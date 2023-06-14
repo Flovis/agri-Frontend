@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700;800&display=swap");
+
+body {
+    font-family: "Urbanist", sans-serif;
+}
+input[type="password"] {
+    font-family: Verdana;
+    letter-spacing: 0.125em;
+}
+.activeClassName{
+    @apply inline-flex flex-col items-center justify-center px-5 text-deep-green border-t-2 border-deep-green bg-meduim-green
+}
