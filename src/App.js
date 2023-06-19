@@ -37,9 +37,9 @@ function App() {
       });
 
       setMeteo(response.data);
-      console.log("response.data: ", response.data);
+      // console.log("response.data: ", response.data);
     } catch (error) {
-      console.error("Problem retrieving weather data");
+      // console.error("Problem retrieving weather data");
       throw error;
     }
   }

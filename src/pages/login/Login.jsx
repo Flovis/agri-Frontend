@@ -69,7 +69,7 @@ const Login = () => {
                             <Button
                                 value="Se connecter"
                                 typ="submit"
-                                className="block mx-auto shadow bg-deep-green hover:bg-[#06B581] text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
+                                className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
                             />
                             <div className="mt-5 text-center text-text-gray">
                                 Vous n'avez pas de compte?{" "}
