@@ -7,6 +7,9 @@ import { Formik, Form } from "formik";
 import { validationSchema } from "../../validation/validationSchemas";
 import PhoneInputField from "../../components/PhoneInputField";
 import moment from "moment";
+import DatalistInput from "react-datalist-input";
+import "react-datalist-input/dist/styles.css";
+import data from "./data.json";
 
 const AddPlanProduction = () => {
     const [startDate, setStartDate] = useState("");
@@ -228,7 +231,7 @@ const AddPlanProduction = () => {
                     </div>
                 </section>
                 {/* =================================== */}
-       
+
                 <section className="border-t border-deep-green mt-4 pt-4 mb-4">
                     <div className="mb-4 text-center">
                         Etape de Conditionnement :{" "}

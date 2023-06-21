@@ -26,49 +26,8 @@ function App() {
   const [weather, setWeather] = useState();
   const [forecast, setForecast] = useState();
 
-  useEffect(() => {
-    const fetchLocation = () => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("Coordinates: ", position.coords);
-          fetchDataWeather(position.coords.latitude, position.coords.longitude);
-          fetchDataForcast(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    };
-    fetchLocation();
-  }, []);
-
-  const fetchDataWeather = async (latitude, longitude) => {
-    try {
-      const response = await axios.get(
-        `https://api.agromonitoring.com/agro/1.0/weather?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
-      );
-      const data = response.data;
-      setWeather(data);
-      console.log("forcast: ", data);
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
-
-  const fetchDataForcast = async (latitude, longitude) => {
-    try {
-      const response = await axios.get(
-        `https://api.agromonitoring.com/agro/1.0/weather/forecast?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
-      );
-      const forecast = response.data;
-      setForecast(forecast);
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
-
   return (
-    <DataMeteoContext.Provider value={{ setCoords, meteoDuJour, prevision }}>
+    
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/enregister" element={<Singin />} />
@@ -88,19 +47,9 @@ function App() {
 
         {/* Part 2 */}
 
-        <Route
-          path="/dashboard"
-          element={<WeatherCard meteo={weather} forecast={forecast} />}
-        />
-        <Route path="/dashboard/contenu" element={<Contenu />} />
-        <Route path="/dashboard/localisation" element={<Localisation />} />
-        <Route
-          path="/dashboard/alert"
-          element={<Alert forecast={forecast} />}
-        />
-        <Route path="/dashboard/parametre" element={<Parametre />} />
+        
       </Routes>
-    </DataMeteoContext.Provider>
+  
   );
 }
 

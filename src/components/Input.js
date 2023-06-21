@@ -1,6 +1,5 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useField } from "formik";
 import React, { useState } from "react";
 
 const Input = ({
@@ -9,6 +8,7 @@ const Input = ({
     name,
     placeholder,
     required,
+    id,
     ...classes
 }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -19,28 +19,27 @@ const Input = ({
     const inputType = showPassword ? "text" : type;
     const isRequired = required ? true : false;
 
-    const [field, meta] = useField(name);
+    // const [field, meta] = useField(name);
 
     return (
         <div className="relative">
-            <label htmlFor="email" className="text-gray-600 text-md mb-[150px]">
+            <label htmlFor={id} className="text-gray-600 text-md mb-[150px]">
                 {label}
             </label>{" "}
             <span className="text-custom-red"> *</span>
             <input
                 type={inputType}
                 name={name}
-                id={name}
-                {...field}
+                id={id}
                 placeholder={placeholder}
                 required={isRequired}
                 className={`border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 ${classes}`}
             />
-            {meta.error && meta.touched && (
+            {/* {meta.error && meta.touched && (
                 <div className="text-sm text-custom-red mt-1 ml-1">
                     {meta.error}
                 </div>
-            )}
+            )} */}
             {type === "password" && (
                 <button
                     type="button"
