@@ -4,7 +4,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import moment from "moment";
 import DatalistInput from "react-datalist-input";
-import "react-datalist-input/dist/styles.css";
+import "react-datalist-input/dist/styles.css"
 import data from "./data.json";
 
 const AddPlanProduction = () => {
