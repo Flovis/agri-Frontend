@@ -9,7 +9,7 @@ const Input = ({
     placeholder,
     required,
     id,
-    
+    ...classes
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
