@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import ForcastModal from "../Modal/ForcastModal";
 
-export default function ForecastCard() {
+export default function ForecastCard({ data }) {
   const [isopen, setIsOpen] = useState(false);
 
   const handleClosePopup = () => {
@@ -24,7 +24,7 @@ export default function ForecastCard() {
         </h1>
 
         <div className="grid h-full max-w-lg grid-cols-2 gap-6 font-medium">
-          <div className="p-4 bg-custom-white rounded-md bg-white flex flex-col justify-center gap-1">
+          <div className="p-4 bg-custom-white rounded-md bg-white flex flex-col justify-center gap-1 h-44">
             <p className="mb-2 flex justify-between">
               <span className="text-gray-700 font-semibold text-lg truncate">
                 2023-06-10
@@ -37,14 +37,14 @@ export default function ForecastCard() {
             <p className="text-gray-600 truncate">Conditions : Ensoleillé</p>
           </div>
 
-          <div className="p-4 bg-custom-white rounded-md bg-white flex items-center justify-center flex-col gap-2">
+          <div className="p-4 bg-custom-white rounded-md bg-white flex items-center justify-center flex-col gap-2 h-44">
             <div
               className="rounded-full bg-[#488575] text-custom-white h-16 w-16 flex items-center justify-center text-white text-2xl"
               onClick={handlePopup}
             >
               <BsThreeDots />
             </div>
-            {isopen && <ForcastModal onClose={handleClosePopup} />}
+            {isopen && <ForcastModal onClose={handleClosePopup} data={data} />}
             <h1 className="text-lg font-bold">VOIR PLUS</h1>
           </div>
         </div>

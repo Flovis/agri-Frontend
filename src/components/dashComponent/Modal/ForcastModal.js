@@ -1,4 +1,6 @@
-const ForcastModal = ({ onClose }) => {
+import CardAlert2 from "../cards/CardAlert2";
+
+const ForcastModal = ({ onClose, data }) => {
   const daysOfWeek = [
     "Lundi",
     "Mardi",
@@ -8,11 +10,56 @@ const ForcastModal = ({ onClose }) => {
     "Samedi",
     "Dimanche",
   ];
+  const weatherData = [
+    {
+      icon: "sun",
+      name: "New York",
+      temperature: 25,
+      condition: "Sunny",
+    },
+    {
+      icon: "cloud",
+      name: "London",
+      temperature: 18,
+      condition: "Cloudy",
+    },
+    {
+      icon: "rain",
+      name: "Paris",
+      temperature: 15,
+      condition: "Rainy",
+    },
+    {
+      icon: "sun",
+      name: "New York",
+      temperature: 25,
+      condition: "Sunny",
+    },
+    {
+      icon: "cloud",
+      name: "London",
+      temperature: 18,
+      condition: "Cloudy",
+    },
+    {
+      icon: "rain",
+      name: "Paris",
+      temperature: 15,
+      condition: "Rainy",
+    },
+    {
+      icon: "rain",
+      name: "Paris",
+      temperature: 15,
+      condition: "Rainy",
+    },
+  ];
+
   const currentDate = new Date();
 
   return (
-    <div className="fixed inset-x-0 flex items-center z-50 bottom-0 w-full duration-200">
-      <div className="bg-white w-full rounded-lg shadow-lg p-4">
+    <div className="fixed  inset-x-0 flex items-center justify-center z-50 bottom-0 w-full duration-200  ">
+      <div className="bg-white w-[95%] rounded-lg shadow-lg p-4 bg-custom-white h-96 flex items-center justify-center overflow-y-auto ">
         <button
           className="absolute border border-deep-green bg-custom-white top-4 right-4 text-gray-500 hover:text-gray-700"
           onClick={onClose}
@@ -32,38 +79,8 @@ const ForcastModal = ({ onClose }) => {
             />
           </svg>
         </button>
-        <div className="grid grid-cols-1 gap-2 mt-2 sm:grid-cols-2 bg-[#eff0f2] h-96 border border-deep-green rounded-lg ">
-          <div className="bg-gray-100 p-2 rounded-lg h-80 mt-4 grid grid-cols-4 gap-2">
-            {[0, 1, 2, 3, 4, 5, 6].map((jour, index) => {
-              const day = new Date(currentDate);
-              day.setDate(currentDate.getDate() + index);
-              const options = { weekday: "long" };
-              const dayName = new Intl.DateTimeFormat("fr-FR", options).format(
-                day
-              );
-              if (day.toDateString() === currentDate.toDateString()) {
-                return (
-                  <div
-                    key={index}
-                    className="w-20 bg-custom-white flex flex-col items-center font-bold text-sm "
-                  >
-                    <span>Aujourd'hui</span>
-                    <span>{day.getDate()}</span>
-                  </div>
-                );
-              }
-
-              return (
-                <div
-                  key={index}
-                  className="w-20 bg-custom-white flex flex-col items-center font-bold text-sm "
-                >
-                  <span>{dayName}</span>
-                  <span>{day.getDate()}</span>
-                </div>
-              );
-            })}
-          </div>
+        <div className="mt-96 p-11">
+          <CardAlert2 data={weatherData} />
         </div>
       </div>
     </div>

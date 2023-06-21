@@ -7,13 +7,6 @@ import PlanProdCard from "./PlanProdCard";
 import { Link } from "react-router-dom";
 import {VscAdd} from "react-icons/vsc"
 
-import Footer from "../../components/dashComponent/footer/Footer";
-
-import { RiNotification2Line } from "react-icons/ri";
-import { BsCalendarWeek } from "react-icons/bs";
-import { LuHome } from "react-icons/lu";
-import { CgProfile } from "react-icons/cg";
-
 const ProductionPlan = () => {
     const datas = [
         {
@@ -68,30 +61,7 @@ const ProductionPlan = () => {
             <Link to="/agriculteur/plan-de-production/ajouter">
                 <FloatButton value={<VscAdd className="text-custom-white text-xl"/> }/>
             </Link>
-            <Footer
-                    data={[
-                        {
-                            to: "/agriculteur/contenu",
-                            icon: <LuHome className="text-xl" />,
-                            nom: "Accuiel",
-                        },
-                        {
-                            to: "/agriculteur/notifications",
-                            icon: <RiNotification2Line className="text-xl" />,
-                            nom: "Notifications",
-                        },
-                        {
-                            to: "/agriculteur/plan-de-production",
-                            icon: <BsCalendarWeek className="text-xl" />,
-                            nom: "Production",
-                        },
-                        {
-                            to: "/agriculteur/profile",
-                            icon: <CgProfile className="text-xl" />,
-                            nom: "Profile",
-                        },
-                    ]}
-                />
+            <NavBottom />
         </div>
     );
 };

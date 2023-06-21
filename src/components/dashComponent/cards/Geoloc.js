@@ -1,13 +1,8 @@
-import "leaflet/dist/leaflet.css";
-import React, { useState } from "react";
-import { FiSettings } from "react-icons/fi";
-import { GrMapLocation } from "react-icons/gr";
-import { LuLibrary } from "react-icons/lu";
-import { MdDashboard } from "react-icons/md";
-import { TbSpeakerphone } from "react-icons/tb";
-import Geoloc from "../../components/dashComponent/cards/Geoloc";
-import Footer from "../../components/dashComponent/footer/Footer";
-import Header from "../../components/dashComponent/header/Header";
+import L from "leaflet";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useGeolocated } from "react-geolocated";
+import agripng from "../../../agri.gif";
+import DataMeteoContext from "../../../context/MeteoContext";
 
 export const communesHautKatanga = [
   { commune: "Lubumbashi", latitude: -11.6609, longitude: 27.4794 },
@@ -267,63 +262,83 @@ export const communesHautKatanga = [
   { commune: "Kasongo", latitude: -4.45, longitude: 26.6667 },
 ];
 
-export default function Localisation({ communesHautKatanga }) {
-  const [markers, setMarkers] = useState([]);
-  const [polygon, setPolygon] = useState([]);
-
-  const handleMapClick = (el) => {
-    const { latitude, longitude } = el;
-    const newMarker = { latitude, longitude };
-    setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
-  };
-
-  if (communesHautKatanga) {
-    communesHautKatanga.forEach((el) => {
-      handleMapClick(el);
+export default function Geoloc({ communesHautKatanga }) {
+  const { setCoords } = useContext(DataMeteoContext);
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: Infinity,
+      },
+      userDecisionTimeout: 5000,
+      watchPosition: true,
+      geolocationProvider: navigator.geolocation,
+      isOptimisticGeolocationEnabled: true,
+      watchLocationPermissionChange: false,
     });
-  }
 
-  const handlePolygonClick = () => {
-    setPolygon(markers);
-  };
+  const mapRef = useRef(null);
+  const [mapInitialized, setMapInitialized] = useState(false);
 
-  return (
-    <div>
-      <div className="h-18 bg-custom-white fixed w-full shadow-md">
-        <Header />
+  useEffect(() => {
+    if (coords && mapRef.current && !mapInitialized) {
+      const map = L.map(mapRef.current).setView(
+        [coords.latitude, coords.longitude],
+        13
+      );
+
+      setCoords(coords);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(
+        map
+      );
+      const customMarkerIcon = L.icon({
+        iconUrl: agripng,
+        iconSize: [32, 32],
+      });
+      L.marker([coords.latitude, coords.longitude], { icon: customMarkerIcon })
+        .addTo(map)
+        .bindPopup("herve agriculteur")
+        .openPopup();
+      const polygon = L.polygon([
+        [coords.latitude, coords.longitude - 0.002],
+        [coords.latitude - 0.002, coords.longitude],
+        [coords.latitude, coords.longitude + 0.002],
+        [coords.latitude + 0.002, coords.longitude],
+      ]).addTo(map);
+      polygon.bindPopup("mesure 20/20");
+      map.flyTo([coords.latitude, coords.longitude], 15);
+      setMapInitialized(true);
+    }
+  }, [coords, mapInitialized]);
+
+  if (!isGeolocationAvailable) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-gray-200">
+        <p className="text-lg text-gray-600">
+          Désolé, la géolocalisation n'est pas prise en charge par votre
+          appareil.
+        </p>
       </div>
-      <div className="pt-[120px]"></div>
-
-      <Geoloc />
-      <Footer
-        data={[
-          {
-            to: "/dashboard",
-            icon: <MdDashboard className="text-2xl" />,
-            nom: "Accueil",
-          },
-          {
-            to: "/dashboard/contenu",
-            icon: <LuLibrary className="text-2xl" />,
-            nom: "Contenu",
-          },
-          {
-            to: "/dashboard/localisation",
-            icon: <GrMapLocation className="text-2xl" />,
-            nom: "Map",
-          },
-          {
-            to: "/dashboard/alert",
-            icon: <TbSpeakerphone className="text-2xl" />,
-            nom: "Alert",
-          },
-          {
-            to: "/dashboard/parametre",
-            icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
-          },
-        ]}
-      />
-    </div>
-  );
+    );
+  } else if (!isGeolocationEnabled) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-gray-200">
+        <p className="text-lg text-gray-600">
+          Veuillez activer la géolocalisation dans les paramètres de votre
+          appareil.
+        </p>
+      </div>
+    );
+  } else if (coords) {
+    return <div ref={mapRef} className="h-64 bg-gray-100" />;
+  } else {
+    return (
+      <div className="flex justify-center items-center h-64 bg-gray-200">
+        <p className="text-lg text-gray-600">
+          Récupération des données de localisation...
+        </p>
+      </div>
+    );
+  }
 }
