@@ -1,12 +1,6 @@
 import React from 'react';
+import NavBottom from './NavBottom';
 import BackNav from './BackNav';
-
-import Footer from "../../components/dashComponent/footer/Footer";
-
-import { RiNotification2Line } from "react-icons/ri";
-import { BsCalendarWeek } from "react-icons/bs";
-import { LuHome } from "react-icons/lu";
-import { CgProfile } from "react-icons/cg";
 
 const Profile = () => {
     return (
@@ -31,30 +25,7 @@ const Profile = () => {
 
                 </div>
             </div>
-            <Footer
-                    data={[
-                        {
-                            to: "/agriculteur/contenu",
-                            icon: <LuHome className="text-xl" />,
-                            nom: "Accuiel",
-                        },
-                        {
-                            to: "/agriculteur/notifications",
-                            icon: <RiNotification2Line className="text-xl" />,
-                            nom: "Notifications",
-                        },
-                        {
-                            to: "/agriculteur/plan-de-production",
-                            icon: <BsCalendarWeek className="text-xl" />,
-                            nom: "Production",
-                        },
-                        {
-                            to: "/agriculteur/profile",
-                            icon: <CgProfile className="text-xl" />,
-                            nom: "Profile",
-                        },
-                    ]}
-                />
+            <NavBottom/>
         </div>
     );
 };

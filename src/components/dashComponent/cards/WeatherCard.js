@@ -5,13 +5,13 @@ import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import DataMeteoContext from "../../../context/Contex";
+import DataMeteoContext from "../../../context/MeteoContext";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import ForecastCard from "./ForecastCard";
 
-export default function WeatherCard() {
-  const { meteo } = useContext(DataMeteoContext);
+export default function WeatherCard({ data, meteo }) {
+  const { meteoDuJour, prevision } = useContext(DataMeteoContext);
 
   return (
     <div className="">
@@ -23,6 +23,7 @@ export default function WeatherCard() {
           <h1 className="mb-4 text-xl font-bold text-[#043d1d] dark:text-white">
             Données météorologiques actuelles
           </h1>
+
           <div className="flex justify-between text-custom-white items-center bg-[#488575] rounded-md h-40 p-4">
             <div>
               <div className="flex flex-col gap-2">
@@ -30,36 +31,29 @@ export default function WeatherCard() {
                   Lubumbashi
                 </h2>
                 <div className="flex items-center">
-                  {/* Replace the commented code with appropriate weather icon */}
-                  {/* {meteo.weather?.map((el) => {
-                const weatherIconClass = `wi wi-owm-${el.icon}`;
-                <i className={weatherIconClass} />;
-              })} */}
-                  <h1 className="text-5xl">27°C</h1>
+                  <h1 className="text-5xl">
+                    {Math.floor(meteo?.main?.temp - 273)}°C
+                  </h1>
                 </div>
-                <h1>23% humidité</h1>
+                <h1>Himidité: {meteo?.main.humidity} </h1>
+                {/* <h1>{data?}   coucher  du soliel</h1> */}
               </div>
             </div>
             {/* //part 2 */}
             <div className="flex gap-6">
+              <div></div>
               <div>
-                <h2>Lubumbashi</h2>
+                <h2>Demain</h2>
                 <h1 className="flex items-center gap-3">
-                  <TiWeatherPartlySunny className="text-4xl" /> 27°C
+                  <TiWeatherPartlySunny className="text-4xl" />
+                  {26}°C
                 </h1>
-                <h1>23% humidité</h1>
-              </div>
-              <div>
-                <h2>Lubumbashi</h2>
-                <h1 className="flex items-center gap-3">
-                  <TiWeatherPartlySunny className="text-4xl" /> 27°C
-                </h1>
-                <h1>23% humidité</h1>
+                <h1>23 humidité</h1>
               </div>
             </div>
           </div>
         </div>
-        <ForecastCard />
+        <ForecastCard data={data} />
       </div>
 
       <Footer

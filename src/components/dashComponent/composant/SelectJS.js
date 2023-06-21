@@ -1,13 +1,15 @@
-// import Select from "react-select";
-// import { colourOptions } from "./doc/data";
+import React from "react";
+import Select from "react-select";
 
-// export function SelectJS() {
-// <Select
-//   defaultValue={[colourOptions[2], colourOptions[3]]}
-//   isMulti
-//   name="colors"
-//   options={colourOptions}
-//   className="basic-multi-select"
-//   classNamePrefix="select"
-// />;
-// }
+export function SelectJS({ colourOptions }) {
+  return (
+    <Select
+      defaultValue={[colourOptions[2], colourOptions[3]]}
+      isMulti
+      name="colors"
+      options={colourOptions}
+      className="basic-multi-select"
+      classNamePrefix="select"
+    />
+  );
+}

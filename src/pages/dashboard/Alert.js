@@ -4,16 +4,24 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
+import AlertConfiguration from "../../components/dashComponent/cards/AlertConfiguration";
+import TT from "../../components/dashComponent/cards/AlertTjours";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
-export default function Alert() {
+export default function Alert({ forecast }) {
   return (
     <div>
-      <div className="h-18 bg-custom-white fixed w-full shadow-md ">
+      <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
         <Header />
       </div>
-      <div className=" pt-[120px]">Alert</div>
+      <div className=" pt-[120px]"></div>
+
+      <TT forecast={forecast} />
+      <div className="mb-20">
+        <AlertConfiguration />
+      </div>
+
       <Footer
         data={[
           {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import languages from "../../data/languages.json";
+import languages from "../../data/languages";
 
 export default function FetchDataLanguage() {
   const [language, setLanguage] = useState();
