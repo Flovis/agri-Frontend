@@ -5,7 +5,7 @@ import CardNotification from "./CardNotification";
 import FloatButton from "./FloatButton";
 import PlanProdCard from "./PlanProdCard";
 import { Link } from "react-router-dom";
-import {VscAdd} from "react-icons/vsc"
+import { VscAdd } from "react-icons/vsc";
 
 const ProductionPlan = () => {
     const datas = [
@@ -59,9 +59,10 @@ const ProductionPlan = () => {
                 />
             ))}
             <Link to="/agriculteur/plan-de-production/ajouter">
-                <FloatButton value={<VscAdd className="text-custom-white text-xl"/> }/>
+                <FloatButton
+                    value={<VscAdd className="text-custom-white text-xl" />}
+                />
             </Link>
-            <NavBottom />
         </div>
     );
 };
