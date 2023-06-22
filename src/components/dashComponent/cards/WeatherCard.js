@@ -81,7 +81,7 @@ export default function WeatherCard({ data, meteo }) {
           {
             to: "/dashboard/parametre",
             icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
+            nom: "Paramètre",
           },
         ]}
       />
