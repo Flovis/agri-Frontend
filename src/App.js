@@ -61,6 +61,7 @@ function App() {
         `https://api.agromonitoring.com/agro/1.0/weather/forecast?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
       );
       const forecast = response.data;
+      console.log("forecast: ", forecast);
       setForecast(forecast);
     } catch (error) {
       console.error("Error: ", error);
@@ -96,7 +97,7 @@ function App() {
         <Route path="/dashboard/localisation" element={<Localisation />} />
         <Route
           path="/dashboard/alert"
-          element={<Alert forecast={forecast} />}
+          element={<Alert weather={weather} forecast={forecast} />}
         />
         <Route path="/dashboard/parametre" element={<Parametre />} />
       </Routes>

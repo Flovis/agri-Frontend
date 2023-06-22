@@ -9,7 +9,7 @@ import TT from "../../components/dashComponent/cards/AlertTjours";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
-export default function Alert({ forecast }) {
+export default function Alert({ weather, forecast }) {
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
@@ -17,7 +17,7 @@ export default function Alert({ forecast }) {
       </div>
       <div className=" pt-[120px]"></div>
 
-      <TT forecast={forecast} />
+      <TT weather={weather} forecast={forecast} />
       <div className="mb-20">
         <AlertConfiguration />
       </div>

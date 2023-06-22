@@ -4,29 +4,42 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
-// import { useNavigate } from "react-router-dom";
-import Select from "react-select";
-import CreatableSelect from "react-select/creatable";
+import UnSelect from "../../components/dashComponent/UnSelect";
+import UnSelectBtn from "../../components/dashComponent/UnSelectBtn";
+import UnSelectRecherche from "../../components/dashComponent/UnSelectRecherche";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
+import cat from "../../data/Categorie";
 import langage from "../../data/Langage";
 import planProduction from "../../data/PlanProduction";
+import frequence from "../../data/frequence";
 
 export default function Contenu() {
   const [step, setStep] = useState(1);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedProductionPlan, setSelectedProductionPlan] = useState("");
-  const [selectedFrequency, setSelectedFrequency] = useState("");
+  const [selectedFrequency, setSelectedFrequency] = useState(null);
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
-
   const formRef = useRef();
+  const [selectedOption, setSelectedOption] = useState("");
 
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   const handleNextStep = () => {
     setStep((prevStep) => prevStep + 1);
+  };
+
+  const handleAddTag = () => {
+    // Implement the logic to add a tag to the tags state
+  };
+
+  const handleAddCategory = () => {
+    // Implement the logic to add a category to the categories state
   };
 
   const handleAddFile = (event) => {
@@ -34,7 +47,13 @@ export default function Contenu() {
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
-  const handleSave = () => {};
+  const handleSave = () => {
+    // Implement the logic to save the form data
+  };
+  const handleSelectProductionPlan = (e) => {
+    setSelectedProductionPlan(e.target.value);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(formRef.current));
@@ -46,147 +65,121 @@ export default function Contenu() {
       <div className="h-18 fixed top-0 bg-custom-white fixed w-full shadow-md ">
         <Header />
       </div>
-      <div className="max-w-lg mx-auto p-4 pt-32">
-        <form ref={formRef} onSubmit={() => submit} action="">
+
+      <div className=" max-w-lg mx-auto p-4 pt-32">
+        <form ref={formRef} onSubmit={submit}>
           {step === 1 && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">
-                Étape 1: Titre et Description
+            <div className=" m-auto mb-14">
+              <h2 className="text-mb font-bold mb-4">
+                Étape 1: Titre et Description{" "}
               </h2>
-              <div className="mb-4">
-                <label htmlFor="title" className="block mb-2">
-                  Titre
-                </label>
+
+              <div className="">
+                <label
+                  htmlFor="titre"
+                  className="text-text-gray text-md mb-[150px]"
+                >
+                  titre du contenu
+                </label>{" "}
+                <span className="text-custom-red"> *</span>
                 <input
                   type="text"
-                  id="title"
-                  className="w-full border border-borde-gray rounded p-2"
-                  value={title}
-                  // onChange={(event) => setTitle(event.target.value)}
+                  name="titre"
+                  id="titre"
+                  placeholder=" ajoute titre du contenu"
+                  required
+                  className={`border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 `}
                 />
               </div>
-              <div className="mb-4">
-                <label htmlFor="description" className="block mb-2">
-                  Description
+
+              <div className="mb-1">
+                <label
+                  htmlFor="description"
+                  className="block mb-2 mt-2 text-text-gray"
+                >
+                  Description du contenu
+                  <span className="text-custom-red"> *</span>
                 </label>
+
                 <textarea
+                  className="w-full p-2 border border-borde-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-borde-gray"
+                  rows={3}
                   id="description"
-                  className="w-full border border-borde-gray rounded p-2"
-                  value={description}
-                  // onChange={(event) => setDescription(event.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
               <div className="mb-4">
-                <label htmlFor="productionPlan" className="block mb-2">
+                <label
+                  htmlFor="productionPlan"
+                  className="block mb-2 text-text-gray"
+                >
                   Sélectionnez le plan de production
                 </label>
-                <CreatableSelect
-                  isClearable
-                  options={planProduction}
-                  value={selectedProductionPlan}
-                  onChange={(event) =>
-                    setSelectedProductionPlan(event.target.value)
-                  }
-                  // className="w-full border border-gray-300 rounded p-2"
-                />
+
+                <UnSelect option={planProduction} />
               </div>
               <div className="mb-4">
-                <label htmlFor="frequency" className="block mb-2">
+                <label
+                  htmlFor="frequency"
+                  className="block mb-2 text-text-gray"
+                >
                   Sélectionnez la fréquence
                 </label>
-                <CreatableSelect
-                  isClearable
-                  options
-                  value={selectedProductionPlan}
-                  onChange={(event) =>
-                    setSelectedProductionPlan(event.target.value)
-                  }
-                  // className="w-full border border-gray-300 rounded p-2"
-                />
+                <UnSelect option={frequence} />
               </div>
-              <button
-                className="bg-deep-green text-custom-white px-4 py-2 rounded"
-                onClick={handleNextStep}
-              >
-                Suivant
-              </button>
+              <div className="w-full mt-3 md:mb-5">
+                <button
+                  className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
+                  onClick={handleNextStep}
+                >
+                  Suivant
+                </button>
+              </div>
+
               <div className="h-3"></div>
             </div>
           )}
-
           {step === 2 && (
             <div>
-              <h2 className="text-2xl font-bold mb-4">
-                Étape 2: Tags, Catégories et Langue
+              <h2 className="text-mb font-bold mb-4">
+                {" "}
+                Étape 2: Tags, Catégories et Langue{" "}
               </h2>
+
               <div className="mb-4">
-                <label htmlFor="tags" className="block mb-2">
+                <label
+                  htmlFor="categories"
+                  className="text-text-gray block mb-2"
+                >
                   Sélectionnez les tags
+                  <span className="text-custom-red"> *</span>
                 </label>
-                <div className="flex items-center justify-center">
-                  <Select
-                    defaultValue={[]}
-                    isMulti
-                    name="language"
-                    options
-                    className="basic-multi-select flex-1"
-                    classNamePrefix="select"
-                    placeholder="Rechercher..."
-                  />
-                  <button
-                    className="bg-deep-green text-custom-white px-4 py-2 mt-2 rounded"
-                    onClick
-                  >
-                    +
-                  </button>
-                </div>
+                <UnSelectRecherche options={langage} />
               </div>
               <div className="mb-4">
-                <label htmlFor="categories" className="block mb-2">
+                <label
+                  htmlFor="categories"
+                  className="text-text-gray block mb-2"
+                >
+                  Sélectionnez les langues
+                  <span className="text-custom-red"> *</span>
+                </label>
+                <UnSelectRecherche options={langage} />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="categories"
+                  className="text-text-gray block mb-2"
+                >
                   Sélectionnez les catégories
+                  <span className="text-custom-red"> *</span>
                 </label>
-                <div className="flex items-center justify-center">
-                  <Select
-                    defaultValue={[]}
-                    isMulti
-                    name="language"
-                    options={langage}
-                    className="basic-multi-select flex-1"
-                    classNamePrefix="select"
-                    placeholder="Rechercher..."
-                  />
-                  <button
-                    className="bg-deep-green text-custom-white px-4 py-2 mt-2 rounded"
-                    onClick
-                  >
-                    +
-                  </button>
-                </div>
+                <UnSelectBtn option={cat} />
               </div>
-              <div className="mb-4">
-                <label htmlFor="language" className="block mb-2">
-                  Sélectionnez la langue
-                </label>
-                <div className="flex items-center justify-center">
-                  <Select
-                    defaultValue={[]}
-                    isMulti
-                    name="language"
-                    options
-                    className="basic-multi-select flex-1"
-                    classNamePrefix="select"
-                    placeholder="Rechercher..."
-                  />
-                  {/* <div className="flex justify-between mb-4"> */}
-                  <button
-                    className="bg-deep-green text-custom-white px-4 py-2 mt-2 rounded"
-                    onClick
-                  >
-                    +
-                  </button>
-                </div>
+
+              <div className="w-full mt-3 md:mb-5">
                 <button
-                  className="bg-deep-green mt-2 text-custom-white px-4 py-2 rounded"
+                  className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
                   onClick={handleNextStep}
                 >
                   Suivant
@@ -194,14 +187,13 @@ export default function Contenu() {
               </div>
             </div>
           )}
-
           {step === 3 && (
             <div>
-              <h2 className="text-2xl font-bold mb-4">
-                Étape 3: Téléversement des fichiers
+              <h2 className="text-mb font-bold mb-4">
+                Étape 3: Téléversement des fichiers{" "}
               </h2>
               <div className="mb-4">
-                <label htmlFor="files" className="block mb-2">
+                <label htmlFor="files" className="text-text-gray block mb-2">
                   Téléverser des fichiers
                 </label>
                 <input
@@ -209,19 +201,23 @@ export default function Contenu() {
                   id="files"
                   multiple
                   className="mb-2"
-                  onChange
+                  onChange={handleAddFile}
                 />
               </div>
-              <button
-                type="submit"
-                className="bg-deep-green mt-2 text-custom-white px-4 py-2 rounded"
-              >
-                Enregistrer
-              </button>
+
+              <div className="w-full mt-3 md:mb-5">
+                <button
+                  className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
+                  onClick={handleNextStep}
+                >
+                  Enregistrer
+                </button>
+              </div>
             </div>
           )}
         </form>
       </div>
+
       <Footer
         data={[
           {

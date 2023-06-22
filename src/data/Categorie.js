@@ -1,20 +1,9 @@
-const categories = [
-  //   "Légumes",
-  //   "Fruits",
-  //   "Céréales",
-  //   "Herbes et épices",
-  //   "Fleurs",
-  //   "Fleurs",
-  //   "Plantes aromatiques",
-  //   "Plantes grimpantes",
-  //   "Plantes à racines",
-  //   "Plantes à feuilles",
-
-  "audio",
-  "video",
-  "texte",
-  "pdf",
-  "word",
+const cat = [
+  { value: "audio", label: "audio" },
+  { value: "video", label: "video" },
+  { value: "texte", label: "texte" },
+  { value: "pdf", label: "pdf" },
+  { value: "texte", label: "texte" },
 ];
 
-export default categories;
+export default cat;
