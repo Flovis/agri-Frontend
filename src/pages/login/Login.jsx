@@ -74,31 +74,33 @@ const Login = () => {
                     </div>
 
                     <div className="w-full mb-3 md:mb-5">
-                        <label
-                            htmlFor="password"
-                            className="text-gray-600 text-md mb-[150px] text-text-gray"
-                        >
-                            Mot de passe
-                        </label>
-                        <input
-                            placeholder=".........."
-                            type="password"
-                            name="password"
-                            id="password"
-                            required
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            className="border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5"
-                        />
-                        <button
-                            type="button"
-                            className="absolute flex  top-1/2 insert-y-o right-3 text-text-gray focus:outline-none"
-                            onClick={visiblePassword}
-                        >
-                            <FontAwesomeIcon
-                                icon={showPassword ? faEyeSlash : faEye}
+                        <div className="relative">
+                            <label
+                                htmlFor="password"
+                                className="text-gray-600 text-md mb-[150px] text-text-gray"
+                            >
+                                Mot de passe
+                            </label>
+                            <input
+                                placeholder=".........."
+                                type="password"
+                                name="password"
+                                id="password"
+                                required
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                className="border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5"
                             />
-                        </button>
+                            <button
+                                type="button"
+                                className="absolute flex  top-1/2 insert-y-o right-3 text-text-gray focus:outline-none"
+                                onClick={visiblePassword}
+                            >
+                                <FontAwesomeIcon
+                                    icon={showPassword ? faEyeSlash : faEye}
+                                />
+                            </button>
+                        </div>
                     </div>
 
                     <div className="flex justify-between mb-4">
