@@ -4,12 +4,13 @@ import Card from "./Card";
 import NavBottom from "./NavBottom";
 import { useState } from "react";
 import Aside from "./Aside";
-import Footer from "../../components/dashComponent/footer/Footer";
+
 
 import { RiNotification2Line } from "react-icons/ri";
 import { BsCalendarWeek } from "react-icons/bs";
 import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
+import TopHeader from "../../components/dashComponent/header/TopHeader";
 const HomeFamer = () => {
     const [showAside, setShowAside] = useState(false);
     const handleToggleAside = () => {
@@ -60,6 +61,7 @@ const HomeFamer = () => {
 
     return (
         <>
+        <TopHeader/>
             <div className="lg:w-[900px] m-auto mb-14">
                 <Nav onclickAvatar={handleToggleAside} />
                 <Aside
@@ -79,7 +81,7 @@ const HomeFamer = () => {
                     ))}
                 </div>
 
-                <Footer
+                <NavBottom
                     data={[
                         {
                             to: "/agriculteur/contenu",
