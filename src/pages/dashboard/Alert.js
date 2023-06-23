@@ -10,7 +10,7 @@ import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
 export default function Alert({ meteo, forecast }) {
-  console.log("forecast: ", forecast);
+  console.log("forecast: ", forecast.weather);
   console.log("weather: ", meteo);
   return (
     <div>
