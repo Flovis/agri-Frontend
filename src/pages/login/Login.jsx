@@ -1,11 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AuthContext from "../../context/AuthProvider";
+
+import { backendAxios } from "../../api/axios";
+const LOGIN_URL = "/login";
 
 const Login = () => {
+    //for auth
+    const { setAuth } = useContext(AuthContext);
+
     const [showPassword, setShowPassword] = useState(false);
 
     const visiblePassword = () => {
@@ -15,7 +22,7 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errMessage, setErrMessage] = useState("");
     const [success, setuccess] = useState(false);
@@ -26,14 +33,45 @@ const Login = () => {
 
     useEffect(() => {
         setErrMessage("");
-    }, [user, password]);
+    }, [email, password]);
 
     const handleSubmit = async (e) => {
-        console.log(user, password);
-        setUser("");
-        setPassword("");
-        setuccess(true);
         e.preventDefault();
+        try {
+            /**
+             * headers : spécifie l'en-tête Content-Type comme application/json,
+             * indiquant que le corps de la requête est au format JSON.
+             * withCredentials : est défini sur true pour indiquer qu'il faut
+             *inclure les cookies lors de l'envoi de la requête
+             *(utile pour maintenir la session d'authentification).
+             */
+            const response = await backendAxios.post(
+                LOGIN_URL,
+                JSON.stringify({ email, password }),
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            const token = response?.data?.data?.token;
+            const role = response?.data?.data?.role;
+            const first_name = response?.data?.data?.first_name;
+            const phone = response?.data?.data?.phone;
+            const last_name = response?.data?.data?.last_name;
+
+            console.log(first_name, last_name, token, role, phone);
+            setAuth({ first_name, last_name, email, password, token, role });
+            setEmail("");
+            setPassword("");
+            setuccess(true);
+        } catch (error) {
+            if (!error.response) {
+                setErrMessage("Erreur");
+            }
+            console.log(error.response?.data);
+            setErrMessage(error.response?.data.message);
+            errRef.current.focus();
+        }
     };
 
     return (
@@ -44,13 +82,13 @@ const Login = () => {
                     ref={errRef}
                     className={
                         errMessage
-                            ? "flex p-4 mb-4 text-sm text-[#b91c1c] border border-[#fca5a5] rounded-lg bg-[#fef2f2]"
+                            ? "flex justify-between p-4 mb-4 text-sm text-[#b91c1c] border border-[#fca5a5] rounded-lg bg-[#fef2f2]"
                             : "hidden"
                     }
                     role="alert"
                     aria-live="assertive"
                 >
-                    <div>few things up and try submitting again.</div>
+                    <div>{errMessage}</div>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="w-full mb-3 md:mb-5">
@@ -68,8 +106,8 @@ const Login = () => {
                             required
                             ref={userRef}
                             className="border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                         />
                     </div>
 
@@ -83,7 +121,7 @@ const Login = () => {
                             </label>
                             <input
                                 placeholder=".........."
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 id="password"
                                 required
