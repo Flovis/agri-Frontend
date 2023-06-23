@@ -4,11 +4,12 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
-import { TiWeatherPartlySunny } from "react-icons/ti";
+// import { TiWeatherPartlySunny } from "react-icons/ti";
 import DataMeteoContext from "../../../context/MeteoContext";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
-import ForecastCard from "./ForecastCard";
+import DashReview from "../retouche/DashReview";
+// import DashCard from "../retouche/DashCard";
 
 export default function WeatherCard({ data, meteo }) {
   const { meteoDuJour, prevision } = useContext(DataMeteoContext);
@@ -18,13 +19,18 @@ export default function WeatherCard({ data, meteo }) {
       <div className="h-18 bg-custom-white fixed w-full shadow-md">
         <Header />
       </div>
+
       <div className="overflow-y-scroll h-[calc(100vh-72px)] pt-8">
         <div className="h-48 pt-24 px-4">
           <h1 className="mb-4 text-xl font-bold text-[#043d1d] dark:text-white">
-            Données météorologiques actuelles
+            Interface d'administration agricole
           </h1>
 
-          <div className="flex justify-between text-custom-white items-center bg-[#488575] rounded-md h-40 p-4">
+          <DashReview meteo={meteo} />
+          <h1 className="mb-4 text-xl font-bold text-[#043d1d] dark:text-white">
+            {/* Données météorologiques actuelles */}
+          </h1>
+          {/* <div className="flex justify-between text-custom-white items-center bg-[#488575] rounded-md h-40 p-4">
             <div>
               <div className="flex flex-col gap-2">
                 <h2 className="text-xl font-semibold text-gray-900">
@@ -36,10 +42,9 @@ export default function WeatherCard({ data, meteo }) {
                   </h1>
                 </div>
                 <h1>Himidité: {meteo?.main.humidity} </h1>
-                {/* <h1>{data?}   coucher  du soliel</h1> */}
               </div>
             </div>
-            {/* //part 2 */}
+
             <div className="flex gap-6">
               <div></div>
               <div>
@@ -51,9 +56,9 @@ export default function WeatherCard({ data, meteo }) {
                 <h1>23 humidité</h1>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-        <ForecastCard data={data} />
+        {/* <ForecastCard data={data} /> */}
       </div>
 
       <Footer
@@ -64,22 +69,22 @@ export default function WeatherCard({ data, meteo }) {
             nom: "Accueil",
           },
           {
-            to: "/dashboard/contenu",
+            to: "/contenu",
             icon: <LuLibrary className="text-2xl" />,
             nom: "Contenu",
           },
           {
-            to: "/dashboard/localisation",
+            to: "/localisation",
             icon: <GrMapLocation className="text-2xl" />,
             nom: "Map",
           },
           {
-            to: "/dashboard/alert",
+            to: "/alert",
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
           {
-            to: "/dashboard/parametre",
+            to: "/parametre",
             icon: <FiSettings className="text-2xl" />,
             nom: "Paramètre",
           },

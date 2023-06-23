@@ -23,7 +23,7 @@ const Card = ({ temperature, jour, getIcon, icon }) => {
 
 //compo3
 const TT = ({ weather, forecast }) => {
-  console.log("forecast: ", weather);
+  console.log("forecast: ", forecast);
   console.log("weather: ", weather);
   const [information, setinformation] = useState({});
   console.log(weather?.main);
@@ -65,15 +65,15 @@ const TT = ({ weather, forecast }) => {
         };
     }
   };
-  const infoCards = [
-    { label: "Préssion", value: `${weather.main.sea_level}` },
-    { label: " Status  vent", value: `${weather.wind.speed * 3.6} km/h` },
-    { label: "Lever soleil", value: getIcon(weather.weather.icon) },
-    { label: "Coucher soleil", value: "07:45 PM" },
-    { label: "Humidité", value: `${weather?.main.humidity}` },
-    { label: "Visibilité", value: `${weather.wind.speed * 3.6} km/h` },
-    { label: "Qualité de l'air", value: "Good" },
-  ];
+  // const infoCards = [
+  //   // { label: "Préssion", value: `${weather.main?.sea_level}` },
+  //   { label: " Status  vent", value: `${weather?.wind?.speed * 3.6} km/h` },
+  //   { label: "Lever soleil", value: getIcon(weather?.weather?.icon) },
+  //   { label: "Coucher soleil", value: "07:45 PM" },
+  //   // { label: "Humidité", value: `${weather?.main.humidity}` },
+  //   { label: "Visibilité", value: `${weather?.wind?.speed * 3.6} km/h` },
+  //   { label: "Qualité de l'air", value: "Good" },
+  // ];
   const weatherConditions = [
     {
       code: "01d",
@@ -117,7 +117,7 @@ const TT = ({ weather, forecast }) => {
       <div>
         <h2 className="text-xl font-bold mb-4">Information Météorologique</h2>
         <div className="grid grid-cols-2 gap-4 mb-10">
-          {infoCards.map((card, index) => (
+          {[1, 2, 2, 3, 4, 5].map((card, index) => (
             <div
               key={index}
               className="bg-white border border-borde-gray rounded-lg p-4"

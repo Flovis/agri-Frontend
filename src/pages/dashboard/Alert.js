@@ -9,7 +9,9 @@ import TT from "../../components/dashComponent/cards/AlertTjours";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
-export default function Alert({ weather, forecast }) {
+export default function Alert({ meteo, forecast }) {
+  console.log("forecast: ", forecast);
+  console.log("weather: ", meteo);
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
@@ -17,7 +19,7 @@ export default function Alert({ weather, forecast }) {
       </div>
       <div className=" pt-[120px]"></div>
 
-      <TT weather={weather} forecast={forecast} />
+      <TT weather={meteo} forecast={forecast} />
       <div className="mb-20">
         <AlertConfiguration />
       </div>
@@ -30,22 +32,22 @@ export default function Alert({ weather, forecast }) {
             nom: "Accueil",
           },
           {
-            to: "/dashboard/contenu",
+            to: "/contenu",
             icon: <LuLibrary className="text-2xl" />,
             nom: "Contenu",
           },
           {
-            to: "/dashboard/localisation",
+            to: "/localisation",
             icon: <GrMapLocation className="text-2xl" />,
             nom: "Map",
           },
           {
-            to: "/dashboard/alert",
+            to: "/alert",
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
           {
-            to: "/dashboard/parametre",
+            to: "/parametre",
             icon: <FiSettings className="text-2xl" />,
             nom: "Parametre",
           },

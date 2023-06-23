@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import CategorieAudio from "./components/dashComponent/cards/CategorieAudio";
 import WeatherCard from "./components/dashComponent/cards/WeatherCard";
 import DataMeteoContext from "./context/MeteoContext";
 import Alert from "./pages/dashboard/Alert";
@@ -24,13 +25,14 @@ function App() {
   const [coords, setCoords] = useState({});
   const [prevision, setPrevision] = useState();
   const [weather, setWeather] = useState();
+  console.log("weather: ", weather);
   const [forecast, setForecast] = useState();
+  const [file, setFile] = useState({});
 
   useEffect(() => {
     const fetchLocation = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log("Coordinates: ", position.coords);
           fetchDataWeather(position.coords.latitude, position.coords.longitude);
           fetchDataForcast(position.coords.latitude, position.coords.longitude);
         },
@@ -49,7 +51,6 @@ function App() {
       );
       const data = response.data;
       setWeather(data);
-      console.log("forcast: ", data);
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -68,7 +69,9 @@ function App() {
   };
 
   return (
-    <DataMeteoContext.Provider value={{ setCoords, meteoDuJour, prevision }}>
+    <DataMeteoContext.Provider
+      value={{ setCoords, meteoDuJour, prevision, setFile, file }}
+    >
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/enregister" element={<Singin />} />
@@ -92,13 +95,14 @@ function App() {
           path="/dashboard"
           element={<WeatherCard meteo={weather} forecast={forecast} />}
         />
-        <Route path="/dashboard/contenu" element={<Contenu />} />
-        <Route path="/dashboard/localisation" element={<Localisation />} />
+        <Route path="/contenu" element={<Contenu />} />
+        <Route path="/localisation" element={<Localisation />} />
         <Route
-          path="/dashboard/alert"
-          element={<Alert weather={weather} forecast={forecast} />}
+          path="/alert"
+          element={<Alert meteo={weather} forecast={forecast} />}
         />
-        <Route path="/dashboard/parametre" element={<Parametre />} />
+        <Route path="/parametre" element={<Parametre />} />
+        <Route path="/contenu/categorieaudio" element={<CategorieAudio />} />
       </Routes>
     </DataMeteoContext.Provider>
   );

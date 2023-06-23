@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiPlusMedical } from "react-icons/bi";
 
-const UnSelectRecherche = ({ options }) => {
+const UnSelectRecherche = ({ options, recqui }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,9 +92,13 @@ const UnSelectRecherche = ({ options }) => {
           )}
         </div>
       </div>
-      <button className="bg-deep-green hover:bg-meduim-green font-bold py-2 px-4 rounded-r-md text-custom-white">
-        <BiPlusMedical />
-      </button>
+      {recqui === "none" ? (
+        ""
+      ) : (
+        <button className="bg-deep-green hover:bg-meduim-green font-bold py-2 px-4 rounded-r-md text-custom-white">
+          <BiPlusMedical />
+        </button>
+      )}
     </div>
   );
 };

@@ -22,22 +22,22 @@ export default function Parametre() {
             nom: "Accueil",
           },
           {
-            to: "/dashboard/contenu",
+            to: "/contenu",
             icon: <LuLibrary className="text-2xl" />,
             nom: "Contenu",
           },
           {
-            to: "/dashboard/localisation",
+            to: "/localisation",
             icon: <GrMapLocation className="text-2xl" />,
             nom: "Map",
           },
           {
-            to: "/dashboard/alert",
+            to: "/alert",
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
           {
-            to: "/dashboard/parametre",
+            to: "/parametre",
             icon: <FiSettings className="text-2xl" />,
             nom: "Parametre",
           },
