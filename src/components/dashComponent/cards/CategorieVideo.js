@@ -10,32 +10,33 @@ import BackNav from "../../../pages/famer/BackNav";
 import UnSelectRecherche from "../UnSelectRecherche";
 import Footer from "../footer/Footer";
 import TopHeader from "../header/TopHeader";
-import CardAudio from "./CardAudio";
+import CardVideo from "./CardVideo";
 
-export default function CategorieAudio() {
+export default function CategorieVideo() {
   const { formData } = useContext(DataMeteoContext);
-  const isAudioPresent =
-    formData.filter((el) => el.hasOwnProperty("audio")) || [];
+  const isVideoPresent =
+    formData.filter((el) => el.hasOwnProperty("video")) || [];
+  console.log("isVideoPresent: ", isVideoPresent);
 
   return (
     <div>
       <div className="h-18 fixed top-0 bg-custom-white fixed w-full shadow-md ">
         <TopHeader />
-        <BackNav linkTo="/contenu" title="Contenu Type audio" />
+        <BackNav linkTo="/contenu" title="Contenu Type video" />
       </div>
       {
-        <div className="py-28 ">
+        <div className="pt-28">
           <div
             className="flex h-36  w-full object-cover items-center text-deep-green  justify-center font-bold"
             style={{
               backgroundImage:
-                'url("https://source.unsplash.com/4fegNAjoAl4/300x300")',
+                'url("https://source.unsplash.com/niUkImZcSP8/300x300")',
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
             <h2 className="text-3xl text-custom-white font-bold mx-2">
-              Categorie Audio
+              Categorie Video
             </h2>
           </div>
           <div className="max-w-lg mx-auto p-4 pt-2 ">
@@ -47,18 +48,18 @@ export default function CategorieAudio() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-20 ">
-              {isAudioPresent.length > 0 ? (
-                isAudioPresent.map((item, index) => (
+              {isVideoPresent.length > 0 ? (
+                isVideoPresent?.map((item, index) => (
                   <React.Fragment key={index}>
-                    <CardAudio
+                    <CardVideo
                       titre={item?.titre}
                       description={item?.descr}
-                      audioFile={item?.audio[0]}
+                      videoFile={item?.video[0]}
                     />
                   </React.Fragment>
                 ))
               ) : (
-                <p>Aucun fichier audio disponible.</p>
+                <p>Aucun fichier video disponible.</p>
               )}
             </div>
           </div>

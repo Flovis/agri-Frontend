@@ -20,7 +20,7 @@ export default function DashReview({ meteo }) {
         </div>
       </div>
       <div className=" rounded-md p-2 flex items-center justify-between ">
-        <h1 className="text-xl font-bold">Weather forcast</h1>
+        <h1 className="text-xl font-bold">Méteo Actuelle</h1>
         <Link to="/alert">
           <FiArrowUpRight
             size={24}

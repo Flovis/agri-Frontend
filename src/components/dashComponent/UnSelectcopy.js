@@ -1,13 +1,13 @@
+import PropTypes from "prop-types";
 import { useContext, useState } from "react";
-import { BiPlusMedical } from "react-icons/bi";
-import { SelectContext } from "../../context/SelectContext";
+import { selectContext } from "../../context/SelectContext";
 
-const UnSelectBtn = ({ option }) => {
+const UnSelectcopy = ({ option }) => {
+  const { selectedOption2, setSelectedOption2 } = useContext(selectContext);
   const [showOptions, setShowOptions] = useState(false);
-  const { setcat, catego } = useContext(SelectContext);
 
-  const handleOptionChange = (selected) => {
-    setcat(selected.value);
+  const handleOptionChange2 = (selected) => {
+    setSelectedOption2(selected.value);
     setShowOptions(false);
   };
 
@@ -16,9 +16,9 @@ const UnSelectBtn = ({ option }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="">
       <div className=" inline-block w-full ">
-        <div className=" border border-borde-gray rounded-l-md p-1 bg-custom-white">
+        <div className=" border border-borde-gray rounded-md p-1 bg-custom-white">
           <div
             className="flex items-center justify-between p-3 bg-custom-white cursor-pointer"
             onClick={handleToggleOptions}
@@ -35,7 +35,7 @@ const UnSelectBtn = ({ option }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="text-text-gray">{catego}</p>
+              <p className="text-text-gray">{selectedOption2}</p>
             </div>
             <div className="flex items-center">
               <svg
@@ -54,12 +54,27 @@ const UnSelectBtn = ({ option }) => {
             </div>
           </div>
           {showOptions && (
-            <div className="absolute w-[350px] h-44 overflow-auto bg-custom-white rounded-b-md mt-3 ">
+            <div className="absolute w-[350px] bg-custom-white h-40 overflow-auto rounded-b-md mt-3 ">
               {option?.map((option, index) => (
                 <div
                   key={index}
                   className="px-4 py-2 my-3   hover:bg-blue-100 cursor-pointer"
-                  onClick={() => handleOptionChange(option)}
+                  onClick={() => {
+                    handleOptionChange2(option);
+                  }}
+                  aria-required
+                >
+                  {option.label}
+                </div>
+              ))}
+              {option?.map((option, index) => (
+                <div
+                  key={index}
+                  className="px-4 py-2 my-3   hover:bg-blue-100 cursor-pointer"
+                  onClick={() => {
+                    handleOptionChange2(option);
+                  }}
+                  aria-required
                 >
                   {option.label}
                 </div>
@@ -68,11 +83,11 @@ const UnSelectBtn = ({ option }) => {
           )}
         </div>
       </div>
-      <button className="bg-deep-green hover:bg-meduim-green font-bold py-2 px-4 rounded-r-md text-custom-white">
-        <BiPlusMedical />
-      </button>
     </div>
   );
 };
+UnSelectcopy.propTypes = {
+  option: PropTypes.array.isRequired,
+};
 
-export default UnSelectBtn;
+export default UnSelectcopy;

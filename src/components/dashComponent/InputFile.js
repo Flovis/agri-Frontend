@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AiOutlineUpload } from "react-icons/ai";
 import DataMeteoContext from "../../context/MeteoContext";
 
-const InputFile = () => {
+const InputFile = ({ accepte }) => {
   const { setFile } = useContext(DataMeteoContext);
 
   const handleFileChange = (e) => {
@@ -18,9 +18,21 @@ const InputFile = () => {
       >
         <input
           id="file-input"
-          multiple
           type="file"
           className="hidden"
+          accept={
+            accepte === "audio"
+              ? "audio/*"
+              : accepte === "image"
+              ? "image/*"
+              : accepte === "video"
+              ? "video/*"
+              : accepte === "pdf"
+              ? "pdf"
+              : accepte === "text"
+              ? ".dox,.docx,.pttx"
+              : ""
+          }
           onChange={handleFileChange}
         />
 

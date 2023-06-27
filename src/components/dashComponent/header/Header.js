@@ -1,6 +1,7 @@
 import { BiEnvelope } from "react-icons/bi";
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { HiPhone } from "react-icons/hi";
+import { RiNotification2Line } from "react-icons/ri";
 
 const Header = () => {
   return (
@@ -17,8 +18,9 @@ const Header = () => {
           <h1 className="text-xl font-extrabold text-[#488575]">AGRI TECH</h1>
         </div>
         <div className="flex items-center">
-          <FaBell className="h-6 w-6 mr-3 cursor-pointer" />
-          <FaUserCircle className="h-6 w-6 cursor-pointer" />
+          <RiNotification2Line className="h-6 w-6 mr-3 cursor-pointer" />
+
+          <CgProfile className="h-6 w-6 cursor-pointer" />
         </div>
       </div>
     </header>

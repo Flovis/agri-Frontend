@@ -1,14 +1,13 @@
 import L from "leaflet";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import DataMeteoContext from "../../../context/MeteoContext";
 import agripng from "../../../placeholder.png";
 
 import communesHautKatanga from "../../../data/Coordonnees";
 
 export default function Geoloc() {
   const canvasRef = useRef(null);
-  const { setCoords } = useContext(DataMeteoContext);
+
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -33,7 +32,6 @@ export default function Geoloc() {
         6
       );
 
-      setCoords(coords);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(
         map
       );
