@@ -33,7 +33,7 @@ const Notifications = () => {
             )) 
             }
                 
-                <Footer
+                <NavBottom
                     data={[
                         {
                             to: "/agriculteur/contenu",

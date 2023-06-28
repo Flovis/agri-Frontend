@@ -8,7 +8,7 @@ import DashCard from "./DashCard";
 export default function DashReview({ meteo }) {
   return (
     <div className=" flex flex-col gap-6">
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <div className=" py-2 px-4 bg-deep-green w-28 text-center text-custom-white rounded-3xl">
           champs
         </div>
@@ -18,9 +18,9 @@ export default function DashReview({ meteo }) {
         <div className=" py-2 px-4 bg-deep-green w-28 text-center text-custom-white rounded-3xl">
           Alert
         </div>
-      </div>
+      </div> */}
       <div className=" rounded-md p-2 flex items-center justify-between ">
-        <h1 className="text-xl font-bold">Weather forcast</h1>
+        <h1 className="text-xl font-bold">Météo actuelle</h1>
         <Link to="/alert">
           <FiArrowUpRight
             size={24}

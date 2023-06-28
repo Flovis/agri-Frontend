@@ -10,8 +10,8 @@ import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
 export default function Alert({ meteo, forecast }) {
-  console.log("forecast: ", forecast.weather);
-  console.log("weather: ", meteo);
+  // console.log("forecast: ", forecast.weather);
+  
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">

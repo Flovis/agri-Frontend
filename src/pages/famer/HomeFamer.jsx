@@ -5,13 +5,13 @@ import NavBottom from "./NavBottom";
 import { useState } from "react";
 import Aside from "./Aside";
 
-
 import { RiNotification2Line } from "react-icons/ri";
 import { BsCalendarWeek } from "react-icons/bs";
 import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import TopHeader from "../../components/dashComponent/header/TopHeader";
-const HomeFamer = () => {
+import CardMeteo from "../../components/dashComponent/retouche/CardMeteo";
+const HomeFamer = ({meteo}) => {
     const [showAside, setShowAside] = useState(false);
     const handleToggleAside = () => {
         setShowAside(!showAside);
@@ -46,7 +46,7 @@ const HomeFamer = () => {
             publish: "10h",
             content:
                 "Le semis peut s’effectuer en avril, soit en abri pour un replantage lors des beaux jours, soit en terre sous mini-serre. Cette serre protégera la future plante des températures basses, mais également des chats qui pourraient trouver le carré confortable",
-            produit: "choux",
+            produit: "corn",
             image: "",
         },
         {
@@ -61,7 +61,7 @@ const HomeFamer = () => {
 
     return (
         <>
-        <TopHeader/>
+            <TopHeader />
             <div className="lg:w-[900px] m-auto mb-14">
                 <Nav onclickAvatar={handleToggleAside} />
                 <Aside
@@ -70,6 +70,10 @@ const HomeFamer = () => {
                 />
 
                 <div className="w-full">
+                    <div className="mt-5">
+                        <p className="px-4 font-medium text-lg ">Informations Météologique</p>
+                        <CardMeteo meteo={meteo} />
+                    </div>
                     {datas.map((data, index) => (
                         <Card
                             key={index}

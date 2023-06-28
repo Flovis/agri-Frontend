@@ -1,17 +1,21 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AuthContext from "../../context/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 import { backendAxios } from "../../api/axios";
 const LOGIN_URL = "/login";
 
 const Login = () => {
     //for auth
-    const { setAuth } = useContext(AuthContext);
+    const { auth, setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -25,7 +29,6 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errMessage, setErrMessage] = useState("");
-    const [success, setuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -52,18 +55,35 @@ const Login = () => {
                     headers: { "Content-Type": "application/json" },
                 }
             );
-            console.log(JSON.stringify(response?.data));
+
+            // console.log(JSON.stringify(response?.data));
+
             const token = response?.data?.data?.token;
             const role = response?.data?.data?.role;
             const first_name = response?.data?.data?.first_name;
             const phone = response?.data?.data?.phone;
             const last_name = response?.data?.data?.last_name;
 
-            console.log(first_name, last_name, token, role, phone);
-            setAuth({ first_name, last_name, email, password, token, role });
+            //Stockage des donnees de l'utilisateur dans le contexte
+            setAuth({
+                first_name,
+                last_name,
+                email,
+                password,
+                token,
+                role,
+                phone,
+            });
+
             setEmail("");
             setPassword("");
-            setuccess(true);
+
+            //Redirection
+            if (role === 4) {
+                navigate("/agriculteur/contenu", { replace: true });
+            } else if (role === 2 || role === 3) {
+                navigate("/dashboard", { replace: true });
+            }
         } catch (error) {
             if (!error.response) {
                 setErrMessage("Erreur");

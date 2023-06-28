@@ -11,6 +11,7 @@ import { BsCalendarWeek } from "react-icons/bs";
 import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import Footer from "../../components/dashComponent/footer/Footer";
+import NavBottom from "./NavBottom";
 
 const AddPlanProduction = () => {
     const allData = Object.keys(data);
@@ -147,7 +148,7 @@ const AddPlanProduction = () => {
 
             <div className="w-full p-5"></div>
             {/* <NavBottom /> */}
-            <Footer
+            <NavBottom
                     data={[
                         {
                             to: "/agriculteur/contenu",

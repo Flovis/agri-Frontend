@@ -18,94 +18,153 @@ import Profile from "./pages/famer/Profile";
 import Login from "./pages/login/Login";
 import ResetPassword from "./pages/login/ResetPassword";
 import Singin from "./pages/login/Singin";
-
+import Layout from "./Layout";
+import RequireAuth from "./hooks/RequireAuth";
+import Home from "./pages/login/Home";
+import Anauthorized from "./pages/login/Anauthorized";
 function App() {
-  const [weatherDemain, setWeatherDemain] = useState(null);
-  const [meteoDuJour, setMeteoDuJour] = useState();
-  const [coords, setCoords] = useState({});
-  const [prevision, setPrevision] = useState();
-  const [weather, setWeather] = useState();
-  console.log("weather: ", weather);
-  const [forecast, setForecast] = useState();
-  const [file, setFile] = useState({});
+    const [weatherDemain, setWeatherDemain] = useState(null);
+    const [meteoDuJour, setMeteoDuJour] = useState();
+    const [coords, setCoords] = useState({});
+    const [prevision, setPrevision] = useState();
+    const [weather, setWeather] = useState();
+    console.log("weather: ", weather);
+    const [forecast, setForecast] = useState();
+    const [file, setFile] = useState({});
 
-  useEffect(() => {
-    const fetchLocation = () => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          fetchDataWeather(position.coords.latitude, position.coords.longitude);
-          fetchDataForcast(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.error(error);
+    useEffect(() => {
+        const fetchLocation = () => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    fetchDataWeather(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    );
+                    fetchDataForcast(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    );
+                },
+                (error) => {
+                    console.error(error);
+                }
+            );
+        };
+        fetchLocation();
+    }, []);
+
+    const fetchDataWeather = async (latitude, longitude) => {
+        try {
+            const response = await axios.get(
+                `https://api.agromonitoring.com/agro/1.0/weather?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
+            );
+            const data = response.data;
+            setWeather(data);
+        } catch (error) {
+            console.error("Error: ", error);
         }
-      );
     };
-    fetchLocation();
-  }, []);
 
-  const fetchDataWeather = async (latitude, longitude) => {
-    try {
-      const response = await axios.get(
-        `https://api.agromonitoring.com/agro/1.0/weather?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
-      );
-      const data = response.data;
-      setWeather(data);
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
+    const fetchDataForcast = async (latitude, longitude) => {
+        try {
+            const response = await axios.get(
+                `https://api.agromonitoring.com/agro/1.0/weather/forecast?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
+            );
+            const forecast = response.data;
+            setForecast(forecast);
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    };
 
-  const fetchDataForcast = async (latitude, longitude) => {
-    try {
-      const response = await axios.get(
-        `https://api.agromonitoring.com/agro/1.0/weather/forecast?lat=${latitude}&lon=${longitude}&appid=04dba98791c3cefc74d0256ec64c6bc9`
-      );
-      const forecast = response.data;
-      setForecast(forecast);
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
+    const ROLES = {
+        SuperAdmin: 2,
+        admin: 3,
+        Famers: 4,
+    };
 
-  return (
-    <DataMeteoContext.Provider
-      value={{ setCoords, meteoDuJour, prevision, setFile, file }}
-    >
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/enregister" element={<Singin />} />
-        <Route path="/renitialiser" element={<ResetPassword />} />
-        <Route path="/agriculteur/contenu" element={<HomeFamer />} />
-        <Route path="/agriculteur/meteo" element={<Meteo />} />
-        <Route path="/agriculteur/notifications" element={<Notifications />} />
-        <Route
-          path="/agriculteur/plan-de-production"
-          element={<ProductionPlan />}
-        />
-        <Route
-          path="/agriculteur/plan-de-production/ajouter"
-          element={<AddPlanProduction />}
-        />
-        <Route path="/agriculteur/profile" element={<Profile />} />
+    return (
+        <DataMeteoContext.Provider
+            value={{ setCoords, meteoDuJour, prevision, setFile, file }}
+        >
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    {/* Public routes*/}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/enregister" element={<Singin />} />
+                    <Route path="/unauthorized" element={<Anauthorized />} />
+                    <Route path="/renitialiser" element={<ResetPassword />} />
 
-        {/* Part 2 */}
+                    {/* Private routes*/}
+                    <Route
+                        element={<RequireAuth allowedRoles={[ROLES.Famers]} />}
+                    >
+                        {/* Famers */}
 
-        <Route
-          path="/dashboard"
-          element={<WeatherCard meteo={weather} forecast={forecast} />}
-        />
-        <Route path="/contenu" element={<Contenu />} />
-        <Route path="/localisation" element={<Localisation />} />
-        <Route
-          path="/alert"
-          element={<Alert meteo={weather} forecast={forecast} />}
-        />
-        <Route path="/parametre" element={<Parametre />} />
-        <Route path="/contenu/categorieaudio" element={<CategorieAudio />} />
-      </Routes>
-    </DataMeteoContext.Provider>
-  );
+                        <Route
+                            path="/agriculteur/contenu"
+                            element={<HomeFamer meteo={weather} />}
+                        />
+                        <Route path="/agriculteur/meteo" element={<Meteo />} />
+                        <Route
+                            path="/agriculteur/notifications"
+                            element={<Notifications />}
+                        />
+                        <Route
+                            path="/agriculteur/plan-de-production"
+                            element={<ProductionPlan />}
+                        />
+                        <Route
+                            path="/agriculteur/plan-de-production/ajouter"
+                            element={<AddPlanProduction />}
+                        />
+                        <Route
+                            path="/agriculteur/profile"
+                            element={<Profile />}
+                        />
+                    </Route>
+                    {/* Admin AND superAdmin */}
+                    <Route
+                        element={
+                            <RequireAuth
+                                allowedRoles={[ROLES.SuperAdmin, ROLES.admin]}
+                            />
+                        }
+                    >
+                        <Route path="/" element={<Home />} />
+
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <WeatherCard
+                                    meteo={weather}
+                                    forecast={forecast}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/localisation"
+                            element={<Localisation />}
+                        />
+                        <Route
+                            path="/alert"
+                            element={
+                                <Alert meteo={weather} forecast={forecast} />
+                            }
+                        />
+                        <Route path="/parametre" element={<Parametre />} />
+                        <Route
+                            path="/contenu/categorieaudio"
+                            element={<CategorieAudio />}
+                        />
+                    </Route>
+                    <Route element={<RequireAuth allowedRoles={[ROLES.SuperAdmin]} />}>
+                        <Route path="/contenu" element={<Contenu />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </DataMeteoContext.Provider>
+    );
 }
 
 export default App;

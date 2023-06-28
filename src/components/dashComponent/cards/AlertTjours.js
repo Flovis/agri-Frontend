@@ -115,7 +115,7 @@ const TT = ({ weather, forecast }) => {
   return (
     <div className="bg-gray-100 p-8">
       <div>
-        <h2 className="text-xl font-bold mb-4">Information Météorologique</h2>
+        {/* <h2 className="text-xl font-bold mb-4">Information Météorologique</h2>
         <div className="grid grid-cols-2 gap-4 mb-10">
           {[1, 2, 2, 3, 4, 5].map((card, index) => (
             <div
@@ -126,7 +126,7 @@ const TT = ({ weather, forecast }) => {
               <p>{card.value}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-4">Prévision Météorologique</h2>
