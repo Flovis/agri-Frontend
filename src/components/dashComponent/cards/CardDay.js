@@ -2,12 +2,14 @@ import React from "react";
 
 export default function CardDay(tableau) {
   console.log("tableau: ", tableau);
+  const jour = Object.keys(tableau);
+  console.log("jour: ", jour);
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-6">
-        {[].map((day, index) => (
+        {/* {tableau?.map((day, index) => (
           <div key={index} className="mb-4">
-            <div className="text-lg font-medium mb-2">{day.day}</div>
+            <div className="text-lg font-medium mb-2">{Object.keys(day)}</div>
             {day.forecast.map((forecast, index) => (
               <div
                 key={index}
@@ -25,7 +27,7 @@ export default function CardDay(tableau) {
               </div>
             ))}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
