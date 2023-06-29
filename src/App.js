@@ -29,8 +29,7 @@ function App() {
   const [forecast, setForecast] = useState();
   const [conditionAlert, setConditionAlert] = useState({});
   const [formData, setFormData] = useState([]);
-
-  // console.log("conditionAlerterve: ", conditionAlert);
+  const [notification, setnotification] = useState(0);
   const [file, setFile] = useState({});
 
   useEffect(() => {
@@ -49,7 +48,7 @@ function App() {
       );
     };
     fetchLocation();
-  }, []);
+  });
 
   const fetchDataWeather = async (latitude, longitude) => {
     try {
@@ -96,6 +95,8 @@ function App() {
         setConditionAlert,
         setFormData,
         formData,
+        notification,
+        setnotification,
       }}
     >
       <Routes>

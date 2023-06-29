@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { BiEnvelope } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { HiPhone } from "react-icons/hi";
 import { RiNotification2Line } from "react-icons/ri";
+import DataMeteoContext from "../../../context/MeteoContext";
 
 const Header = () => {
+  const { notification } = useContext(DataMeteoContext);
   return (
     <header className="">
       <div className=" h-12 bg-[#488575] w-full flex items-center justify-between px-5">
@@ -18,7 +21,14 @@ const Header = () => {
           <h1 className="text-xl font-extrabold text-[#488575]">AGRI TECH</h1>
         </div>
         <div className="flex items-center">
-          <RiNotification2Line className="h-6 w-6 mr-3 cursor-pointer" />
+          <button className="relative">
+            <RiNotification2Line className="h-6 w-6 mr-3 cursor-pointer" />
+            <strong className="">
+              <div className="absolute -top-[3PX] -right-[-6px] w-4 h-4 bg-custom-red rounded-full flex items-center justify-center text-custom-white text-xs">
+                {notification}
+              </div>
+            </strong>
+          </button>
 
           <CgProfile className="h-6 w-6 cursor-pointer" />
         </div>

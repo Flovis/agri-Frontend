@@ -4,6 +4,7 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
+import PushNotConfig from "../../Back/PushNotConfig";
 import CardForecast from "../../components/dashComponent/cards/CardForecast";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
@@ -15,6 +16,7 @@ export default function Alert() {
         <Header />
       </div>
       <div className=" pt-[120px]"></div>
+      <PushNotConfig />
 
       <div className="">
         <CardForecast />
