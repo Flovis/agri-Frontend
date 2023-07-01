@@ -4,24 +4,27 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
-import PushNotConfig from "../../Back/PushNotConfig";
-import CardForecast from "../../components/dashComponent/cards/CardForecast";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 
-export default function Alert() {
+export default function Alert({ meteo, forecast }) {
+  // console.log("forecast: ", forecast.weather);
+
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
         <Header />
       </div>
       <div className=" pt-[120px]"></div>
-      <PushNotConfig />
 
-      <div className="">
-        <CardForecast />
+      {/* <TT  /> */}
+ 
+
+      <div className="mb-20">
+        {/* <AlertConfiguration /> */}
       </div>
-      {/* <Condition /> */}
+      
+
       <Footer
         data={[
           {

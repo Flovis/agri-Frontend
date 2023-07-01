@@ -1,0 +1,53 @@
+/* styles.css */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.weather-info {
+  @apply flex justify-between items-center  bg-custom-white p-4 rounded-md;
+}
+
+.weather-icon {
+  @apply  text-2xl;
+}
+
+.weather-info__left {
+  @apply flex items-center gap-2;
+}
+
+.weather-info__content {
+  @apply flex flex-col;
+}
+
+.weather-info__title {
+  @apply text-deep-green font-bold;
+}
+
+.weather-info__temperature {
+  @apply -my-1 font-extrabold;
+}
+
+.weather-info__right {
+  @apply flex flex-col gap-2;
+}
+
+.weather-info__time-hours {
+  @apply font-bold;
+}
+
+.weather-info__time-range {
+  @apply text-borde-gray font-bold;
+}
+
+.weather-info__details {
+  @apply flex gap-2;
+}
+
+.weather-info__detail {
+  @apply flex items-center font-bold;
+}
+
+.weather-info__detail .weather-icon {
+  @apply text-[#0ca2ed] text-xl;
+}

@@ -1,17 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { BiPlusMedical } from "react-icons/bi";
-import { selectContext } from "../../context/SelectContext";
-const UnSelectRecherche = ({ options, recqui }) => {
-  const { lang, setlang } = useContext(selectContext) || {};
 
+const UnSelectRecherche = ({ options, recqui }) => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleOptionChange = (selectedOption) => {
-    if (lang.includes(selectedOption)) {
-      setlang(lang.filter((option) => option !== selectedOption));
+    if (selectedOptions.includes(selectedOption)) {
+      setSelectedOptions(
+        selectedOptions.filter((option) => option !== selectedOption)
+      );
     } else {
-      setlang([...lang, selectedOption]);
+      setSelectedOptions([...selectedOptions, selectedOption]);
     }
   };
 
@@ -49,7 +50,7 @@ const UnSelectRecherche = ({ options, recqui }) => {
               </svg>
               <p className="text-text-gray ">
                 {" "}
-                {lang?.map((choix, index) => choix.label).join(", ")}
+                {selectedOptions.map((choix, index) => choix.label).join(", ")}
               </p>
             </div>
             <div className="flex items-center">
@@ -80,7 +81,7 @@ const UnSelectRecherche = ({ options, recqui }) => {
                 <div
                   key={index}
                   className={`px-4 py-2 my-3 hover:bg-blue-100 cursor-pointer ${
-                    lang.includes(option) ? "bg-meduim-green" : ""
+                    selectedOptions.includes(option) ? "bg-meduim-green" : ""
                   }`}
                   onClick={() => handleOptionChange(option)}
                 >

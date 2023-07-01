@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { BiPlusMedical } from "react-icons/bi";
-import { SelectContext } from "../../context/SelectContext";
 
 const UnSelectBtn = ({ option }) => {
+  const [selectedOption, setSelectedOption] = useState("");
   const [showOptions, setShowOptions] = useState(false);
-  const { setcat, catego } = useContext(SelectContext);
 
   const handleOptionChange = (selected) => {
-    setcat(selected.value);
+    setSelectedOption(selected.value);
     setShowOptions(false);
   };
 
@@ -35,7 +34,7 @@ const UnSelectBtn = ({ option }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="text-text-gray">{catego}</p>
+              <p className="text-text-gray">{selectedOption}</p>
             </div>
             <div className="flex items-center">
               <svg
@@ -54,7 +53,7 @@ const UnSelectBtn = ({ option }) => {
             </div>
           </div>
           {showOptions && (
-            <div className="absolute w-[350px] h-44 overflow-auto bg-custom-white rounded-b-md mt-3 ">
+            <div className="absolute w-[350px] bg-custom-white rounded-b-md mt-3 ">
               {option?.map((option, index) => (
                 <div
                   key={index}

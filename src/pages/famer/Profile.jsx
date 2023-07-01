@@ -28,7 +28,7 @@ const Profile = () => {
                     <span clasName="top-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white bg-deep-green dark:border-gray-800 rounded-full"></span>
                 </div>
             </div>
-            <Footer
+            <NavBottom
                 data={[
                     {
                         to: "/agriculteur/contenu",

@@ -1,16 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Footer({ data }) {
-  const [countMenu, setCountMenu] = useState();
-  useEffect(() => {
-    setCountMenu(data.length);
-  }, []);
+  const { auth } = useAuth();
+
+  let filteredData;
+
+  if (auth?.role === 2) {
+    filteredData = data.filter((dat) => dat.nom !== "Contenu");
+  } else {
+    filteredData = data;
+  }
+
+  console.log(filteredData.length);
+
+  console.log("Role", auth?.role);
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-14 bg-custom-white border-t border-borde-gray">
-      <div className={`grid h-full max-w-lg  grid-cols-5 mx-auto font-medium`}>
-        {data?.map((li, index) => (
+      <div
+        className={`grid h-full max-w-lg  grid-cols-5 mx-auto font-medium`}
+      >
+        {filteredData?.map((li, index) => (
           <NavLink
             key={index}
             to={li.to}

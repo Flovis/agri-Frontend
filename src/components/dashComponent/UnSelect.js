@@ -1,18 +1,11 @@
-import { useContext, useState } from "react";
-import { SelectContext, selectContext } from "../../context/SelectContext";
+import { useState } from "react";
 
 const UnSelect = ({ option }) => {
-  const { selectedOption, setSelectedOption } = useContext(SelectContext);
-  const { selectedOption2, setSelectedOption2 } = useContext(selectContext);
+  const [selectedOption, setSelectedOption] = useState("");
   const [showOptions, setShowOptions] = useState(false);
 
   const handleOptionChange = (selected) => {
     setSelectedOption(selected.value);
-    setShowOptions(false);
-  };
-
-  const handleOptionChange2 = (selected) => {
-    setSelectedOption2(selected.value);
     setShowOptions(false);
   };
 
@@ -40,9 +33,7 @@ const UnSelect = ({ option }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="text-text-gray">
-                {selectedOption ? selectedOption : selectedOption2}
-              </p>
+              <p className="text-text-gray">{selectedOption}</p>
             </div>
             <div className="flex items-center">
               <svg
@@ -61,25 +52,12 @@ const UnSelect = ({ option }) => {
             </div>
           </div>
           {showOptions && (
-            <div className="absolute w-[350px] bg-custom-white rounded-b-md mt-3 h-40 overflow-auto ">
+            <div className="absolute w-[350px] bg-custom-white rounded-b-md mt-3 ">
               {option?.map((option, index) => (
                 <div
                   key={index}
                   className="px-4 py-2 my-3   hover:bg-blue-100 cursor-pointer"
-                  onClick={() => {
-                    handleOptionChange(option);
-                  }}
-                >
-                  {option.label}
-                </div>
-              ))}
-              {option?.map((option, index) => (
-                <div
-                  key={index}
-                  className="px-4 py-2 my-3   hover:bg-blue-100 cursor-pointer"
-                  onClick={() => {
-                    handleOptionChange2(option);
-                  }}
+                  onClick={() => handleOptionChange(option)}
                 >
                   {option.label}
                 </div>

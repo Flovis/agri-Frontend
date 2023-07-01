@@ -68,7 +68,7 @@ const ProductionPlan = () => {
                     value={<VscAdd className="text-custom-white text-xl" />}
                 />
             </Link>
-            <Footer
+            <NavBottom
                 data={[
                     {
                         to: "/agriculteur/contenu",
