@@ -13,6 +13,9 @@ const Login = () => {
     //for auth
     const { auth, setAuth } = useAuth();
 
+    const [btnValue, setBtnValue] = useState("Se connecter");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -40,58 +43,67 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            /**
-             * headers : spécifie l'en-tête Content-Type comme application/json,
-             * indiquant que le corps de la requête est au format JSON.
-             * withCredentials : est défini sur true pour indiquer qu'il faut
-             *inclure les cookies lors de l'envoi de la requête
-             *(utile pour maintenir la session d'authentification).
-             */
-            const response = await backendAxios.post(
-                LOGIN_URL,
-                JSON.stringify({ email, password }),
-                {
-                    headers: { "Content-Type": "application/json" },
+        if(email && password){
+            setBtnValue("chargement...");
+            setIsSubmitting(true);
+            try {
+                /**
+                 * headers : spécifie l'en-tête Content-Type comme application/json,
+                 * indiquant que le corps de la requête est au format JSON.
+                 * withCredentials : est défini sur true pour indiquer qu'il faut
+                 *inclure les cookies lors de l'envoi de la requête
+                 *(utile pour maintenir la session d'authentification).
+                 */
+                const response = await backendAxios.post(
+                    LOGIN_URL,
+                    JSON.stringify({ email, password }),
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+    
+                // console.log(JSON.stringify(response?.data));
+                const id = response?.data?.data?.id;
+                const token = response?.data?.data?.token;
+                const role = response?.data?.data?.role;
+                const first_name = response?.data?.data?.first_name;
+                const phone = response?.data?.data?.phone;
+                const last_name = response?.data?.data?.last_name;
+    
+                //Stockage des donnees de l'utilisateur dans le contexte
+                setAuth({
+                    id,
+                    first_name,
+                    last_name,
+                    email,
+                    password,
+                    token,
+                    role,
+                    phone,
+                });
+    
+                setEmail("");
+                setPassword("");
+
+                
+    
+                //Redirection
+                if (role === 4) {
+                    navigate("/agriculteur/contenu", { replace: true });
+                } else if (role === 2 || role === 3) {
+                    navigate("/dashboard", { replace: true });
                 }
-            );
-
-            // console.log(JSON.stringify(response?.data));
-
-            const token = response?.data?.data?.token;
-            const role = response?.data?.data?.role;
-            const first_name = response?.data?.data?.first_name;
-            const phone = response?.data?.data?.phone;
-            const last_name = response?.data?.data?.last_name;
-
-            //Stockage des donnees de l'utilisateur dans le contexte
-            setAuth({
-                first_name,
-                last_name,
-                email,
-                password,
-                token,
-                role,
-                phone,
-            });
-
-            setEmail("");
-            setPassword("");
-
-            //Redirection
-            if (role === 4) {
-                navigate("/agriculteur/contenu", { replace: true });
-            } else if (role === 2 || role === 3) {
-                navigate("/dashboard", { replace: true });
+            } catch (error) {
+                if (!error.response) {
+                    setErrMessage("Erreur");
+                }
+                console.log(error.response?.data);
+                setErrMessage(error.response?.data.message);
+                errRef.current.focus();
             }
-        } catch (error) {
-            if (!error.response) {
-                setErrMessage("Erreur");
-            }
-            console.log(error.response?.data);
-            setErrMessage(error.response?.data.message);
-            errRef.current.focus();
+
         }
+        
     };
 
     return (
@@ -186,9 +198,10 @@ const Login = () => {
                     </div>
                     <div className="w-full mb-3md:mb-5">
                         <Button
-                            value="Se connecter"
+                            value={btnValue}
                             typ="submit"
                             className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
+                            disabled={isSubmitting}
                         />
                         <div className="mt-5 text-center text-text-gray">
                             Vous n'avez pas de compte?{" "}
