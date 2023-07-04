@@ -13,10 +13,6 @@ const BackNav = ({ linkTo, title }) => {
         </Link>
         <div className="flex justify-between items-center w-full">
           <div className="font-bold">{title}</div>
-          <button className="bg-deep-green duration-200 p-2 rounded-md flex items-center text-md text-custom-white">
-            <BiPlusMedical className="text-xl" />
-            Ajouter
-          </button>
         </div>
       </div>
     </div>

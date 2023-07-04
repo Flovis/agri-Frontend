@@ -1,15 +1,14 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import TopHeader from "../../header/TopHeader";
-import BackNav from "../../../../pages/famer/BackNav";
-import { FiSettings, FiVolume2 } from "react-icons/fi";
+import { FiSettings } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
-import { TbPdf, TbSpeakerphone } from "react-icons/tb";
+import { TbSpeakerphone } from "react-icons/tb";
 import { GrMapLocation } from "react-icons/gr";
 import Footer from "../../footer/Footer";
-import { ImMusic } from "react-icons/im";
-import SongCard from "../cards/SongCard";
-import LecteurAudio from "../cards/LecteurAudio";
+
+import SongCard from "../cards/audio/SongCard";
+import BackNavStep from "../../header/BackNav";
 
 export default function Step2() {
   const songs = [{ id: 1 }, { id: 2 }, { id: 3 }];
@@ -19,7 +18,7 @@ export default function Step2() {
       <div>
         <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
           <TopHeader />
-          <BackNav linkTo="/contenu" title=" Audio " />
+          <BackNavStep linkTo="/contenu" title=" Audio " type="audio" />
         </div>
         <div className="pt-28">
           <div
@@ -31,7 +30,7 @@ export default function Step2() {
             }}
           >
             <h2 className="text-3xl text-custom-white font-bold mx-2">
-              Categorie PDF
+              Categorie Audio
             </h2>
           </div>
         </div>
@@ -42,8 +41,6 @@ export default function Step2() {
           <SongCard key={song.id} song={song} />
         ))}
       </div>
-
-      <LecteurAudio />
 
       <Footer
         data={[
@@ -76,11 +73,4 @@ export default function Step2() {
       />
     </>
   );
-}
-
-{
-  /* <button className="bg-deep-green duration-200 p-2 rounded-md flex items-center text-md text-custom-white">
-       <BiPlusMedical className="text-xl" />
-       Ajouter
-     </button> */
 }

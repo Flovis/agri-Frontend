@@ -1,36 +1,49 @@
-import React from 'react';
-import TopHeader from '../../../dashComponent/header/TopHeader';
-import BackNav from '../../header/BackNav';
-import { FiSettings, FiVolume2 } from "react-icons/fi";
+import React from "react";
+import TopHeader from "../../../dashComponent/header/TopHeader";
+import BackNav from "../../header/BackNav";
+import { FiSettings } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
-import { TbPdf, TbSpeakerphone } from "react-icons/tb";
-import { GrMapLocation } from 'react-icons/gr';
-import Footer from '../../footer/Footer';
+import { TbSpeakerphone } from "react-icons/tb";
+import { GrMapLocation } from "react-icons/gr";
+import Footer from "../../footer/Footer";
+import CardVideo from "../cards/vdeo/CardVideo";
+import Traitement from "../../algo/Traitement";
 
 export default function Step3() {
+  const { Stockage } = Traitement();
+  console.log("Stockage: ", Stockage);
   return (
     <div>
       <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
-        <TopHeader/>
-        <BackNav linkTo="/contenu" title="Contenu Type Pdf" />
+        <TopHeader />
+        <BackNav linkTo="/contenu" type="video" title="Video" />
       </div>
       <div className="pt-28">
         <div
           className="flex h-36 w-full object-cover items-center text-deep-green justify-center font-bold"
           style={{
-            backgroundImage: 'url("https://source.unsplash.com/pakTZIspHO0/300x300")',
+            backgroundImage:
+              'url("https://source.unsplash.com/Z0rh7_Xumco/300x300")',
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         >
           <h2 className="text-3xl text-custom-white font-bold mx-2">
-            Categorie PDF
+            Categorie Video
           </h2>
         </div>
+        <ul>
+          ggggggggggggggg
+          {Array.isArray(Stockage) &&
+            Stockage?.map((video) => (
+              <React.Fragment key={video.id}>
+                <CardVideo />
+                <p>{JSON.stringify(Stockage)}</p>
+              </React.Fragment>
+            ))}
+        </ul>
       </div>
-
-
 
       <Footer
         data={[
@@ -61,7 +74,6 @@ export default function Step3() {
           },
         ]}
       />
-    
     </div>
   );
 }

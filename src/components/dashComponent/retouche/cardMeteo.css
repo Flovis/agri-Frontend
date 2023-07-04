@@ -1,15 +1,15 @@
 /* styles.css */
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 .weather-info {
   @apply flex justify-between items-center  bg-custom-white p-4 rounded-md;
 }
 
 .weather-icon {
-  @apply  text-2xl;
+  @apply text-2xl;
 }
 
 .weather-info__left {
@@ -32,12 +32,16 @@
   @apply flex flex-col gap-2;
 }
 
+.weather-info__time {
+  @apply flex gap-2;
+}
+
 .weather-info__time-hours {
   @apply font-bold;
 }
 
 .weather-info__time-range {
-  @apply text-borde-gray font-bold;
+  @apply text-borde-gray font-bold text-sm;
 }
 
 .weather-info__details {

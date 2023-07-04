@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { BiPlusMedical, BiVideo } from "react-icons/bi";
+import { BiVideo } from "react-icons/bi";
 import { FiVolume2 } from "react-icons/fi";
 import { TbPdf } from "react-icons/tb";
-import { GrArticle } from "react-icons/gr";
 import CardCategorie from "../cards/CardCategorie";
 
 const Step1 = () => {
@@ -26,7 +25,7 @@ const Step1 = () => {
         </Link>
         <Link to={`/contenu/video`} className="duration-200">
           <CardCategorie
-            image="https://source.unsplash.com/niUkImZcSP8/300x300"
+            image="https://source.unsplash.com/Z0rh7_Xumco/300x300"
             type={<BiVideo className="text-custom-red mr-2" />}
             titre="Categorie Video"
             description="Des vidéos inspirantes mettant en lumière le travail acharné des agriculteurs pour cultiver et récolter une variété de cultures."
@@ -34,9 +33,9 @@ const Step1 = () => {
           />
         </Link>
 
-        <Link to={`/contenu/textuelles`} className="duration-200">
+        <Link to={`/contenu/textuel`} className="duration-200">
           <CardCategorie
-            image="https://source.unsplash.com/pakTZIspHO0/300x300"
+            image="https://source.unsplash.com/4hTVRYshNuE/300x300"
             type={<TbPdf className="text-custom-red mr-2" />}
             titre="Categorie textuelles"
             description="Plongez dans le fascinant monde des agriculteurs à travers des contenus PDF."
