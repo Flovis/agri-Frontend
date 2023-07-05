@@ -1,94 +1,77 @@
 import L from "leaflet";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useGeolocated } from "react-geolocated";
 import DataMeteoContext from "../../../context/MeteoContext";
 import agripng from "../../../placeholder.png";
-
 import communesHautKatanga from "../../../data/Coordonnees";
+import { MoonLoader } from "react-spinners";
+
+import "leaflet/dist/leaflet.css";
 
 export default function Geoloc() {
-  const canvasRef = useRef(null);
-  const { setCoords } = useContext(DataMeteoContext);
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-    useGeolocated({
-      positionOptions: {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: Infinity,
-      },
-      userDecisionTimeout: 5000,
-      watchPosition: true,
-      geolocationProvider: navigator.geolocation,
-      isOptimisticGeolocationEnabled: true,
-      watchLocationPermissionChange: false,
-    });
-
   const mapRef = useRef(null);
   const [mapInitialized, setMapInitialized] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const {
+    dataMeteoContextValue: { localisation },
+  } = useContext(DataMeteoContext);
+  console.log("localisationMap: ", localisation);
 
   useEffect(() => {
-    if (coords && mapRef.current && !mapInitialized) {
+    if (localisation && mapRef.current && !mapInitialized) {
       const map = L.map(mapRef.current).setView(
-        [coords.latitude, coords.longitude],
+        [localisation.latitude, localisation.longitude],
         6
       );
 
-      setCoords(coords);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(
-        map
-      );
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        // Ajoutez les options de la tuile si nécessaire
+      }).addTo(map);
+
       const customMarkerIcon = L.icon({
         iconUrl: agripng,
         iconSize: [32, 32],
       });
 
-      communesHautKatanga?.map((item) => {
+      communesHautKatanga?.forEach((item) => {
         L.marker([item.latitude, item.longitude], { icon: customMarkerIcon })
           .addTo(map)
           .bindPopup(`${item.commune}`)
           .openPopup();
-        // map.flyTo([item.latitude, item.longitude], 10);
       });
 
       const polygon = L.polygon([
-        [coords.latitude, coords.longitude - 0.002],
-        [coords.latitude - 0.002, coords.longitude],
-        [coords.latitude, coords.longitude + 0.002],
-        [coords.latitude + 0.002, coords.longitude],
+        [localisation.latitude, localisation.longitude - 0.002],
+        [localisation.latitude - 0.002, localisation.longitude],
+        [localisation.latitude, localisation.longitude + 0.002],
+        [localisation.latitude + 0.002, localisation.longitude],
       ]).addTo(map);
       polygon.bindPopup("mesure 20/20");
 
       setMapInitialized(true);
+      setLoading(false);
+    } else if (!localisation) {
+      setLoading(false);
+      setError(true);
     }
-  }, [coords, mapInitialized]);
+  }, [localisation, mapInitialized]);
 
-  if (!isGeolocationAvailable) {
+  if (error) {
     return (
       <div className="flex justify-center items-center h-80 bg-gray-200">
         <p className="text-lg text-gray-600">
-          Désolé, la géolocalisation n'est pas prise en charge par votre
-          appareil.
+          Une erreur s'est produite lors de la récupération des données de
+          localisation. Veuillez réessayer plus tard.
         </p>
       </div>
     );
-  } else if (!isGeolocationEnabled) {
-    return (
-      <div className="flex justify-center items-center h-80 bg-gray-200">
-        <p className="text-lg text-gray-600">
-          Veuillez activer la géolocalisation dans les paramètres de votre
-          appareil.
-        </p>
-      </div>
-    );
-  } else if (coords) {
-    return <div ref={mapRef} className="h-96 bg-gray-100" />;
-  } else {
+  } else if (loading) {
     return (
       <div className="flex justify-center items-center h-96 bg-gray-200">
-        <p className="text-lg text-gray-600">
-          Récupération des données de localisation...
-        </p>
+        <MoonLoader color="#488575" />
       </div>
     );
+  } else {
+    return <div ref={mapRef} className="h-96 bg-gray-100 w-full" />;
   }
 }

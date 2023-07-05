@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import TopHeader from "../../../dashComponent/header/TopHeader";
 import BackNav from "../../header/BackNav";
 import { FiSettings } from "react-icons/fi";
@@ -9,10 +9,11 @@ import { GrMapLocation } from "react-icons/gr";
 import Footer from "../../footer/Footer";
 import CardVideo from "../cards/vdeo/CardVideo";
 import Traitement from "../../algo/Traitement";
+import { ContentForm } from "../../../../hooks/useDataForm";
 
 export default function Step3() {
-  const { Stockage } = Traitement();
-  console.log("Stockage: ", Stockage);
+  const { contenu } = useContext(ContentForm);
+  console.log("contenupage video: ", contenu);
   return (
     <div>
       <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
@@ -35,11 +36,11 @@ export default function Step3() {
         </div>
         <ul>
           ggggggggggggggg
-          {Array.isArray(Stockage) &&
-            Stockage?.map((video) => (
+          {Array.isArray(contenu) &&
+            contenu?.map((video) => (
               <React.Fragment key={video.id}>
                 <CardVideo />
-                <p>{JSON.stringify(Stockage)}</p>
+                <p>{JSON.stringify(contenu)}</p>
               </React.Fragment>
             ))}
         </ul>

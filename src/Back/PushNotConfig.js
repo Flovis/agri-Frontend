@@ -43,7 +43,7 @@ export default function PushNotConfig() {
     socket.on("connect", () => {
       //   const data = 9;
       //   socket.broadcast.emit("getdData", data);
-      sendDataToBack(forecast);
+      //   sendDataToBack(forecast);
       return notyf.success("Tu es connecté au serveur ");
     });
 

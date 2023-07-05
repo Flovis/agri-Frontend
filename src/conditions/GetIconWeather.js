@@ -93,13 +93,15 @@ const getIcon = (code) => {
 
   const weatherIconList = getWeatherIcons(weatherIcons);
 
-  return weatherIconList.map((weatherIcon, index) => (
-    <React.Fragment key={index}>
-      <span className="text-4xl" style={{ color: weatherIcon.color }}>
-        {weatherIcon.icon}
-      </span>
-    </React.Fragment>
-  ));
+  return weatherIconList
+    ? weatherIconList?.map((weatherIcon, index) => (
+        <React.Fragment key={index}>
+          <span className="text-4xl" style={{ color: weatherIcon.color }}>
+            {weatherIcon.icon}
+          </span>
+        </React.Fragment>
+      ))
+    : null;
 };
 
 export default getIcon;

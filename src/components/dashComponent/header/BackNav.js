@@ -2,19 +2,22 @@ import React from "react";
 import { BiArrowBack, BiPlusMedical } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
-const BackNavStep = ({ linkTo, title, set, classes, type }) => {
+const BackNavStep = ({ linkTo, title, set, classes, type, handlePrevious }) => {
   console.log("title: ", title);
-  const navigate = useNavigate();
+  const navigate = useNavigate({});
 
-  const handleForm = () => {
-    navigate(`/contenu/level1?type=${type}`);
+  const handleForm = ({}) => {
+    navigate(`/contenu/getform?type=${type}`);
   };
 
   return (
     <div onClick={set}>
       <div className="flex items-center gap-10 p-4 bg-custom-white">
         <Link to={linkTo}>
-          <div className="w-8 h-8 rounded-full flex justify-center items-center hover:bg-borde-gray">
+          <div
+            onClick={handlePrevious}
+            className="w-8 h-8 rounded-full flex justify-center items-center hover:bg-borde-gray"
+          >
             <BiArrowBack className="text-xl" />
           </div>
         </Link>

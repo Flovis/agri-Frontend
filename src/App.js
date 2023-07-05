@@ -23,6 +23,7 @@ import ResetPassword from "./pages/login/ResetPassword";
 import Singin from "./pages/login/Singin";
 import fetchData from "./api/fetchData";
 import Step from "./components/dashComponent/Contenu/step/Step";
+import PushNotConfig from "./Back/PushNotConfig";
 
 function App() {
   const [conditionAlert, setConditionAlert] = useState({});
@@ -96,6 +97,7 @@ function App() {
 
   return (
     <DataMeteoContext.Provider value={{ dataMeteoContextValue }}>
+      <PushNotConfig />
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* Public routes*/}
