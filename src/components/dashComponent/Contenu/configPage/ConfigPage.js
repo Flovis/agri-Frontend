@@ -7,7 +7,8 @@ export default function ConfigPage() {
   const [step, setStep] = useState(1);
   console.log("step: ", step);
   const [formData, setFormData] = useState({});
-  console.log("formDatafinale: ", formData);
+  console.log("formDataConfig: ", formData);
+  //   console.log("formDatafinale: ", formData);
 
   const handleNext = (data) => {
     setStep((prev) => prev + 1);
@@ -35,8 +36,6 @@ export default function ConfigPage() {
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
-    // Send the formData to the server
   };
 
   return (
@@ -52,7 +51,11 @@ export default function ConfigPage() {
         />
       )}
       {step === 3 && (
-        <Partage onPrevious={handlePrevious} onSubmit={handleSubmit} />
+        <Partage
+          onPrevious={handlePrevious}
+          onSubmit={handleSubmit}
+          formData={formData}
+        />
       )}
     </div>
   );

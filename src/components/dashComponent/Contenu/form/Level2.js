@@ -26,7 +26,7 @@ const Level2 = ({ onPrevious, onSubmit }) => {
   });
 
   const handlePrevious = () => {
-    navigate(`/contenu/getform?type=${defaultType}`);
+    // navigate(`/contenu/getform?type=${defaultType}`);
     onPrevious(form);
   };
 
@@ -36,7 +36,7 @@ const Level2 = ({ onPrevious, onSubmit }) => {
     const data = Object.fromEntries(formdata);
     setform(data);
     onSubmit(data);
-    navigate(`/contenu/${defaultType}`);
+    // navigate(`/contenu/${defaultType}`);
   };
 
   return (

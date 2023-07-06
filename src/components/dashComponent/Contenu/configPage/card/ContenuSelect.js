@@ -1,27 +1,32 @@
-import DynamicInput from "../../../PublicComponent/DynamicInput";
 import DynamicSelect from "../../../PublicComponent/DynamicSelect ";
 import DynamicButton from "../../../PublicComponent/DynamicButton ";
 import DynamicTitle from "../../../PublicComponent/DynamicTitle";
 import TopHeader from "../../../header/TopHeader";
 import BackNavStep from "../../../header/BackNav";
-import DynamicTextarea from "../../../PublicComponent/DynamicTextarea ";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import DynamicDataSet from "../../../PublicComponent/DynamicDataSet";
+import { useState } from "react";
 
 const ContenuSelect = ({ onNext }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
   const navigate = new useNavigate();
+  const [data, setdata] = useState({});
+  console.log("data: ", data);
 
   const handleNext = (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
-    formdata.set("category", defaultType);
     const data = Object.fromEntries(formdata);
-    onNext(data);
+    if (data) {
+      notyf.success("Remplissez des informations supplémentaires");
+      onNext(data);
+    } else {
+      notyf.error("Veuillez remplir le formulaire");
+    }
   };
 
   const notyf = new Notyf({
@@ -56,9 +61,23 @@ const ContenuSelect = ({ onNext }) => {
           </div>
           <div className="my-2">
             <DynamicSelect
+              label="Type d'alert"
+              options={[
+                "Alert meteologique",
+                "Alert plan de production",
+                "Autre",
+              ]}
+              nameData="typeAlert"
+            />
+          </div>
+
+          {/* <div className="my-2"> */}
+
+          <div className="my-2">
+            <DynamicSelect
               label="Sélectionner le cycle de production"
               options={["semence", "croissance", "recolte", "conditionnement"]}
-              name="cycle"
+              nameData="cycle"
             />
           </div>
           <div className="-mt-2"></div>
@@ -74,13 +93,6 @@ const ContenuSelect = ({ onNext }) => {
               options={["audio", "video", "texte"]}
               name="category"
               nameData="category"
-            />
-          </div>
-          <div>
-            <DynamicTextarea
-              label="Description du contenu"
-              rows={3}
-              name="description"
             />
           </div>
 

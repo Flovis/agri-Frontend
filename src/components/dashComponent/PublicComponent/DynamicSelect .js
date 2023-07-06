@@ -38,11 +38,11 @@ const DynamicSelect = ({ label, options, classes, nameData, onChange }) => {
         // required
       />
       {filteredOptions.length > 0 && (
-        <ul className="absolute w-full bg-custom-white border border-borde-gray rounded-md mt-2 h-28 overflow-y-auto">
+        <ul className="absolute w-full bg-custom-white border border-borde-gray rounded-md mt-2 h-28 overflow-y-auto z-10">
           {filteredOptions.map((option) => (
             <li
               key={option}
-              className=" px-4 py-2 cursor-pointer "
+              className="px-4 py-2 cursor-pointer"
               onClick={() => handleOptionSelect(option)}
             >
               {option}

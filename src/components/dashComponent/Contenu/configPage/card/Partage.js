@@ -10,13 +10,15 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaShareAltSquare } from "react-icons/fa";
+import SelectComponent from "../../../PublicComponent/SelectComponent";
 
-const Partage = ({ onPrevious, onSubmit }) => {
+const Partage = ({ onPrevious, onSubmit, formData }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
   const navigate = new useNavigate();
   const [form, setform] = useState("");
+  //   console.log("formDataPage", formData);
 
   const notyf = new Notyf({
     duration: 1000,
@@ -61,7 +63,16 @@ const Partage = ({ onPrevious, onSubmit }) => {
               type="submit"
             />
           </div>
-
+          {/* {formData?.map((el) => {
+            <li>
+              <p> {el.cycle}</p>
+              <p>{el.category}</p>
+              <p> {el.description}</p>
+              <p>{el.frequence}</p>
+              <p> {el.canal}</p>
+              <p> {el.group}</p>
+            </li>;
+          })} */}
           <div className="mt-4 flex items-center">
             <DynamicButton
               label="Enregistrer"

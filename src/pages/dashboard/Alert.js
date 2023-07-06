@@ -7,6 +7,7 @@ import { TbSpeakerphone } from "react-icons/tb";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
 import TodayMeteo from "../../components/dashComponent/forcast/cards/TodayMeteo";
+import AjoutCat from "../../components/dashComponent/Modal/AjoutLangue";
 
 export default function Alert() {
   return (
@@ -15,6 +16,7 @@ export default function Alert() {
         <Header />
       </div>
       <div className=" pt-[120px]"></div>
+
       <TodayMeteo />
       <Footer
         data={[

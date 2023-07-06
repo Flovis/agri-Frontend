@@ -55,3 +55,7 @@
 .weather-info__detail .weather-icon {
   @apply text-[#0ca2ed] text-xl;
 }
+
+.custom-select {
+  @apply py-2 px-4 bg-custom-red rounded-lg;
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import DynamicInput from "../../PublicComponent/DynamicInput";
 import DynamicSelect from "../../PublicComponent/DynamicSelect ";
 import DynamicButton from "../../PublicComponent/DynamicButton ";
@@ -7,28 +8,13 @@ import BackNavStep from "../../header/BackNav";
 import DynamicTextarea from "../../PublicComponent/DynamicTextarea ";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
-import { useEffect, useState } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Level1 = ({ onNext, onPrevious }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
   const navigate = new useNavigate();
-
-  const handleNext = (e) => {
-    e.preventDefault();
-    const formdata = new FormData(e.target);
-    formdata.set("category", defaultType);
-    const data = Object.fromEntries(formdata);
-    onNext(data);
-  };
-
   const notyf = new Notyf({
     duration: 1000,
     position: {
@@ -37,8 +23,13 @@ const Level1 = ({ onNext, onPrevious }) => {
     },
   });
 
-  // notyf.error("Veuillez remplir le formulaire");
-  // notyf.success("Remplis des informations supplémentaires");
+  const handleNext = (e) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    formdata.set("category", defaultType);
+    const data = Object.fromEntries(formdata);
+    onNext(data);
+  };
 
   return (
     <>
@@ -63,7 +54,7 @@ const Level1 = ({ onNext, onPrevious }) => {
             <DynamicSelect
               label="Sélectionner le cycle de production"
               options={["semence", "croissance", "recolte", "conditionnement"]}
-              name="cycle"
+              nameData="cycle"
             />
           </div>
           <div>

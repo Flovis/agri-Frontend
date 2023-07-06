@@ -4,11 +4,10 @@ import DynamicButton from "../../../PublicComponent/DynamicButton ";
 import DynamicTitle from "../../../PublicComponent/DynamicTitle";
 import TopHeader from "../../../header/TopHeader";
 import BackNavStep from "../../../header/BackNav";
-import DynamicTextarea from "../../../PublicComponent/DynamicTextarea ";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import DynamicDataSet from "../../../PublicComponent/DynamicDataSet";
+import DynamicTextarea from "../../../PublicComponent/DynamicTextarea ";
 
 const Horaire = ({ onNext, onPrevious }) => {
   const location = useLocation();
@@ -57,15 +56,11 @@ const Horaire = ({ onNext, onPrevious }) => {
           <div className="w-[90%]">
             <DynamicTitle text="Informations complémentaires" size="xl" />
           </div>
-          <div className="my-2">
-            <DynamicSelect
-              label="Type d'alert"
-              options={[
-                "Alert meteologique",
-                "Alert plan de production",
-                "Autre",
-              ]}
-              name="typeAlert"
+          <div>
+            <DynamicTextarea
+              label="Description du contenu"
+              rows={3}
+              name="description"
             />
           </div>
 

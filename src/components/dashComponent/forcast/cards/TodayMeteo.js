@@ -1,10 +1,11 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import DynamicTitle from "../../PublicComponent/DynamicTitle";
 import UseTimer from "../../../../hooks/useTime";
 import DaysCard from "./DaysCard";
 import getIcon from "../../../../conditions/GetIconWeather";
 import DynamicButton from "../../PublicComponent/DynamicButton ";
 import { useNavigate } from "react-router-dom";
+import AjoutCat from "../../Modal/AjoutLangue";
 
 export default function TodayMeteo() {
   const {
@@ -17,10 +18,15 @@ export default function TodayMeteo() {
     pressurePercentage,
     minMaxTemperatures,
   } = UseTimer();
+
   const jours = Object.keys(minMaxTemperatures);
   const navigate = new useNavigate();
-  const handleclick = () => {
-    navigate("/contenu/configpage");
+  // const handleclick = () => {
+  //   navigate("/contenu/configpage");
+  // };
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
   };
   return (
     <>
@@ -30,7 +36,7 @@ export default function TodayMeteo() {
             <DynamicTitle text="Prévision Méteologique" />
             <DynamicButton
               label="Configuration"
-              onClick={handleclick}
+              onClick={handleOpen}
               getsizeClasses="text-[12px] w-24 -mr-6 -py-2 flex justify-center"
             />
           </div>
@@ -48,7 +54,7 @@ export default function TodayMeteo() {
               </div>
             </div>
           </div>
-
+          {isOpen && <AjoutCat isOpen={isOpen} setIsOpen={setIsOpen} />}
           <div className="flex items-center justify-center w-screen">
             <div className="bg-custom-white w-[90%] shadow-lg rounded-lg p-6 h-[max-content]">
               <div className="grid grid-cols-3 gap-6">

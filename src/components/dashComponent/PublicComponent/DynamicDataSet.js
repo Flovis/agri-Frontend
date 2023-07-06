@@ -19,7 +19,7 @@ export default function DynamicDataSet({ label }) {
         inputProps={{
           className:
             "bg-white w-full text-text-gray border border-borde-gray  rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full h-[55px]",
-          name: "cycle",
+          name: "productName",
 
           style: {
             fontSize: "16px",
