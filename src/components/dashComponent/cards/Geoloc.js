@@ -1,14 +1,14 @@
 import L from "leaflet";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import DataMeteoContext from "../../../context/MeteoContext";
 import agripng from "../../../placeholder.png";
+import { MoonLoader } from "react-spinners";
 
 import communesHautKatanga from "../../../data/Coordonnees";
 
 export default function Geoloc() {
   const canvasRef = useRef(null);
-  const { setCoords } = useContext(DataMeteoContext);
+
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -33,7 +33,6 @@ export default function Geoloc() {
         6
       );
 
-      setCoords(coords);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(
         map
       );
@@ -50,13 +49,13 @@ export default function Geoloc() {
         // map.flyTo([item.latitude, item.longitude], 10);
       });
 
-      const polygon = L.polygon([
-        [coords.latitude, coords.longitude - 0.002],
-        [coords.latitude - 0.002, coords.longitude],
-        [coords.latitude, coords.longitude + 0.002],
-        [coords.latitude + 0.002, coords.longitude],
-      ]).addTo(map);
-      polygon.bindPopup("mesure 20/20");
+      // const polygon = L.polygon([
+      //   [coords.latitude, coords.longitude - 0.002],
+      //   [coords.latitude - 0.002, coords.longitude],
+      //   [coords.latitude, coords.longitude + 0.002],
+      //   [coords.latitude + 0.002, coords.longitude],
+      // ]).addTo(map);
+      // polygon.bindPopup("mesure 20/20");
 
       setMapInitialized(true);
     }
@@ -74,10 +73,14 @@ export default function Geoloc() {
   } else if (!isGeolocationEnabled) {
     return (
       <div className="flex justify-center items-center h-80 bg-gray-200">
-        <p className="text-lg text-gray-600">
-          Veuillez activer la géolocalisation dans les paramètres de votre
-          appareil.
-        </p>
+        <div className="flex justify-center items-center h-full flex-col">
+          <p className="text-sm text-text-gray text-center mx-10">
+            Veuillez activer la géolocalisation dans les paramètres de votre
+            appareil.
+          </p>
+
+          <MoonLoader color="#488575" />
+        </div>
       </div>
     );
   } else if (coords) {
@@ -85,9 +88,12 @@ export default function Geoloc() {
   } else {
     return (
       <div className="flex justify-center items-center h-96 bg-gray-200">
-        <p className="text-lg text-gray-600">
+        <div className="flex justify-center items-center h-full">
+          <MoonLoader color="#488575" />
+        </div>
+        {/* <p className="text-lg text-gray-600">
           Récupération des données de localisation...
-        </p>
+        </p> */}
       </div>
     );
   }

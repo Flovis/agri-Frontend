@@ -4,14 +4,13 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
-// import { TiWeatherPartlySunny } from "react-icons/ti";
 import DataMeteoContext from "../../../context/MeteoContext";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import DashReview from "../retouche/DashReview";
-// import DashCard from "../retouche/DashCard";
 
-export default function WeatherCard({ data, meteo }) {
+
+export default function WeatherCard() {
   const { meteoDuJour, prevision } = useContext(DataMeteoContext);
 
   return (
@@ -26,7 +25,7 @@ export default function WeatherCard({ data, meteo }) {
             {/* Interface d'administration agricole */}
           </h1>
 
-          <DashReview meteo={meteo} />
+          <DashReview  />
           <h1 className="mb-4 text-xl font-bold text-[#043d1d] dark:text-white">
             {/* Données météorologiques actuelles */}
           </h1>

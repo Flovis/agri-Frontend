@@ -4,14 +4,14 @@ import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
-import AlertConfiguration from "../../components/dashComponent/cards/AlertConfiguration";
-import TT from "../../components/dashComponent/cards/AlertTjours";
 import Footer from "../../components/dashComponent/footer/Footer";
 import Header from "../../components/dashComponent/header/Header";
+import TodayMeteo from "../../components/dashComponent/forcast/cards/TodayMeteo";
+import AjoutCat from "../../components/dashComponent/Modal/AjoutLangue";
 
 export default function Alert({ meteo, forecast }) {
-  // console.log("forecast: ", forecast.weather);
-  
+  console.log("forecast: ", forecast.weather);
+  console.log("weather: ", meteo);
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
@@ -19,11 +19,7 @@ export default function Alert({ meteo, forecast }) {
       </div>
       <div className=" pt-[120px]"></div>
 
-      <TT weather={meteo} forecast={forecast} />
-      <div className="mb-20">
-        <AlertConfiguration />
-      </div>
-
+      <TodayMeteo />
       <Footer
         data={[
           {
