@@ -1,17 +1,35 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../../hooks/useAuth";
+import io from "socket.io-client";
 
 import { backendAxios } from "../../api/axios";
+import { SocketContext } from "../../context/SocketContext";
 const LOGIN_URL = "/login";
 
 const Login = () => {
     //for auth
     const { auth, setAuth } = useAuth();
+    const { setSocket } = useContext(SocketContext);
+    useEffect(() => {
+        const socket = io("http://localhost:3500");
+        socket.on("connect", () => {
+            console.log("Connected to the socket.io server");
+            setSocket(socket);
+        });
+        //     // socket.on("disconnect", () => {
+        //     //     console.log("Disconnected from the sockext.io server");
+        //     // });
+
+        
+        // return () => {
+        //     socket.disconnect();
+        // };
+    }, []);
 
     const [btnValue, setBtnValue] = useState("Se connecter");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,7 +61,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(email && password){
+        if (email && password) {
             setBtnValue("chargement...");
             setIsSubmitting(true);
             try {
@@ -61,7 +79,7 @@ const Login = () => {
                         headers: { "Content-Type": "application/json" },
                     }
                 );
-    
+
                 // console.log(JSON.stringify(response?.data));
                 const id = response?.data?.data?.id;
                 const token = response?.data?.data?.token;
@@ -69,7 +87,7 @@ const Login = () => {
                 const first_name = response?.data?.data?.first_name;
                 const phone = response?.data?.data?.phone;
                 const last_name = response?.data?.data?.last_name;
-    
+
                 //Stockage des donnees de l'utilisateur dans le contexte
                 setAuth({
                     id,
@@ -81,12 +99,10 @@ const Login = () => {
                     role,
                     phone,
                 });
-    
+
                 setEmail("");
                 setPassword("");
 
-                
-    
                 //Redirection
                 if (role === 4) {
                     navigate("/agriculteur/contenu", { replace: true });
@@ -101,9 +117,7 @@ const Login = () => {
                 setErrMessage(error.response?.data.message);
                 errRef.current.focus();
             }
-
         }
-        
     };
 
     return (

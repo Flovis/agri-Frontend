@@ -12,6 +12,16 @@ const PlanProdCard = ({ title, debutDate, id }) => {
                 </div>
             </div>
             <div className="text-sm">Début: {" " + debutDate}</div>
+            {/* <div>
+                <div className="flex justify-between mb-1">
+                    <span className="text-sm font-medium text-deep-green ">
+                        45%
+                    </span>
+                </div>
+                <div className="w-full bg-clear-green rounded-full h-1">
+                    <div className="bg-[#042f2e] h-1 rounded-full w-[45%]"></div>
+                </div>
+            </div> */}
             <div className="flex items-center gap-4 w-full">
                 {/* <button className="px-2 py-2 text-xl rounded-full">
                     {" "}

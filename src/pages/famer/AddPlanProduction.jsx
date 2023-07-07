@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, {
+    useState,
+    useMemo,
+    useCallback,
+    useEffect,
+    useContext,
+} from "react";
 import BackNav from "./BackNav";
 import Button from "../../components/Button";
 import DatalistInput from "react-datalist-input";
@@ -13,10 +19,26 @@ import { backendAxios } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import io from "socket.io-client"
+
+// import { SocketContext } from "../../context/SocketContext";
+// const socket = io("http://localhost:3500");
+
 
 const PRODUCTION_URL = "/production";
 
 const AddPlanProduction = () => {
+    // const socket = useContext(SocketContext);
+    // console.log("kadea", socket);
+    useEffect(() => {
+        // socket.on("connect", () => {
+        //     console.log("connected");
+        // });
+        // socket.on("Test", (msg) => {
+        //     console.log(`hwshwsjwsj`);
+        // });
+    }, []);
+
     const allData = Object.keys(data);
     // console.log(allData);
 
@@ -131,11 +153,7 @@ const AddPlanProduction = () => {
                         <DatalistInput
                             id="produit"
                             className="produit"
-                            inputProps={{ className: "p-12" }}
                             labelProps={{ className: "" }}
-                            listboxProps={{
-                                className: "",
-                            }}
                             listboxOptionProps={{
                                 className: "",
                             }}
@@ -143,6 +161,18 @@ const AddPlanProduction = () => {
                             placeholder="Tomates"
                             onSelect={onSelect}
                             items={itemsProduct}
+                            inputProps={{
+                                className:
+                                    "bg-white w-full text-text-gray border border-borde-gray  rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full h-[50px]",
+                                name: "productName",
+                                style: {
+                                    fontSize: "16px",
+                                },
+                            }}
+                            listboxProps={{
+                                className:
+                                    " h-60 overflow-y-auto text-text-gray",
+                            }}
                         />
                     </div>
                     <div className="w-full mb-1 md:mb-5 ">

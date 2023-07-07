@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NavBottom from "./NavBottom";
 import BackNav from "./BackNav";
 import CardNotification from "./CardNotification";
@@ -13,13 +13,40 @@ import { CgProfile } from "react-icons/cg";
 import Footer from "../../components/dashComponent/footer/Footer";
 import useAuth from "../../hooks/useAuth";
 import { backendAxios } from "../../api/axios";
+import io from "socket.io-client";
+
+import { SocketContext } from "../../context/SocketContext";
+// const socket = io("http://localhost:3500");
 
 const ProductionPlan = () => {
     const { auth } = useAuth();
     console.log(auth.id);
 
+    const { socket, setSocket } = useContext(SocketContext);
+    console.log("socket", socket);
+
     const URL = `/allProduction/${auth.id}`;
     const [produits, setProduits] = useState([]);
+
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        socket.emit("ok", "Toujours");
+        socket.on("Test", (msg) => {
+            console.log(msg);
+            setMessage(msg);
+        });
+        return () => {
+            // Nettoyer les écouteurs lorsque le composant est démonté
+            socket.off("Test");
+        };
+    }, []);
+    console.log("le message", message);
+    // useEffect(() => {
+    //     // Mettre à jour le message lorsqu'il y a des changements
+    //     console.log("Nouveau message :", message);
+    //     setMessage(message)
+    // }, [message]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,59 +55,22 @@ const ProductionPlan = () => {
                     headers: { "Content-Type": "application/json" },
                 }); // Replace "/api/your-endpoint" with the actual endpoint URL
                 setProduits(response.data.productionPlan);
-                console.log(response.data.productionPlan);
-                console.log(produits);
+                // console.log(response.data.productionPlan);
+                // console.log(produits);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
     }, []);
-    const datas = [
-        {
-            id: 1,
-            crop: "Tomates",
-            quantity: 100,
-            startDate: "2023-06-15",
-            endDate: "2023-09-30",
-        },
-        {
-            id: 2,
-            crop: "Carottes",
-            quantity: 200,
-            startDate: "2023-07-01",
-            endDate: "2023-10-31",
-        },
-        {
-            id: 3,
-            crop: "Poivrons",
-            quantity: 150,
-            startDate: "2023-06-20",
-            endDate: "2023-09-15",
-        },
-        {
-            id: 4,
-            crop: "Pommes de terre",
-            quantity: 300,
-            startDate: "2023-06-25",
-            endDate: "2023-10-15",
-        },
-        {
-            id: 5,
-            crop: "Courgettes",
-            quantity: 120,
-            startDate: "2023-07-10",
-            endDate: "2023-09-30",
-        },
-        // Ajoutez autant d'objets de plan de production que nécessaire
-    ];
+    
     return (
         <div className="mb-[40px]">
             <BackNav linkTo="/agriculteur/contenu" title="Plan de production" />
             <div className="">
                 <div className="w-full h-[150px] flex flex-col items-center justify-center bg-[#d1fae5]">
                     <div className="font-medium text-text-gray">
-                        Nombre de produits
+                        Nombre de produits 
                     </div>
                     <div className="text-center text-[70px] text-[#042f2e]">
                         {produits ? produits.length : 0}
@@ -92,7 +82,7 @@ const ProductionPlan = () => {
                     produits.map((produit, index) => (
                         <div className="w-1/2" key={index}>
                             <PlanProdCard
-                            id={index+1}
+                                id={index + 1}
                                 title={produit.Product.name}
                                 debutDate={produit.dateDebut}
                             />
