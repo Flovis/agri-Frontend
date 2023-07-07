@@ -8,9 +8,10 @@ import BackNavStep from "../../header/BackNav";
 import DynamicDataSet from "../../PublicComponent/DynamicDataSet";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Level2 = ({ onPrevious, onSubmit }) => {
+  // Hooks and variables
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
@@ -25,8 +26,9 @@ const Level2 = ({ onPrevious, onSubmit }) => {
     },
   });
 
+  // Event handlers
   const handlePrevious = () => {
-    // navigate(`/contenu/getform?type=${defaultType}`);
+    navigate(`/contenu/getform?type=${defaultType}`);
     onPrevious(form);
   };
 
@@ -36,12 +38,14 @@ const Level2 = ({ onPrevious, onSubmit }) => {
     const data = Object.fromEntries(formdata);
     setform(data);
     onSubmit(data);
-    // navigate(`/contenu/${defaultType}`);
+    navigate(`/contenu/${defaultType}`);
   };
 
+  // JSX rendering
   return (
     <>
-      <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md ">
+      {/* Top header */}
+      <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
         <TopHeader />
         <BackNavStep
           title={defaultType}
@@ -51,27 +55,44 @@ const Level2 = ({ onPrevious, onSubmit }) => {
           handlePrevious={handlePrevious}
         />
       </div>
+
+      {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center gap-4 mt-32 "
+        className="flex flex-col justify-center items-center gap-4 mt-32"
       >
         <div className="w-[90%] flex flex-col gap-4">
           <div className="">
-            <DynamicTitle text=" Informations complémentaires" size="xl" />
-          </div>
-          <div>
-            <DynamicDataSet
-              label="Sélectionner le produit"
-              // onChange={(e) => setproductName(e.target.value)}
-            />
+            <DynamicTitle text="Informations complémentaires" size="xl" />
           </div>
 
-          <div className="-mt-2">
-            <DynamicInput
-              label="Télécharger le fichier média"
-              type={defaultType}
-            />
+          <div>
+            <DynamicDataSet label="Sélectionner le produit" />
           </div>
+
+          <div className="flex items-center justify-center ">
+            <div className="-mt-2 ">
+              <DynamicInput label=" média" type={defaultType} />
+            </div>
+            <div>
+              <input
+                type="text"
+                // className={`border w-full p-5 w-[17rem]  border-borde-gray bg-custom-white rounded-lg overflow-hidden mt-2 `}
+                className={`border border-borde-gray text-text-gray text-md rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-5  mt-2 w-[17rem] `}
+                name="files"
+              />
+            </div>
+          </div>
+          {/* Conditional rendering based on `defaultType` */}
+          {/* {defaultType === "video" && (
+            <div className="-mt-8">
+              <input
+                type="text"
+                className={`border border-borde-gray bg-custom-white rounded-lg overflow-hidden `}
+                name="files"
+              />
+            </div> */}
+          {/* )} */}
 
           <div className="-mt-4">
             <DynamicSelect
@@ -80,12 +101,12 @@ const Level2 = ({ onPrevious, onSubmit }) => {
               nameData="tag"
             />
           </div>
-          <div className="mt-4">
+
+          <div className="my-4">
             <DynamicButton
               label="Enregistrer"
               getsizeClasses="w-full"
               type="submit"
-              // onClick={handleSubmit}
             />
           </div>
         </div>

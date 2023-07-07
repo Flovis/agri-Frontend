@@ -13,13 +13,13 @@ export default function Footer({ data }) {
     filteredData = data;
   }
 
-  console.log(filteredData.length);
+  // console.log(filteredData.length);
 
-  console.log("Role", auth?.role);
+  // console.log("Role", auth?.role);
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-14 bg-custom-white border-t border-borde-gray">
-      <div className={`grid h-full max-w-lg  grid-cols-5 mx-auto font-medium`}>
+      <div className={`grid h-full max-w-lg  grid-cols-4 mx-auto font-medium`}>
         {filteredData?.map((li, index) => (
           <NavLink
             key={index}

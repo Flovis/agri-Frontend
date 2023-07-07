@@ -8,17 +8,6 @@ import DashCard from "./DashCard";
 export default function DashReview({ meteo }) {
   return (
     <div className=" flex flex-col gap-6">
-      {/* <div className="flex justify-between">
-        <div className=" py-2 px-4 bg-deep-green w-28 text-center text-custom-white rounded-3xl">
-          champs
-        </div>
-        <div className=" py-2 px-4 bg-deep-green w-28 text-center text-custom-white rounded-3xl">
-          recolte
-        </div>
-        <div className=" py-2 px-4 bg-deep-green w-28 text-center text-custom-white rounded-3xl">
-          Alert
-        </div>
-      </div> */}
       <div className=" rounded-md p-2 flex items-center justify-between ">
         <h1 className="text-xl font-bold">Météo actuelle</h1>
         <Link to="/alert">
@@ -28,9 +17,8 @@ export default function DashReview({ meteo }) {
           />
         </Link>
       </div>
-      {/* card meteo */}
-      <CardMeteo meteo={meteo} />
-      {/* dessus */}
+
+      <CardMeteo />
 
       {/* chart */}
       <div className=" rounded-md p-2 flex items-center justify-between ">
@@ -57,8 +45,8 @@ export default function DashReview({ meteo }) {
       </div>
       <div className="flex justify-between items-center bg-custom-white p-4 rounded-md gap-2">
         <div className="bg-deep-green w-44 py-4 px-0 rounded-md flex flex-col items-center justify-center font-semibold text-custom-white ">
-          <p className="font-extrabold">2 jours</p>
-          <p>de retard</p>{" "}
+          <p className="font-extrabold">3 jours</p>
+          <p>restant</p>{" "}
         </div>
         <div className="text-sm">
           <p className="rounded-md">
@@ -71,8 +59,7 @@ export default function DashReview({ meteo }) {
         </div>
       </div>
       <DashCard />
-      {/* RECOLTE */}
-      {/* <WeatheForecastChart /> */}
+
       <div className="">
         <div>
           <div className=" rounded-md p-2 flex items-center justify-between ">

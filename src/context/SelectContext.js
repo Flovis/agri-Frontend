@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const SelectContext = createContext();
+const texteContext = createContext();
 const selectContext = createContext();
 
-export { SelectContext, selectContext };
+export { texteContext, selectContext };

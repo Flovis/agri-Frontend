@@ -10,8 +10,6 @@ import TodayMeteo from "../../components/dashComponent/forcast/cards/TodayMeteo"
 import AjoutCat from "../../components/dashComponent/Modal/AjoutLangue";
 
 export default function Alert({ meteo, forecast }) {
-  console.log("forecast: ", forecast.weather);
-  console.log("weather: ", meteo);
   return (
     <div>
       <div className="h-18 top-0 bg-custom-white fixed w-full shadow-md ">
@@ -42,11 +40,11 @@ export default function Alert({ meteo, forecast }) {
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
-          {
-            to: "/parametre",
-            icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
-          },
+          // {
+          //   to: "/parametre",
+          //   icon: <FiSettings className="text-2xl" />,
+          //   nom: "Parametre",
+          // },
         ]}
       />
     </div>

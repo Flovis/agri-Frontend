@@ -1,5 +1,6 @@
 import React, { useRef, useState, useCallback } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaUpload } from "react-icons/fa";
+import { TbFileUpload } from "react-icons/tb";
 
 const VideoInput = React.memo(({ classes, onChange }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,7 +32,7 @@ const VideoInput = React.memo(({ classes, onChange }) => {
   return (
     <div>
       <div
-        className={`border border-borde-gray bg-custom-white rounded-lg overflow-hidden ${classes}`}
+        className={`border w-20 border-borde-gray bg-custom-white rounded-lg overflow-hidden ${classes}`}
       >
         {url && (
           <div className="relative">
@@ -53,12 +54,16 @@ const VideoInput = React.memo(({ classes, onChange }) => {
             </button>
           </div>
         )}
-        <div className="flex items-center bg-white p-3">
+        <div className="flex items-center bg-white p-3 inset-0">
           <label
             htmlFor="video-input"
-            className="flex-grow rounded p-2 cursor-pointer"
+            className="flex-grow rounded p-2 cursor-pointer inset-0"
           >
-            {file ? file.name : "Choisissez le fichier vidéo"}
+            {file ? (
+              <TbFileUpload />
+            ) : (
+              <FaUpload className="text-2xl text-deep-green" />
+            )}
           </label>
           <input
             type="file"

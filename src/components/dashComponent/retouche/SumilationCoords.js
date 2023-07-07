@@ -36,7 +36,7 @@ const SumilationCoords = () => {
     const ctx = canvas.getContext("2d");
 
     if (chartRef.current) {
-      chartRef.current.destroy(); // Détruire le graphique précédent s'il existe
+      chartRef.current.destroy();
     }
 
     chartRef.current = new Chart(ctx, chartConfig);
@@ -47,6 +47,7 @@ const SumilationCoords = () => {
 
     for (const commune of communes) {
       const groupe = `Groupe ${Math.ceil(commune.latitude)}`;
+      console.log("groupe: ", groupe);
 
       if (groupedCommunes[groupe]) {
         groupedCommunes[groupe].push(commune);

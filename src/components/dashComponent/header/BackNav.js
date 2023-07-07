@@ -3,7 +3,6 @@ import { BiArrowBack, BiPlusMedical } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
 const BackNavStep = ({ linkTo, title, set, classes, type, handlePrevious }) => {
-  console.log("title: ", title);
   const navigate = useNavigate({});
 
   const handleForm = ({}) => {
@@ -12,7 +11,7 @@ const BackNavStep = ({ linkTo, title, set, classes, type, handlePrevious }) => {
 
   return (
     <div onClick={set}>
-      <div className="flex items-center gap-10 p-4 bg-custom-white">
+      <div className="absolut flex items-center gap-10 p-4 bg-custom-white z-50">
         <Link to={linkTo}>
           <div
             onClick={handlePrevious}

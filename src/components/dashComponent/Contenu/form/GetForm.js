@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Level1 from "./Level1";
 import Level2 from "./Level2";
+import DataMeteoContext from "../../../../context/MeteoContext";
 
 export default function GetForm() {
   const [step, setStep] = useState(1);
   const [formObject, setFormObject] = useState({});
   const [recordings, setRecordings] = useState([]);
-  console.log("recordings: ", recordings);
-
+  const {
+    dataMeteoContextValue: { setContenu, contenu },
+  } = useContext(DataMeteoContext);
+  console.log("contenu: ", contenu);
+  setContenu(recordings);
   const handleNext = (data) => {
     setStep((prev) => prev + 1);
     setFormObject((prevFormObject) => ({
@@ -28,7 +32,7 @@ export default function GetForm() {
   const handleSubmit = (data) => {
     const updatedFormObject = { ...formObject, ...data };
     setFormObject(updatedFormObject);
-    setRecordings((prevRecordings) => [...prevRecordings, updatedFormObject]); // Ajouter le nouvel enregistrement au tableau des enregistrements
+    setRecordings((prevRecordings) => [...prevRecordings, updatedFormObject]);
   };
 
   return (

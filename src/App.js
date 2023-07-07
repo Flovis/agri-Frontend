@@ -9,7 +9,6 @@ import RequireAuth from "./hooks/RequireAuth";
 import Alert from "./pages/dashboard/Alert";
 import Contenu from "./pages/dashboard/Contenu";
 import Localisation from "./pages/dashboard/Localisation";
-import Parametre from "./pages/dashboard/Parametre";
 import AddPlanProduction from "./pages/famer/AddPlanProduction";
 import HomeFamer from "./pages/famer/HomeFamer";
 import Meteo from "./pages/famer/Meteo";
@@ -29,9 +28,7 @@ function App() {
   const [formData, setFormData] = useState([]);
   const [file, setFile] = useState({});
   const [localisation, setLocalisation] = useState(null);
-  console.log("localisation: ", localisation);
   const [forecast, setForecast] = useState([]);
-  console.log("forecast: ", forecast);
   const [weather, setWeather] = useState(null);
   const [contenu, setContenu] = useState({});
 
@@ -134,6 +131,9 @@ function App() {
             }
           >
             <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<WeatherCard />} />
+            <Route path="/alert" element={<Alert />} />
+            <Route path="/localisation" element={<Localisation />} />
           </Route>
           <Route
             path="/"

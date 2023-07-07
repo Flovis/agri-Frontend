@@ -1,19 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TopHeader from "../../../dashComponent/header/TopHeader";
 import BackNav from "../../header/BackNav";
-import { FiSettings } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
 import { GrMapLocation } from "react-icons/gr";
 import Footer from "../../footer/Footer";
 import CardVideo from "../cards/vdeo/CardVideo";
-import Traitement from "../../algo/Traitement";
-import { ContentForm } from "../../../../hooks/useDataForm";
+import DataMeteoContext from "../../../../context/MeteoContext";
 
 export default function Step3() {
-  const { contenu } = useContext(ContentForm);
-  console.log("contenupage video: ", contenu);
+  const [videos, setVideos] = useState([
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    // "https://www.youtube.com/watch?v=oHg5SJYRHA0",
+    "https://www.youtube.com/watch?v=9bZkp7q19f0",
+  ]);
+  console.log("videos: ", videos);
+  const {
+    dataMeteoContextValue: { contenu },
+  } = useContext(DataMeteoContext);
+
+  useEffect(() => {
+    if (contenu && Array.isArray(contenu)) {
+      const videoUrls = contenu?.map((video) =>
+        URL.createObjectURL(video.file)
+      );
+      setVideos([...videos, videoUrls]);
+    }
+  }, []);
+
   return (
     <div>
       <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
@@ -35,14 +50,7 @@ export default function Step3() {
           </h2>
         </div>
         <ul>
-          ggggggggggggggg
-          {Array.isArray(contenu) &&
-            contenu?.map((video) => (
-              <React.Fragment key={video.id}>
-                <CardVideo />
-                <p>{JSON.stringify(contenu)}</p>
-              </React.Fragment>
-            ))}
+          <CardVideo videos={videos} />
         </ul>
       </div>
 
@@ -68,11 +76,11 @@ export default function Step3() {
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
-          {
-            to: "/parametre",
-            icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
-          },
+          // {
+          //   to: "/parametre",
+          //   icon: <FiSettings className="text-2xl" />,
+          //   nom: "Parametre",
+          // },
         ]}
       />
     </div>
