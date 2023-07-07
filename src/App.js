@@ -26,7 +26,7 @@ import Step from "./components/dashComponent/Contenu/step/Step";
 function App() {
   const [conditionAlert, setConditionAlert] = useState({});
   const [formData, setFormData] = useState([]);
-  const [file, setFile] = useState({});
+
   const [localisation, setLocalisation] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [weather, setWeather] = useState(null);
@@ -77,8 +77,7 @@ function App() {
   const dataMeteoContextValue = {
     forecast,
     weather,
-    setFile,
-    file,
+
     conditionAlert,
     setConditionAlert,
     setFormData,
@@ -86,8 +85,6 @@ function App() {
     localisation,
     setContenu,
     contenu,
-    file,
-    setFile,
   };
   const ROLES = { SuperAdmin: 1, admin: 2, Famers: 3 };
 

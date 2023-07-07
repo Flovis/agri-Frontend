@@ -11,6 +11,7 @@ import "notyf/notyf.min.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaShareAltSquare } from "react-icons/fa";
 import SelectComponent from "../../../PublicComponent/SelectComponent";
+import CardRetard from "../../../notification/CardRetard";
 
 const Partage = ({ onPrevious, onSubmit, formData }) => {
   const location = useLocation();
@@ -58,11 +59,13 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
         <div className="w-[90%] flex flex-col gap-4">
           <div className="flex justify-between">
             <DynamicTitle text=" Draft " size="xl" />
+
             <FaShareAltSquare
               className="text-2xl text-deep-green"
               type="submit"
             />
           </div>
+          <CardRetard />
           {/* {formData?.map((el) => {
             <li>
               <p> {el.cycle}</p>
