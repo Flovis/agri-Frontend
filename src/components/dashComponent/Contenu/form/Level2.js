@@ -70,29 +70,19 @@ const Level2 = ({ onPrevious, onSubmit }) => {
             <DynamicDataSet label="Sélectionner le produit" />
           </div>
 
-          <div className="flex items-center justify-center ">
-            <div className="-mt-2 ">
-              <DynamicInput label=" média" type={defaultType} />
-            </div>
-            <div>
-              <input
-                type="text"
-                // className={`border w-full p-5 w-[17rem]  border-borde-gray bg-custom-white rounded-lg overflow-hidden mt-2 `}
-                className={`border border-borde-gray text-text-gray text-md rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-5  mt-2 w-[17rem] `}
-                name="files"
-              />
-            </div>
+          <div className="-mt-2">
+            <DynamicInput
+              label="Télécharger le fichier média"
+              type={defaultType}
+            />
           </div>
+
           {/* Conditional rendering based on `defaultType` */}
-          {/* {defaultType === "video" && (
-            <div className="-mt-8">
-              <input
-                type="text"
-                className={`border border-borde-gray bg-custom-white rounded-lg overflow-hidden `}
-                name="files"
-              />
-            </div> */}
-          {/* )} */}
+          {defaultType === "video" && (
+            <div className="-mt-4">
+              <DynamicInput label="ou Link" />
+            </div>
+          )}
 
           <div className="-mt-4">
             <DynamicSelect
