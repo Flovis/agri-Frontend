@@ -89,7 +89,7 @@ function App() {
     file,
     setFile,
   };
-  const ROLES = { SuperAdmin: 1, admin: 2, Famers: 3 };
+  const ROLES = { SuperAdmin: 2, admin: 3, Famers: 4 };
 
   return (
     <DataMeteoContext.Provider value={{ dataMeteoContextValue }}>
@@ -134,13 +134,13 @@ function App() {
             <Route path="/dashboard" element={<WeatherCard />} />
             <Route path="/alert" element={<Alert />} />
             <Route path="/localisation" element={<Localisation />} />
+            <Route path="/contenu/:stepNumber" element={<Step />} />
           </Route>
           <Route
             path="/"
             element={<RequireAuth allowedRoles={[ROLES.SuperAdmin]} />}
           >
             <Route path="/contenu" element={<Contenu />} />
-            <Route path="/contenu/:stepNumber" element={<Step />} />
           </Route>
         </Route>
       </Routes>

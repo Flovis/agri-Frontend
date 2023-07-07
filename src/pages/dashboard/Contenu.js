@@ -41,11 +41,11 @@ export default function Contenu() {
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
           },
-          {
-            to: "/parametre",
-            icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
-          },
+          // {
+          //   to: "/parametre",
+          //   icon: <FiSettings className="text-2xl" />,
+          //   nom: "Parametre",
+          // },
         ]}
       />
     </div>

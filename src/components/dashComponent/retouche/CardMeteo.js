@@ -5,7 +5,7 @@ import "./cardMeteo.css";
 import useTimer from "../../../hooks/useTime";
 import { FaCloudSun } from "react-icons/fa";
 
-export default function CardMeteo({ meteo }) {
+export default function CardMeteo() {
   const {
     hours,
     minutes,
