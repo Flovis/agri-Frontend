@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Nav from "./Nav";
 import Card from "./Card";
 import NavBottom from "./NavBottom";
-import { useState } from "react";
 import Aside from "./Aside";
 
 import { RiNotification2Line } from "react-icons/ri";
@@ -11,7 +10,26 @@ import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import TopHeader from "../../components/dashComponent/header/TopHeader";
 import CardMeteo from "../../components/dashComponent/retouche/CardMeteo";
-const HomeFamer = ({meteo}) => {
+import { io } from "socket.io-client";
+import { SocketContext } from "../../context/SocketContext";
+// const socket = io("http://localhost:3500");
+
+// console.log("kadea", socket);
+const HomeFamer = ({ meteo }) => {
+    const {socket} = useContext(SocketContext);
+
+    useEffect(() => {
+        socket.on("NouveauPlan", (data) => {
+            console.log("NouveauPlan", data);
+        });
+        // socket.on("disconnect", () => {
+        //     console.log("Disconnected from the socket.io server");
+        // });
+        // // return () => {
+        // //     socket.disconnect();
+        // // };
+    }, []);
+
     const [showAside, setShowAside] = useState(false);
     const handleToggleAside = () => {
         setShowAside(!showAside);
@@ -71,7 +89,9 @@ const HomeFamer = ({meteo}) => {
 
                 <div className="w-full">
                     <div className="mt-5">
-                        <p className="px-4 font-medium text-lg ">Informations Météologique</p>
+                        <p className="px-4 font-medium text-lg ">
+                            Informations Météologique
+                        </p>
                         <CardMeteo meteo={meteo} />
                     </div>
                     {datas.map((data, index) => (

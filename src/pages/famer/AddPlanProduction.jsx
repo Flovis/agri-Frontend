@@ -1,8 +1,12 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, {
+    useState,
+    useMemo,
+    useCallback,
+    useEffect,
+    useContext,
+} from "react";
 import BackNav from "./BackNav";
-import Input from "../../components/Input";
 import Button from "../../components/Button";
-import moment from "moment";
 import DatalistInput from "react-datalist-input";
 import "react-datalist-input/dist/styles.css";
 import data from "./data.json";
@@ -10,36 +14,117 @@ import { RiNotification2Line } from "react-icons/ri";
 import { BsCalendarWeek } from "react-icons/bs";
 import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
-import Footer from "../../components/dashComponent/footer/Footer";
 import NavBottom from "./NavBottom";
+import { backendAxios } from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import io from "socket.io-client"
+
+// import { SocketContext } from "../../context/SocketContext";
+// const socket = io("http://localhost:3500");
+
+
+const PRODUCTION_URL = "/production";
 
 const AddPlanProduction = () => {
+    // const socket = useContext(SocketContext);
+    // console.log("kadea", socket);
+    useEffect(() => {
+        // socket.on("connect", () => {
+        //     console.log("connected");
+        // });
+        // socket.on("Test", (msg) => {
+        //     console.log(`hwshwsjwsj`);
+        // });
+    }, []);
+
     const allData = Object.keys(data);
     // console.log(allData);
-    let product;
 
+    const { auth } = useAuth();
+    const [btnValue, setBtnValue] = useState("Ajouter");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const [products, setProducts] = useState();
     const [selectedProduct, setSelectedProduct] = useState();
+
     const [startDate, setStartDate] = useState("");
+    const [productionDates, setProductionDates] = useState();
 
-    const handleStartDate = (event) => {
-        setStartDate(event.target.value);
-    };
-
-    if (selectedProduct) {
-        console.log(selectedProduct.value);
-    }
     const onSelect = useCallback((selectedProduct) => {
-        console.log(selectedProduct);
         setSelectedProduct(selectedProduct);
+        setProducts(data[selectedProduct.value]);
     }, []);
 
     const itemsProduct = useMemo(() =>
         allData.map((data) => ({ id: data, value: data }))
     );
-    if (selectedProduct) {
-        product = data[selectedProduct.value];
-        console.log();
-    }
+
+    //
+
+    const calculeDate = (dateDebut, jours) => {
+        const dates = [dateDebut];
+        const date = new Date(dateDebut);
+        jours.forEach((jour) => {
+            date.setDate(date.getDate() + jour);
+            const dateSuivante = date.toISOString().split("T")[0];
+            dates.push(dateSuivante);
+        });
+
+        return dates;
+    };
+
+    //
+    useEffect(() => {
+        if (selectedProduct) {
+            setProductionDates(
+                calculeDate(startDate, [
+                    products.croissance.min,
+                    products.recolte.min,
+                    products.conditionnement.min,
+                ])
+            );
+        }
+    }, [startDate]);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (selectedProduct && startDate) {
+            // console.log(selectedProduct.value);
+            // console.log(productionDates);
+            // console.log(typeof productionDates[0]);
+            setBtnValue("chargement...");
+            setIsSubmitting(true);
+
+            try {
+                const response = await backendAxios.post(
+                    PRODUCTION_URL,
+                    JSON.stringify({
+                        userId: auth.id,
+                        userRole: auth.role,
+                        productName: selectedProduct.value,
+                        semenceDate: productionDates[0],
+                        croissanceDate: productionDates[1],
+                        recolteDate: productionDates[2],
+                        conditionDate: productionDates[3],
+                    }),
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+
+                setBtnValue("Ajouter");
+                setIsSubmitting(false);
+
+                toast.success("Le produit a été ajouté avec succès.");
+                console.log(response?.data);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log("les cha,ps sont requis");
+        }
+    };
 
     return (
         <div>
@@ -47,7 +132,19 @@ const AddPlanProduction = () => {
                 linkTo="/agriculteur/plan-de-production"
                 title="Ajouter un produit"
             />
-            <form action="">
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            <form onSubmit={handleSubmit}>
                 <div className="w-full p-5">
                     <div className="w-full mb-1 md:mb-5 ">
                         <label htmlFor="produit" className="text-md mb-[150px]">
@@ -56,11 +153,7 @@ const AddPlanProduction = () => {
                         <DatalistInput
                             id="produit"
                             className="produit"
-                            inputProps={{ className: "p-12" }}
                             labelProps={{ className: "" }}
-                            listboxProps={{
-                                className: "",
-                            }}
                             listboxOptionProps={{
                                 className: "",
                             }}
@@ -68,6 +161,18 @@ const AddPlanProduction = () => {
                             placeholder="Tomates"
                             onSelect={onSelect}
                             items={itemsProduct}
+                            inputProps={{
+                                className:
+                                    "bg-white w-full text-text-gray border border-borde-gray  rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full h-[50px]",
+                                name: "productName",
+                                style: {
+                                    fontSize: "16px",
+                                },
+                            }}
+                            listboxProps={{
+                                className:
+                                    " h-60 overflow-y-auto text-text-gray",
+                            }}
                         />
                     </div>
                     <div className="w-full mb-1 md:mb-5 ">
@@ -83,11 +188,11 @@ const AddPlanProduction = () => {
                             id=""
                             className="border border-borde-gray text-text-gray text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                             required
-                            onChange={handleStartDate}
+                            onChange={(e) => setStartDate(e.target.value)}
                         />
                     </div>
                     <div className="w-full mb-1 md:mb-5 mt-4">
-                        {product && startDate && (
+                        {/* {product && startDate && (
                             <>
                                 <div>
                                     <div>
@@ -134,13 +239,14 @@ const AddPlanProduction = () => {
                                     </div>
                                 </div>
                             </>
-                        )}
+                        )} */}
                     </div>
                     <div className="w-full mt-3 md:mb-5">
                         <Button
-                            value="Ajouter"
-                            typ="submit"
+                            value={btnValue}
+                            type="submit"
                             className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
+                            disabled={isSubmitting}
                         />
                     </div>
                 </div>
@@ -149,29 +255,29 @@ const AddPlanProduction = () => {
             <div className="w-full p-5"></div>
             {/* <NavBottom /> */}
             <NavBottom
-                    data={[
-                        {
-                            to: "/agriculteur/contenu",
-                            icon: <RxHome className="text-2xl" />,
-                            nom: "Accuiel",
-                        },
-                        {
-                            to: "/agriculteur/notifications",
-                            icon: <RiNotification2Line className="text-2xl" />,
-                            nom: "Notifications",
-                        },
-                        {
-                            to: "/agriculteur/plan-de-production",
-                            icon: <BsCalendarWeek className="text-2xl" />,
-                            nom: "Production",
-                        },
-                        {
-                            to: "/agriculteur/profile",
-                            icon: <CgProfile className="text-2xl" />,
-                            nom: "Profile",
-                        },
-                    ]}
-                />
+                data={[
+                    {
+                        to: "/agriculteur/contenu",
+                        icon: <RxHome className="text-2xl" />,
+                        nom: "Accuiel",
+                    },
+                    {
+                        to: "/agriculteur/notifications",
+                        icon: <RiNotification2Line className="text-2xl" />,
+                        nom: "Notifications",
+                    },
+                    {
+                        to: "/agriculteur/plan-de-production",
+                        icon: <BsCalendarWeek className="text-2xl" />,
+                        nom: "Production",
+                    },
+                    {
+                        to: "/agriculteur/profile",
+                        icon: <CgProfile className="text-2xl" />,
+                        nom: "Profile",
+                    },
+                ]}
+            />
         </div>
     );
 };
