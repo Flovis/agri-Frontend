@@ -21,16 +21,15 @@ import Login from "./pages/login/Login";
 import ResetPassword from "./pages/login/ResetPassword";
 import Singin from "./pages/login/Singin";
 import fetchData from "./api/fetchData";
-import Step from "./components/dashComponent/Contenu/step/Step";
+import Step from "./components/dashComponent/Cotenu/step/Step";
 
 function App() {
   const [conditionAlert, setConditionAlert] = useState({});
   const [formData, setFormData] = useState([]);
-
   const [localisation, setLocalisation] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [weather, setWeather] = useState(null);
-  const [contenu, setContenu] = useState({});
+  const [contenu, setContenu] = useState([]);
 
   useEffect(() => {
     if (navigator.geolocation) {

@@ -1,5 +1,5 @@
 import React from "react";
-import TopHeader from "../../../dashComponent/header/TopHeader";
+import TopHeader from "../../header/TopHeader";
 import BackNav from "../../header/BackNav";
 import { FiSettings } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";

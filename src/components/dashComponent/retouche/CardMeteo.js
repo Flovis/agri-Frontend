@@ -5,19 +5,8 @@ import "./cardMeteo.css";
 import useTimer from "../../../hooks/useTime";
 import { FaCloudSun } from "react-icons/fa";
 
-export default function CardMeteo({ meteo }) {
-  const {
-    hours,
-    minutes,
-    weatherIcon,
-    temperature,
-    humidity,
-    windSpeed,
-    localisation,
-    pressurePercentage,
-    minMaxTemperatures,
-    jours,
-  } = useTimer();
+export default function CardMeteo() {
+  const { hours, minutes, temperature, humidity, windSpeed } = useTimer();
 
   return (
     <div className="flex justify-between items-center bg-custom-white p-4 rounded-md">

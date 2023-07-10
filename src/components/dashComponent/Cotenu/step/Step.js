@@ -8,6 +8,7 @@ import GetForm from "../form/GetForm";
 import ConfigPage from "../configPage/ConfigPage";
 import ConfigMeteo from "../configPage/card/ConfigMeteo";
 import ListeAlert from "../configPage/card/ListeAlert";
+import Fichier from "../Fichier";
 
 const Step = () => {
   const { stepNumber } = useParams();
@@ -30,6 +31,8 @@ const Step = () => {
         return <ConfigMeteo />;
       case "listemeteo":
         return <ListeAlert />;
+      case "fichier":
+        return <Fichier />;
       default:
         return;
       //   <NotFound />;

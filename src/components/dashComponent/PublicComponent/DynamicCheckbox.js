@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const DynamicCheckbox = ({
   name,
@@ -25,7 +25,9 @@ const DynamicCheckbox = ({
         checked={isChecked}
         onChange={handleCheckboxChange}
       />
-      <label htmlFor="horaire1">{label} </label>
+      <label htmlFor={name} className="text-[11px]">
+        {label}{" "}
+      </label>
     </div>
   );
 };
