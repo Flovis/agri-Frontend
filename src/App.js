@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
-
 import WeatherCard from "./components/dashComponent/cards/WeatherCard";
 import DataMeteoContext from "./context/MeteoContext";
 import RequireAuth from "./hooks/RequireAuth";
@@ -143,5 +142,4 @@ function App() {
     </DataMeteoContext.Provider>
   );
 }
-
 export default App;
