@@ -38,7 +38,7 @@ export default function GetForm() {
     <div>
       {step === 1 && <Level1 onNext={handleNext} onPrevious={handlePrevious} />}
       {step === 2 && (
-        <Level2 onPrevious={handlePrevious} onSubmit={handleSubmit} />
+        <Level2 onPrevious={handlePrevious} onSubmit={handleSubmit} formObject={formObject} />
       )}
     </div>
   );

@@ -18,7 +18,7 @@ const Home = () => {
   });
 
   const handleGotoForm = () => {
-    navigate(`/contenu/getform`);
+    navigate(`/contenu/getform/`);
   };
 
   const handleclick = (type) => {
@@ -49,7 +49,7 @@ const Home = () => {
           <ul className="grid grid-cols-2 gap-2   items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
             <li
               onClick={() => handleclick("audio")}
-              className="flex items-center flex-col  justify-center m-auto relative  "
+              className="flex items-center flex-col  justify-center m-auto    "
             >
               <img
                 src="./assets/fichier.png"
@@ -60,7 +60,7 @@ const Home = () => {
             </li>
             <li
               onClick={() => handleclick("video")}
-              className="flex items-center flex-col  justify-center m-auto relative  "
+              className="flex items-center flex-col  justify-center m-auto   "
             >
               <img
                 src="./assets/fichier.png"
@@ -71,7 +71,7 @@ const Home = () => {
             </li>
             <li
               onClick={() => handleclick("textuel")}
-              className="flex items-center flex-col  justify-center m-auto relative  "
+              className="flex items-center flex-col  justify-center m-auto   "
             >
               <img
                 src="./assets/fichier.png"

@@ -9,10 +9,7 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Level2 = ({ onPrevious, onSubmit }) => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const defaultType = searchParams.get("type");
+const Level2 = ({ onPrevious, onSubmit,formObject }) => {
   const navigate = new useNavigate();
   const [form, setform] = useState("");
 
@@ -25,7 +22,7 @@ const Level2 = ({ onPrevious, onSubmit }) => {
   });
 
   const handlePrevious = () => {
-    navigate(`/contenu/getform?type=${defaultType}`);
+    navigate(`/contenu/getform`);
     onPrevious(form);
   };
 
@@ -50,7 +47,7 @@ const Level2 = ({ onPrevious, onSubmit }) => {
         <BackNavStep
           title="Ajout Contenu"
           classes="hidden"
-          type={defaultType}
+          // type={defaultType}
           linkTo={`/contenu/getform`}
           handlePrevious={handlePrevious}
         />
@@ -70,7 +67,11 @@ const Level2 = ({ onPrevious, onSubmit }) => {
               <DynamicDataSet label="Sélectionner le produit" />
             </div>
             <div>
-              <DynamicInput label="lien video" name="title" />
+              <DynamicInput
+                label="Ajouter un fichier media"
+                type={formObject.category}
+                name="title"
+              />
             </div>
             <div>
               <DynamicSelect

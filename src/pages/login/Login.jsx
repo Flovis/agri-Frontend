@@ -87,9 +87,9 @@ const Login = () => {
         setEmail("");
         setPassword("");
         //Redirection
-        if (role === 4) {
+        if (role === 3) {
           navigate("/agriculteur/contenu", { replace: true });
-        } else if (role === 2 || role === 3) {
+        } else if (role === 1 || role === 2) {
           navigate("/dashboard", { replace: true });
         }
       } catch (error) {
