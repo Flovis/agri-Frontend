@@ -68,7 +68,7 @@ const ProductionPlan = () => {
         <div className="mb-[40px]">
             <BackNav linkTo="/agriculteur/contenu" title="Plan de production" />
             <div className="">
-                <div className="w-full h-[150px] flex flex-col items-center justify-center bg-[#d1fae5]">
+                <div className="w-full h-[150px] flex flex-col items-center justify-center  flow feature">
                     <div className="font-medium text-text-gray">
                         Nombre de produits 
                     </div>

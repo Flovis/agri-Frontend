@@ -8,34 +8,35 @@ import GetForm from "../form/GetForm";
 import ConfigPage from "../configPage/ConfigPage";
 import ConfigMeteo from "../configPage/card/ConfigMeteo";
 import ListeAlert from "../configPage/card/ListeAlert";
+import Partage from "../configPage/card/Partage";
 
 const Step = () => {
-  const { stepNumber } = useParams();
+    const { stepNumber } = useParams();
 
-  const renderStepComponent = () => {
-    switch (stepNumber) {
-      case "video":
-        return <Step3 />;
-      case "textuel":
-        return <Step4 />;
-      case "audio":
-        return <Step2 />;
-      case "audioplayer":
-        return <LecteurAudio />;
-      case "getform":
-        return <GetForm />;
-      case "configpage":
-        return <ConfigPage />;
-      case "configmeteo":
-        return <ConfigMeteo />;
-      case "listemeteo":
-        return <ListeAlert />;
-      default:
-        return;
-      //   <NotFound />;
-    }
-  };
+    const renderStepComponent = () => {
+        switch (stepNumber) {
+            case "video":
+                return <Step3 />;
+            case "textuel":
+                return <Step4 />;
+            case "audio":
+                return <Step2 />;
+            case "audioplayer":
+                return <LecteurAudio />;
+            case "getform":
+                return <GetForm />;
+            case "configpage":
+                return <ConfigPage />;
+            case "configmeteo":
+                return <ConfigMeteo />;
+            case "listemeteo":
+                return <ListeAlert />;
+            default:
+                return <Partage/>
+            //   <NotFound />;
+        }
+    };
 
-  return <div>{renderStepComponent()}</div>;
+    return <div>{renderStepComponent()}</div>;
 };
 export default Step;

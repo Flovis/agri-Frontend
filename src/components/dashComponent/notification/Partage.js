@@ -12,7 +12,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaShareAltSquare } from "react-icons/fa";
 import CardRetard from "../../../notification/CardRetard";
 
-const Partage = ({ onPrevious, onSubmit, formData }) => {
+const Partages = ({ onPrevious, onSubmit, formData }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const defaultType = searchParams.get("type");
@@ -59,28 +59,28 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
                 className="flex flex-col justify-center items-center gap-4 mt-32 "
             >
                 <div className="w-[90%] flex flex-col gap-4">
-                    {/* <div className="flex justify-between">
+                    <div className="flex justify-between">
                         <DynamicTitle text=" Draft " size="xl" />
                         <FaShareAltSquare
                             className="text-2xl text-deep-green"
                             type="submit"
                         />
-                    </div> */}
+                    </div>
                     {/* {formData?.map((el) => { */}
                     <CardRetard formdata={formData} />;{/* })} */}
                     
-                    {/* <div className="mt-4 flex items-center">
+                    <div className="mt-4 flex items-center">
                         <DynamicButton
                             label="Enregistrer"
                             getsizeClasses="w-full"
                             type="submit"
                             // onClick={handleSubmit}
                         />
-                    </div> */}
+                    </div>
                 </div>
             </form>
         </>
     );
 };
 
-export default Partage;
+export default Partages;

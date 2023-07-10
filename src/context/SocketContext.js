@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-
-// Créez le contexte Socket
 const SocketContext = React.createContext();
 
 const SocketProvider = ({ children }) => {

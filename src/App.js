@@ -175,6 +175,10 @@ function App() {
                                     />
                                 }
                             />
+                            <Route
+                                path="/contenu/:stepNumber"
+                                element={<Step />}
+                            />
                             {/* <Route
                                 path="/contenu/categorieaudio"
                                 element={<CategorieAudio />}
