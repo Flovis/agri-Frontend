@@ -102,9 +102,10 @@ const Fichier = () => {
                         supprimer
                       </button>
                       <button
-                        onClick={() =>
-                          toggle(contentEditable, setcontentEditable)
-                        }
+                        onClick={() => {
+                          toggle(contentEditable, setcontentEditable);
+                          toggle(isopen, setisOpen);
+                        }}
                         className="text-text-gray p-2 rounded-b-md border border-borde-gray text-[10px] hover:border hover:border-borde-gray w-[100%] hover:bg-deep-green hover:text-custom-white"
                       >
                         renommer
@@ -112,7 +113,7 @@ const Fichier = () => {
                     </div>
                   )}
                   <img
-                    src="./asserts/fichier.png"
+                    src="../assets/fichier.png"
                     alt="png"
                     className="w-12  flex-none"
                   />
