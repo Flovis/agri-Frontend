@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CardRetard({ formData }) {
+export default function CardRetard({ textred, textStrong, texte, name }) {
     return (
         <div className="flex justify-between items-center bg-custom-white p-4 rounded-md gap-2">
             <div className="bg-[#ff5e5e] w-44 p-4 rounded-md flex flex-col items-center justify-center font-semibold text-custom-white ">

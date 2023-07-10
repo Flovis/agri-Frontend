@@ -2,16 +2,16 @@ import React from "react";
 import { BiArrowBack, BiPlusMedical } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
-const BackNavStep = ({ linkTo, title, set, classes, type, handlePrevious }) => {
+const BackNavStep = ({ linkTo, title, set, classes, handlePrevious }) => {
   const navigate = useNavigate({});
 
   const handleForm = ({}) => {
-    navigate(`/contenu/getform?type=${type}`);
+    navigate(`/contenu/getform`);
   };
 
   return (
     <div onClick={set}>
-      <div className="absolut flex items-center gap-10 p-4 bg-custom-white z-50">
+      <div className="fixed flex items-center gap-10 p-4 bg-custom-white z-[100%] w-full">
         <Link to={linkTo}>
           <div
             onClick={handlePrevious}
@@ -21,7 +21,7 @@ const BackNavStep = ({ linkTo, title, set, classes, type, handlePrevious }) => {
           </div>
         </Link>
         <div className="flex justify-between w-full items-center">
-          <div className="font-bold">{title}</div>
+          <div className="font-bold -ml-8">{title} </div>
           <button
             className={` ${classes} bg-deep-green duration-200 p-2 rounded-md flex items-center text-md text-custom-white`}
             onClick={handleForm}

@@ -3,7 +3,7 @@ import React from "react";
 const DynamicTextarea = ({
   value,
   onChange,
-  rows = 4,
+  rows,
   placeholder,
   className,
   label,
@@ -11,21 +11,13 @@ const DynamicTextarea = ({
 }) => {
   return (
     <div>
-      {label && (
-        <label className="text-text-gray block mb-2 font-medium -mt-2">
-          {label}
-        </label>
-      )}
+      <label className="font-medium">{label}</label>
       <textarea
-        className={`resize-none border-borde-gray w-full border rounded focus:outline-none focus:ring-borde-gray focus:ring-borde-gray p-2 ${className}`}
-        value={value}
-        // onChange={onChange}
-        rows={rows}
-        placeholder={placeholder}
         name={name}
         // required
-        maxLength={250}
-      />
+        rows={rows}
+        className="w-full border-borde-gray mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-borde-gray shadow-sm rounded-lg"
+      ></textarea>
     </div>
   );
 };

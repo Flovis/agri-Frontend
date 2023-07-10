@@ -6,59 +6,46 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../../hooks/useAuth";
 import io from "socket.io-client";
-
 import { backendAxios } from "../../api/axios";
 import { SocketContext } from "../../context/SocketContext";
 const LOGIN_URL = "/login";
-
 const Login = () => {
     //for auth
     const { auth, setAuth } = useAuth();
-    const { setSocket } = useContext(SocketContext);
+    //   const { setSocket } = useContext(SocketContext);
     useEffect(() => {
         const socket = io("http://localhost:3500");
         socket.on("connect", () => {
             console.log("Connected to the socket.io server");
-            setSocket(socket);
+            //   setSocket(socket);
         });
         //     // socket.on("disconnect", () => {
         //     //     console.log("Disconnected from the sockext.io server");
         //     // });
-
-        
         // return () => {
         //     socket.disconnect();
         // };
     }, []);
-
     const [btnValue, setBtnValue] = useState("Se connecter");
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-
     const [showPassword, setShowPassword] = useState(false);
-
     const visiblePassword = () => {
         setShowPassword(!showPassword);
     };
-
     const userRef = useRef();
     const errRef = useRef();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errMessage, setErrMessage] = useState("");
-
     useEffect(() => {
         userRef.current.focus();
     }, []);
-
     useEffect(() => {
         setErrMessage("");
     }, [email, password]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (email && password) {
@@ -79,7 +66,6 @@ const Login = () => {
                         headers: { "Content-Type": "application/json" },
                     }
                 );
-
                 // console.log(JSON.stringify(response?.data));
                 const id = response?.data?.data?.id;
                 const token = response?.data?.data?.token;
@@ -87,22 +73,19 @@ const Login = () => {
                 const first_name = response?.data?.data?.first_name;
                 const phone = response?.data?.data?.phone;
                 const last_name = response?.data?.data?.last_name;
-
-            //Stockage des donnees de l'utilisateur dans le contexte
-            setAuth({
-                id,
-                first_name,
-                last_name,
-                email,
-                password,
-                token,
-                role,
-                phone,
-            });
-
-            setEmail("");
-            setPassword("");
-
+                //Stockage des donnees de l'utilisateur dans le contexte
+                setAuth({
+                    id,
+                    first_name,
+                    last_name,
+                    email,
+                    password,
+                    token,
+                    role,
+                    phone,
+                });
+                setEmail("");
+                setPassword("");
                 //Redirection
                 if (role === 4) {
                     navigate("/agriculteur/contenu", { replace: true });
@@ -119,7 +102,6 @@ const Login = () => {
             }
         }
     };
-
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="w-[500px] p-5">
@@ -128,7 +110,7 @@ const Login = () => {
                     ref={errRef}
                     className={
                         errMessage
-                            ? "flex justify-between p-4 mb-4 text-sm text-[#b91c1c] border border-[#fca5a5] rounded-lg bg-[#fef2f2]"
+                            ? "flex justify-between p-4 mb-4 text-sm text-[#B91C1C] border border-[#FCA5A5] rounded-lg bg-[#FEF2F2]"
                             : "hidden"
                     }
                     role="alert"
@@ -156,7 +138,6 @@ const Login = () => {
                             value={email}
                         />
                     </div>
-
                     <div className="w-full mb-3 md:mb-5">
                         <div className="relative">
                             <label
@@ -186,7 +167,6 @@ const Login = () => {
                             </button>
                         </div>
                     </div>
-
                     <div className="flex justify-between mb-4">
                         <div className="flex items-center h-5">
                             <input
@@ -229,5 +209,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;

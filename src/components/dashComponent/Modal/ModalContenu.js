@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DynamicSelect from "../PublicComponent/DynamicSelect ";
 import DynamicButton from "../PublicComponent/DynamicButton ";
 import { Notyf } from "notyf";
 import { useNavigate } from "react-router-dom";
@@ -15,10 +14,6 @@ export default function ModalContenu({ isOpen, setIsOpen }) {
   });
   // codition pour declancher
 
-  //   const handleOpen = () => {
-  //     setIsOpen(!isOpen);
-  //   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
@@ -26,10 +21,10 @@ export default function ModalContenu({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <div className="fixed inset-0 w-full h-full flex items-center justify-center bg-[#000] bg-opacity-60 ">
+      <div className="z-50 fixed inset-0 w-full h-full flex items-center justify-center bg-[#000] bg-opacity-60 ">
         <form
           className=" p-4 border border-borde-gray bg-custom-white rounded-lg w-[90%] z-50 relative"
-          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit}
         >
           <div className="flex items-center">
             <h3 className="text-lg font-medium text-gray-800 dark:text-gray-300">

@@ -20,16 +20,15 @@ import Login from "./pages/login/Login";
 import ResetPassword from "./pages/login/ResetPassword";
 import Singin from "./pages/login/Singin";
 import fetchData from "./api/fetchData";
-import { SocketProvider } from "./context/SocketContext";
-import Step from "./components/dashComponent/Contenu/step/Step";
+import Step from "./components/dashComponent/Cotenu/step/Step";
+
 function App() {
     const [conditionAlert, setConditionAlert] = useState({});
     const [formData, setFormData] = useState([]);
-    const [file, setFile] = useState({});
     const [localisation, setLocalisation] = useState(null);
     const [forecast, setForecast] = useState([]);
     const [weather, setWeather] = useState(null);
-    const [contenu, setContenu] = useState({});
+    const [contenu, setContenu] = useState([]);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -76,8 +75,7 @@ function App() {
     const dataMeteoContextValue = {
         forecast,
         weather,
-        setFile,
-        file,
+
         conditionAlert,
         setConditionAlert,
         setFormData,
@@ -85,117 +83,74 @@ function App() {
         localisation,
         setContenu,
         contenu,
-        file,
-        setFile,
     };
-    const ROLES = {
-        SuperAdmin: 2,
-        admin: 3,
-        Famers: 4,
-    };
+    const ROLES = { SuperAdmin: 2, admin: 3, Famers: 4 };
+
     return (
         <DataMeteoContext.Provider value={{ dataMeteoContextValue }}>
-            <SocketProvider>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        {/* Public routes*/}
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/enregister" element={<Singin />} />
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    {/* Public routes*/}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/enregister" element={<Singin />} />
+                    <Route path="/unauthorized" element={<Anauthorized />} />
+                    <Route path="/renitialiser" element={<ResetPassword />} />
+
+                    {/* Private routes*/}
+                    <Route
+                        element={<RequireAuth allowedRoles={[ROLES.Famers]} />}
+                    >
+                        {/* Famers */}
+
                         <Route
-                            path="/unauthorized"
-                            element={<Anauthorized />}
+                            path="/agriculteur/contenu"
+                            element={<HomeFamer meteo={weather} />}
+                        />
+                        <Route path="/agriculteur/meteo" element={<Meteo />} />
+                        <Route
+                            path="/agriculteur/notifications"
+                            element={<Notifications />}
                         />
                         <Route
-                            path="/renitialiser"
-                            element={<ResetPassword />}
+                            path="/agriculteur/plan-de-production"
+                            element={<ProductionPlan />}
                         />
-                        {/* Private routes*/}
                         <Route
-                            element={
-                                <RequireAuth allowedRoles={[ROLES.Famers]} />
-                            }
-                        >
-                            {/* Famers */}
-                            <Route
-                                path="/agriculteur/contenu"
-                                element={<HomeFamer meteo={weather} />}
-                            />
-                            <Route
-                                path="/agriculteur/meteo"
-                                element={<Meteo />}
-                            />
-                            <Route
-                                path="/agriculteur/notifications"
-                                element={<Notifications />}
-                            />
-                            <Route
-                                path="/agriculteur/plan-de-production"
-                                element={<ProductionPlan />}
-                            />
-                            <Route
-                                path="/agriculteur/plan-de-production/ajouter"
-                                element={<AddPlanProduction />}
-                            />
-                            <Route
-                                path="/agriculteur/profile"
-                                element={<Profile />}
-                            />
-                        </Route>
-                        {/* Admin AND superAdmin */}
+                            path="/agriculteur/plan-de-production/ajouter"
+                            element={<AddPlanProduction />}
+                        />
                         <Route
-                            element={
-                                <RequireAuth
-                                    allowedRoles={[
-                                        ROLES.SuperAdmin,
-                                        ROLES.admin,
-                                    ]}
-                                />
-                            }
-                        >
-                            <Route path="/" element={<Home />} />
-                            <Route
-                                path="/dashboard"
-                                element={
-                                    <WeatherCard
-                                        meteo={weather}
-                                        forecast={forecast}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/localisation"
-                                element={<Localisation />}
-                            />
-                            <Route
-                                path="/alert"
-                                element={
-                                    <Alert
-                                        meteo={weather}
-                                        forecast={forecast}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/contenu/:stepNumber"
-                                element={<Step />}
-                            />
-                            {/* <Route
-                                path="/contenu/categorieaudio"
-                                element={<CategorieAudio />}
-                            /> */}
-                        </Route>
-                        <Route
-                            element={
-                                <RequireAuth
-                                    allowedRoles={[ROLES.SuperAdmin]}
-                                />
-                            }
-                        >
-                            <Route path="/contenu" element={<Contenu />} />
-                        </Route>
+                            path="/agriculteur/profile"
+                            element={<Profile />}
+                        />
                     </Route>
-                </Routes>
-            </SocketProvider>
+                    {/* Admin AND superAdmin */}
+                    <Route
+                        element={
+                            <RequireAuth
+                                allowedRoles={[ROLES.SuperAdmin, ROLES.admin]}
+                            />
+                        }
+                    >
+                        <Route path="/" element={<Home />} />
+                        <Route path="/dashboard" element={<WeatherCard />} />
+                        <Route path="/alert" element={<Alert />} />
+                        <Route
+                            path="/localisation"
+                            element={<Localisation />}
+                        />
+                    </Route>
+                    <Route
+                        path="/"
+                        element={
+                            <RequireAuth allowedRoles={[ROLES.SuperAdmin]} />
+                        }
+                    >
+                        <Route path="/contenu" element={<Contenu />} />
+                        <Route path="/contenu/:stepNumber" element={<Step />} />
+                    </Route>
+                </Route>
+            </Routes>
         </DataMeteoContext.Provider>
     );
 }

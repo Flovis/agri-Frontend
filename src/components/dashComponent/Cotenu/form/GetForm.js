@@ -6,12 +6,11 @@ import DataMeteoContext from "../../../../context/MeteoContext";
 export default function GetForm() {
   const [step, setStep] = useState(1);
   const [formObject, setFormObject] = useState({});
-  const [recordings, setRecordings] = useState([]);
   const {
     dataMeteoContextValue: { setContenu, contenu },
   } = useContext(DataMeteoContext);
-  console.log("contenu: ", contenu);
-  setContenu(recordings);
+
+  console.log("contenuherve", contenu);
   const handleNext = (data) => {
     setStep((prev) => prev + 1);
     setFormObject((prevFormObject) => ({
@@ -26,13 +25,13 @@ export default function GetForm() {
       ...prevFormObject,
       ...data,
     }));
-    setRecordings([]);
+    setContenu([]);
   };
 
   const handleSubmit = (data) => {
     const updatedFormObject = { ...formObject, ...data };
     setFormObject(updatedFormObject);
-    setRecordings((prevRecordings) => [...prevRecordings, updatedFormObject]);
+    setContenu((prevRecordings) => [...prevRecordings, updatedFormObject]);
   };
 
   return (
@@ -41,26 +40,6 @@ export default function GetForm() {
       {step === 2 && (
         <Level2 onPrevious={handlePrevious} onSubmit={handleSubmit} />
       )}
-      {/* {recordings.length > 0 && (
-        <div>
-          <h2>Enregistrements :</h2>
-          <ul>
-            {recordings.map((recording, index) => (
-              <li key={index}>
-                Enregistrement {index + 1}:
-                <ul>
-                  {Object.entries(recording).map(([key, value]) => (
-                    <li key={key}>
-                      <strong>{key}: </strong>
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </div>
   );
 }

@@ -1,21 +1,16 @@
 import React from "react";
 import TopHeader from "../../header/TopHeader";
-import { FiSettings } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 import { TbSpeakerphone } from "react-icons/tb";
 import { GrMapLocation } from "react-icons/gr";
 import Footer from "../../footer/Footer";
-
-import SongCard from "../cards/audio/SongCard";
 import BackNavStep from "../../header/BackNav";
 
 export default function Step2() {
-  const songs = [{ id: 1 }, { id: 2 }, { id: 3 }];
-
   return (
     <>
-      <div>
+      {/* <div>
         <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
           <TopHeader />
           <BackNavStep linkTo="/contenu" title=" Audio " type="audio" />
@@ -34,13 +29,7 @@ export default function Step2() {
             </h2>
           </div>
         </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2 my-4   mx-4">
-        {songs.map((song) => (
-          <SongCard key={song.id} song={song} />
-        ))}
-      </div>
+      </div> */}
 
       <Footer
         data={[
@@ -63,11 +52,6 @@ export default function Step2() {
             to: "/alert",
             icon: <TbSpeakerphone className="text-2xl" />,
             nom: "Alert",
-          },
-          {
-            to: "/parametre",
-            icon: <FiSettings className="text-2xl" />,
-            nom: "Parametre",
           },
         ]}
       />

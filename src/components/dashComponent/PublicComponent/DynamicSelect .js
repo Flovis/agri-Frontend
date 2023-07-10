@@ -1,25 +1,16 @@
-import { useState } from "react";
-import Select from "react-select";
-const DynamicSelect = ({ label, options, classes, nameData, onChange }) => {
-    return (
-        <div className="relative">
-            <label className="text-sm font-medium text-gray-500 my-2">
-                {label}
-            </label>
-            <select
-                className={`border mt-2 bg-custom-white border-borde-gray text-text-gray text-md rounded-lg focus:outline-none focus:ring-gray-300 focus:border-gray-300 block w-full p-3.5 ${classes}`}
-                onChange={onChange}
-                name={nameData}
-            >
-                {options?.map((el) => {
-                    return (
-                        <option key={el} className=" hover:bg-deep-green">
-                            {el}
-                        </option>
-                    );
-                })}
-            </select>
-        </div>
-    );
+const DynamicSelect = ({ options, nameData, label }) => {
+  return (
+    <div className=" relative max-w-6xl mx-auto ">
+      <label className="font-medium">{label} </label>
+      <select
+        name={nameData}
+        className={` border mt-2  border-borde-gray text-text-gray text-md appearance-none rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-3.5 `}
+      >
+        {options?.map((el) => {
+          return <option key={el}>{el}</option>;
+        })}
+      </select>
+    </div>
+  );
 };
 export default DynamicSelect;
