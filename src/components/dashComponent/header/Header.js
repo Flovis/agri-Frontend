@@ -8,6 +8,8 @@ import CardNotification from "./CardNotification";
 
 const Header = () => {
     const { notification } = useContext(DataMeteoContext);
+    console.log('notif',notification)
+    const handleNotification = ()=>{}
     return (
         <header className="">
             <div className=" h-12 bg-[#488575] w-full flex items-center justify-between px-5">
@@ -24,12 +26,13 @@ const Header = () => {
                     </h1>
                 </div>
                 <div className="flex items-center">
-                    <button className="relative">
+                    <button className="relative" onClick={handleNotification}>
                         <RiNotification2Line className="h-6 w-6 mr-3 cursor-pointer" />
                         <strong className="">
-                            <div className="absolute -top-[3PX] -right-[-6px] w-4 h-4 bg-custom-red rounded-full flex items-center justify-center text-custom-white text-xs">
+                            {notification && <div
+                                className="absolute -top-[3PX] -right-[-6px] w-4 h-4 bg-custom-red rounded-full flex items-center justify-center text-custom-white text-xs">
                                 {notification}
-                            </div>
+                            </div>}
                         </strong>
                     </button>
 
