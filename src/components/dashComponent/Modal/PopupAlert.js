@@ -1,5 +1,4 @@
 const Popup = ({ onClose }) => {
-  const handleConfigureMeteo = () => {};
 
   const handleConfigureProduction = () => {};
 

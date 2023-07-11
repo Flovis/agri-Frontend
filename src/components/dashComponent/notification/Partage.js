@@ -10,10 +10,9 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaShareAltSquare } from "react-icons/fa";
-import SelectComponent from "../../../PublicComponent/SelectComponent";
 import CardRetard from "../../../notification/CardRetard";
 
-const Partage = ({ onPrevious, onSubmit, formData }) => {
+const Partages = ({ onPrevious, onSubmit, formData }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const defaultType = searchParams.get("type");
@@ -52,6 +51,9 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
                     handlePrevious={handlePrevious}
                 />
             </div>
+
+            {<p></p>}
+
             <form
                 onSubmit={handleSubmit}
                 className="flex flex-col justify-center items-center gap-4 mt-32 "
@@ -59,23 +61,14 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
                 <div className="w-[90%] flex flex-col gap-4">
                     <div className="flex justify-between">
                         <DynamicTitle text=" Draft " size="xl" />
-
                         <FaShareAltSquare
                             className="text-2xl text-deep-green"
                             type="submit"
                         />
                     </div>
-                    <CardRetard />
-                    {/* {formData?.map((el) => {
-            <li>
-              <p> {el.cycle}</p>
-              <p>{el.category}</p>
-              <p> {el.description}</p>
-              <p>{el.frequence}</p>
-              <p> {el.canal}</p>
-              <p> {el.group}</p>
-            </li>;
-          })} */}
+                    {/* {formData?.map((el) => { */}
+                    <CardRetard formdata={formData} />;{/* })} */}
+                    
                     <div className="mt-4 flex items-center">
                         <DynamicButton
                             label="Enregistrer"
@@ -90,4 +83,4 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
     );
 };
 
-export default Partage;
+export default Partages;

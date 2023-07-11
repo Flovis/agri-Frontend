@@ -13,5 +13,4 @@ const DynamicSelect = ({ options, nameData, label }) => {
     </div>
   );
 };
-
 export default DynamicSelect;
