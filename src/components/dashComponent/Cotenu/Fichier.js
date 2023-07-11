@@ -25,39 +25,6 @@ const Fichier = () => {
     setshow(!show);
   }, []);
 
-  //   test
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      setcontentEditable(false);
-    }
-  };
-
-  useEffect(() => {
-    if (contentEditable) {
-      document.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.removeEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [contentEditable]);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    const name = Object.fromEntries(new FormData(e.target));
-    if (name.category && name.category.trim() !== "") {
-      if (listItems.includes(name.category)) {
-        notyf.error("Catégorie existe");
-      } else {
-        setListItems([...listItems, name.category]);
-      }
-    } else {
-      notyf.error("Catégorie non créée");
-    }
-    setOpen(!open);
-  };
-
   return (
     <>
       <div>
@@ -65,12 +32,12 @@ const Fichier = () => {
         <BackNavStep classes="hidden" linkTo="/contenu" title={type} />
       </div>
       <div className="py-16 bg-gray-900">
-        {open && <AddCatModal isOpen={open} handleClick={handleClick} />}
+        {/* {open && <AddCatModal isOpen={open}  />} */}
         <div className="max-w-screen-xl mx-auto px-4 flex-wrap gap-x-12 justify-between items-center md:flex md:px-8 lg:flex-nowrap">
           <div className="flex-none mt-6 text-white lg:mt-0">
             <ul className="grid grid-cols-2 gap-2  items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
               {/*btn add cat  */}
-              <button
+              {/* <button
                 className="flex items-center justify-center "
                 onClick={() => {
                   toggle(open, setOpen);
@@ -79,7 +46,7 @@ const Fichier = () => {
                 <div className="border hover:animate-pulse duration-200 hover:bg-opacity-25 flex items-center justify-center w-14 h-14 rounded-full border-dashed border-deep-green ">
                   <p className="font-extrabold text-xl text-deep-green ">+</p>
                 </div>
-              </button>
+              </button> */}
               {/* les lis pour dossiers */}
               {listItems.map((item, index) => (
                 <li className="flex items-center flex-col  justify-center m-auto relative  ">
