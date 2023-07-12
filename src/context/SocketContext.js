@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { createContext, useState } from "react";
 
-const SocketContext = React.createContext();
+const SocketContext = createContext({});
 
 const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState();
