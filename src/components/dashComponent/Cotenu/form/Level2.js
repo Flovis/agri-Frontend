@@ -7,11 +7,12 @@ import BackNavStep from "../../header/BackNav";
 import DynamicDataSet from "../../PublicComponent/DynamicDataSet";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Level2 = ({ onPrevious, onSubmit,formObject }) => {
+const Level2 = ({ onPrevious, onSubmit, formObject }) => {
   const navigate = new useNavigate();
   const [form, setform] = useState("");
+  const [editor, seteditor] = useState("");
 
   const notyf = new Notyf({
     duration: 1000,
@@ -29,6 +30,7 @@ const Level2 = ({ onPrevious, onSubmit,formObject }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
+    formdata.set("link", editor);
     const data = Object.fromEntries(formdata);
     if (data.productName === "" || data.tag === "") {
       notyf.error("veillez remplir les champs svp");
@@ -70,7 +72,8 @@ const Level2 = ({ onPrevious, onSubmit,formObject }) => {
               <DynamicInput
                 label="Ajouter un fichier media"
                 type={formObject.category}
-                name="title"
+                seteditor={seteditor}
+                editor={editor}
               />
             </div>
             <div>

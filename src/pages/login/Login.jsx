@@ -12,12 +12,12 @@ const LOGIN_URL = "/login";
 const Login = () => {
   //for auth
   const { auth, setAuth } = useAuth();
-  //   const { setSocket } = useContext(SocketContext);
+  const { setSocket } = useContext(SocketContext);
   useEffect(() => {
     const socket = io("http://localhost:3500");
     socket.on("connect", () => {
       console.log("Connected to the socket.io server");
-      //   setSocket(socket);
+      setSocket(socket);
     });
     //     // socket.on("disconnect", () => {
     //     //     console.log("Disconnected from the sockext.io server");
