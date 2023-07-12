@@ -9,7 +9,7 @@ import BackNavStep from "../header/BackNav";
 const Fichier = () => {
   const [open, setOpen] = useState(false);
   const [isopen, setisOpen] = useState(false);
-  const [listItems, setListItems] = useState([]);
+  const [listItems, setListItems] = useState([1, 2]);
   const [contentEditable, setcontentEditable] = useState(false);
   const location = new useLocation();
   const type = new URLSearchParams(location.search).get("type");
@@ -38,7 +38,9 @@ const Fichier = () => {
             <ul className="grid grid-cols-2 gap-2  items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
               {listItems.map((item, index) => (
                 <li className="flex items-center flex-col  justify-center m-auto  ">
-                  {}
+                  <p>Nom: ngalamulume</p>
+                  <p>Nom: ngalamulume</p>
+                  <p>Nom: ngalamulume</p>
                 </li>
               ))}
             </ul>

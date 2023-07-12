@@ -1,48 +1,56 @@
 export default function CardNotification() {
-    const handleClick = () => {};
-    return (
-        <div className="z-50 flex justify-center h-screen items-center mt-2  -mr-56  ">
-            <div className="relative my-32 ">
-                <div
-                    className="absolute border border-borde-gray right-0 mt-2 bg-custom-white rounded-md shadow-lg overflow-hidden z-20 w-72"
-                    //   style={{ width: "20rem" }}
-                >
-                    <div className="py-2 overflow-y-auto h-36 ">
-                        <button onClick>
-                            <div className="flex items-center px-4 py-3 border-b border-borde-gray hover:bg-gray-100 -mx-2">
-                                <p className="text-gray-600 text-sm mx-2">
-                                    <span className="font-bold">
-                                        cycle : semance
-                                    </span>{" "}
-                                    produit tomate
-                                    <span className="font-bold text-blue-500">
-                                        envoyer
-                                    </span>{" "}
-                                    avec success
-                                </p>
-                            </div>
-                        </button>
+  const radios = [
+    {
+      name: "Hobby plan",
+      description: "For personal or non-commercial projects.",
+    },
+    {
+      name: "Pro plan",
+      description: "For team collaboration with advanced features.",
+    },
+    {
+      name: "Enterprise plan",
+      description: "For teams with security,and performance needs.",
+    },
+  ];
 
-                        <div className="flex items-center px-4 py-3 border-b border-borde-gray hover:bg-gray-100 -mx-2">
-                            <p className="text-gray-600 text-sm mx-2">
-                                <span className="font-bold">
-                                    cycle : semance
-                                </span>{" "}
-                                produit tomate
-                                <span className="font-bold text-blue-500">
-                                    envoyer
-                                </span>{" "}
-                                avec success
-                            </p>
-                        </div>
-                    </div>
-                    <button className="w-full">
-                        <div className="block text-center font-bold py-2">
-                            Voir plus
-                        </div>
-                    </button>
+  return (
+    <div className="max-w-full mx-auto px-4 border bg-custom-white">
+      <h2 className="text-gray-800 font-medium">
+        Find a plan to power your projects
+      </h2>
+      <ul className="mt-6 space-y-3">
+        {radios.map((item, idx) => (
+          <li key={idx}>
+            <label htmlFor={item.name} className="block relative">
+              <input
+                id={item.name}
+                type="radio"
+                defaultChecked={idx == 1 ? true : false}
+                name="payment"
+                class="sr-only peer"
+              />
+              <div className="w-full p-5 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
+                <div className="pl-7">
+                  <h3 className="leading-none text-gray-800 font-medium">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    {item.description}
+                  </p>
                 </div>
-            </div>
-        </div>
-    );
+              </div>
+              <span className="block absolute top-5 left-5 border peer-checked:border-[5px] peer-checked:border-indigo-600 w-4 h-4 rounded-full"></span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+// <button className="w-full">
+//     <div className="block text-center font-bold py-2">
+//         Voir plus
+//     </div>
+// </button>
