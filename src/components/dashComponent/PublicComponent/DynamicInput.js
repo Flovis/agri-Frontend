@@ -3,7 +3,16 @@ import AudioInput from "../Cotenu/form/inputType/TypeAudio";
 import VideoInput from "../Cotenu/form/inputType/TypeVideo";
 import FileInput from "../Cotenu/form/inputType/TypeTextuelle";
 
-const DynamicInput = ({ label, type, value, tailTexte, classes, name }) => {
+const DynamicInput = ({
+  label,
+  type,
+  value,
+  tailTexte,
+  classes,
+  name,
+  editor,
+  seteditor,
+}) => {
   let inputComponent;
 
   switch (type) {
@@ -11,10 +20,12 @@ const DynamicInput = ({ label, type, value, tailTexte, classes, name }) => {
       inputComponent = <AudioInput label={label} />;
       break;
     case "video":
-      inputComponent = <VideoInput label={label} />;
+      inputComponent = <VideoInput label={label} value={value} />;
       break;
     case "textuel":
-      inputComponent = <FileInput label={label} />;
+      inputComponent = (
+        <FileInput label={label} seteditor={seteditor} editor={editor} />
+      );
       break;
     default:
       inputComponent = (
@@ -33,11 +44,7 @@ const DynamicInput = ({ label, type, value, tailTexte, classes, name }) => {
 
   return (
     <div className="flex flex-col mb-4">
-      <label
-        htmlFor={label}
-        // className="text-sm font-medium text-text-gray my-2"
-        className="font-medium"
-      >
+      <label htmlFor={label} className="font-medium text-text-gray">
         {label}
       </label>
       {inputComponent}
