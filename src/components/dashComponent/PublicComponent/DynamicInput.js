@@ -34,7 +34,7 @@ const DynamicInput = ({
           id={label}
           className={`border border-borde-gray text-text-gray text-md rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-3.5 ${classes}`}
           value={value}
-          name={name ? name : "title"}
+          name="title"
           // required
           maxLength={tailTexte}
         />

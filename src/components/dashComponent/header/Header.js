@@ -4,7 +4,8 @@ import { CgProfile } from "react-icons/cg";
 import { HiPhone } from "react-icons/hi";
 import { RiNotification2Line } from "react-icons/ri";
 import DataMeteoContext from "../../../context/MeteoContext";
-import CardNotification from "./CardNotification";
+
+import GestionNotification from "./GestionNotification";
 
 const Header = () => {
   const { notification } = useContext(DataMeteoContext);
@@ -14,7 +15,7 @@ const Header = () => {
     setisopen(!isopen);
   };
   return (
-    <header className="">
+    <header className="duration-500">
       <div className=" h-12 bg-[#488575] w-full flex items-center justify-between px-5">
         <div className="flex gap-4  text-custom-white">
           <HiPhone />
@@ -26,7 +27,6 @@ const Header = () => {
         <div className="flex items-center">
           <h1 className="text-xl font-extrabold text-[#488575]">AGRI TECH</h1>
         </div>
-        {isopen && <CardNotification />}
         <div className="flex items-center">
           <button className="relative" onClick={handleNotification}>
             <RiNotification2Line className="h-6 w-6 mr-3 cursor-pointer" />
@@ -42,6 +42,7 @@ const Header = () => {
           <CgProfile className="h-6 w-6 cursor-pointer" />
         </div>
       </div>
+      {isopen && <GestionNotification />}
     </header>
   );
 };
