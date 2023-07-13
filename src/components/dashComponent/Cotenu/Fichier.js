@@ -5,14 +5,19 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TopHeader from "../header/TopHeader";
 import BackNavStep from "../header/BackNav";
+import { backendAxios } from "../../../api/axios";
 
 const Fichier = () => {
   const [open, setOpen] = useState(false);
   const [isopen, setisOpen] = useState(false);
-  const [listItems, setListItems] = useState([1, 2]);
+  const [listItems, setListItems] = useState([]);
   const [contentEditable, setcontentEditable] = useState(false);
   const location = new useLocation();
   const type = new URLSearchParams(location.search).get("type");
+
+  const URL = `/getContents/${type}`;
+  const [datas, setDatas] = useState([]);
+
   const notyf = new Notyf({
     duration: 1000,
     position: {
@@ -24,6 +29,23 @@ const Fichier = () => {
   const toggle = useCallback((show, setshow) => {
     setshow(!show);
   }, []);
+
+  useEffect(() => {
+    const fectData = async () => {
+      try {
+        const response = await backendAxios.get(URL, {
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(response.data);
+        setDatas(response.data.allContent);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fectData();
+  }, []);
+
+  console.log("Datas", datas);
 
   return (
     <>
@@ -38,9 +60,7 @@ const Fichier = () => {
             <ul className="grid grid-cols-2 gap-2  items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
               {listItems.map((item, index) => (
                 <li className="flex items-center flex-col  justify-center m-auto  ">
-                  <p>Nom: ngalamulume</p>
-                  <p>Nom: ngalamulume</p>
-                  <p>Nom: ngalamulume</p>
+                  {}
                 </li>
               ))}
             </ul>
