@@ -1,5 +1,4 @@
 import React from "react";
-import { FiSettings } from "react-icons/fi";
 import { GrMapLocation } from "react-icons/gr";
 import { LuLibrary } from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";

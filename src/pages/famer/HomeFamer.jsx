@@ -10,9 +10,7 @@ import { RxHome } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import TopHeader from "../../components/dashComponent/header/TopHeader";
 import CardMeteo from "../../components/dashComponent/retouche/CardMeteo";
-// import { io } from "socket.io-client";
 import { SocketContext } from "../../context/SocketContext";
-// const socket = io("http://localhost:3500");
 
 // console.log("kadea", socket);
 const HomeFamer = ({ meteo }) => {

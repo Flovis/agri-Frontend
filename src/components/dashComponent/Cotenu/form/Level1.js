@@ -7,7 +7,7 @@ import BackNavStep from "../../header/BackNav";
 import DynamicTextarea from "../../PublicComponent/DynamicTextarea ";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Level1 = ({ onNext }) => {
   const notyf = new Notyf({
@@ -26,8 +26,6 @@ const Level1 = ({ onNext }) => {
       notyf.error("veillez remplir les champs svp");
     } else {
       onNext(data);
-
-
     }
   };
 

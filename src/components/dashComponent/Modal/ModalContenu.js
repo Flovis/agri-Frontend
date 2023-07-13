@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ModalContenu({ isOpen, setIsOpen }) {
   const navigate = new useNavigate();
+
   const notyf = new Notyf({
     duration: 1000,
     position: {
