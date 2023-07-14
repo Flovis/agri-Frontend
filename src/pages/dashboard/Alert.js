@@ -14,8 +14,9 @@ export default function Alert({ meteo, forecast }) {
         <Header />
       </div>
       <div className=" pt-[120px]"></div>
-
-      <TodayMeteo />
+      <div className="">
+        <TodayMeteo />
+      </div>
       <Footer
         data={[
           {

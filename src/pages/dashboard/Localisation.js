@@ -30,9 +30,10 @@ export default function Localisation() {
         <Header />
       </div>
       <div className="pt-[120px]"></div>
-
-      <Geoloc />
-      <SumilationCoords />
+      <div className="max-w-xl inset-x-auto border">
+        <Geoloc />
+        <SumilationCoords />
+      </div>
       <div className="mb-20"></div>
       <Footer
         data={[

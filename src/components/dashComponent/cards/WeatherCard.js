@@ -14,7 +14,7 @@ export default function WeatherCard() {
         <Header />
       </div>
 
-      <div className="overflow-y-scroll h-[calc(100vh-72px)] pt-8">
+      <div className="overflow-y-scroll h-[calc(100vh-72px)] pt-8 max-w-screen-xl mx-auto">
         <div className="h-48 pt-24 px-4">
           <h1 className="mb-4 text-xl font-bold text-[#043d1d] dark:text-white"></h1>
 

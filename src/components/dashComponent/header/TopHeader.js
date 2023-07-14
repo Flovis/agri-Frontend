@@ -5,8 +5,8 @@ import { HiPhone } from "react-icons/hi";
 
 const TopHeader = () => {
   return (
-    <div>
-      <div className=" h-12 bg-[#488575] w-full flex items-center justify-between px-5">
+    <div className="bg-[#488575]">
+      <div className=" h-12 bg-[#488575] max-w-screen-xl mx-auto flex items-center justify-between px-5">
         <div className="flex gap-4  text-custom-white">
           <HiPhone />
           <BiEnvelope />

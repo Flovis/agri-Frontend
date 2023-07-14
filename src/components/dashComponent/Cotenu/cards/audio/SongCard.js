@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { ImMusic } from "react-icons/im";
 import { Link } from "react-router-dom";
-
-const SongCard = ({ song }) => {
+import CardMusic from "./CardMusic";
+const SongCard = ({ index, titre }) => {
+  const [open, setopen] = useState(false);
+  const handleClick = () => {
+    setopen(!open);
+  };
   return (
-    <Link to={"/contenu/audioplayer"}>
+    <>
       <div
-        key={song.id}
+        key={index}
         className="bg-custom-white p-4 border border-borde-gray rounded "
+        onClick={handleClick}
       >
         <div className="flex items-center mb-2 flex-col">
           <div className="w-16 h-16 bg-borde-gray rounded-full flex items-center justify-center mr-2">
@@ -15,7 +21,8 @@ const SongCard = ({ song }) => {
           <h1>Titre Music</h1>
         </div>
       </div>
-    </Link>
+      {open && <CardMusic />}
+    </>
   );
 };
 

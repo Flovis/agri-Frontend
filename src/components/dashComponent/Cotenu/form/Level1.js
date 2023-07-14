@@ -40,8 +40,8 @@ const Level1 = ({ onNext }) => {
         />
       </div>
 
-      <main className="mb-10 mt-20 w-full h-full flex flex-col items-center justify-center px-4 items-center">
-        <div className="max-w-sm w-full mt-4">
+      <main className=" mb-5 mt-20 md:mb-0 md:mt-0 w-full h-screen flex flex-col items-center justify-center px-4 items-center">
+        <div className="max-w-sm md:max-w-xl w-full mt-4">
           <div className="-mb-3">
             <div className="mt-5 space-y-1">
               <h3 className="text-text-gray text-xl font-bold sm:text-xl ">

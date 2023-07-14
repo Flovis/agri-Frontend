@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
-  const [gotoAddContent, setgotoAddContent] = useState(false);
+
   const navigate = new useNavigate();
   const notyf = new Notyf({
     duration: 1000,
@@ -27,8 +27,8 @@ const Home = () => {
   };
   return (
     <div className="py-28 h-screen">
-      <div className="max-w-screen-xl mx-auto px-4 flex-wrap gap-x-12 justify-between items-center md:flex md:px-8 lg:flex-nowrap">
-        <div className="max-w-xl space-y-3 flex justify-between">
+      <div className="max-w-screen-xl mx-auto px-4 flex-wrap gap-x-12 justify-between items-center  md:px-8 lg:flex-nowrap">
+        <div className="max-w-full my-8 mb-10 space-y-3 flex justify-between">
           <p className=" mt-4 text-text-gray text-xl font-semibold sm:text-2xl">
             categories
           </p>
@@ -44,9 +44,9 @@ const Home = () => {
           />
         </div>
         {/* content adding */}
-        {gotoAddContent && <Step />}
-        <div className="flex-none mt-10 text-white lg:mt-0">
-          <ul className="grid grid-cols-2 gap-2   items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
+        {<Step />}
+        <div className="flex-none mt-10  lg:mt-0">
+          <ul className="grid grid-cols-2 gap-2 md:grid-cols-3   items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
             <li
               onClick={() => handleclick("audio")}
               className="flex items-center flex-col  justify-center m-auto    "

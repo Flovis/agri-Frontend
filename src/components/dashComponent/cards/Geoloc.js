@@ -49,22 +49,14 @@ export default function Geoloc() {
         // map.flyTo([item.latitude, item.longitude], 10);
       });
 
-      // const polygon = L.polygon([
-      //   [coords.latitude, coords.longitude - 0.002],
-      //   [coords.latitude - 0.002, coords.longitude],
-      //   [coords.latitude, coords.longitude + 0.002],
-      //   [coords.latitude + 0.002, coords.longitude],
-      // ]).addTo(map);
-      // polygon.bindPopup("mesure 20/20");
-
       setMapInitialized(true);
     }
   }, [coords, mapInitialized]);
 
   if (!isGeolocationAvailable) {
     return (
-      <div className="flex justify-center items-center h-80 bg-gray-200">
-        <p className="text-lg text-gray-600">
+      <div className="flex justify-center items-center h-80 ">
+        <p className="text-lg text-text-gray">
           Désolé, la géolocalisation n'est pas prise en charge par votre
           appareil.
         </p>
@@ -84,16 +76,13 @@ export default function Geoloc() {
       </div>
     );
   } else if (coords) {
-    return <div ref={mapRef} className="h-96 bg-gray-100" />;
+    return <div ref={mapRef} className="h-96 " />;
   } else {
     return (
       <div className="flex justify-center items-center h-96 bg-gray-200">
         <div className="flex justify-center items-center h-full">
           <MoonLoader color="#488575" />
         </div>
-        {/* <p className="text-lg text-gray-600">
-          Récupération des données de localisation...
-        </p> */}
       </div>
     );
   }

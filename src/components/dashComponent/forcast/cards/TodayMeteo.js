@@ -2,7 +2,6 @@ import React, { createContext, useState } from "react";
 import DynamicTitle from "../../PublicComponent/DynamicTitle";
 import UseTimer from "../../../../hooks/useTime";
 import DaysCard from "./DaysCard";
-import getIcon from "../../../../conditions/GetIconWeather";
 import DynamicButton from "../../PublicComponent/DynamicButton ";
 import { useNavigate } from "react-router-dom";
 import AjoutCat from "../../Modal/AjoutLangue";
@@ -21,16 +20,13 @@ export default function TodayMeteo() {
 
   const jours = Object.keys(minMaxTemperatures);
   const navigate = new useNavigate();
-  // const handleclick = () => {
-  //   navigate("/contenu/configpage");
-  // };
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
   return (
     <>
-      <div className="w-[95%]">
+      <div className="max-w-xl h-screen">
         <div className="mt-2">
           <div className="text-xl font-bold  mx-6 flex justify-between items-center">
             <DynamicTitle text="Prévision Méteologique" />
