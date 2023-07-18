@@ -33,7 +33,7 @@ const ProductionPlan = () => {
     useEffect(() => {
         socket.emit("ok", "Toujours");
         socket.on("Test", (msg) => {
-            console.log(msg);
+            // console.log(msg);
             setMessage(msg);
         });
         return () => {
@@ -63,21 +63,21 @@ const ProductionPlan = () => {
         };
         fetchData();
     }, []);
-    
+
     return (
         <div className="mb-[40px]">
             <BackNav linkTo="/agriculteur/contenu" title="Plan de production" />
             <div className="">
                 <div className="w-full h-[150px] flex flex-col items-center justify-center bg-[#D1FAE5]">
                     <div className="font-medium text-text-gray">
-                        Nombre de produits 
+                        Nombre de produits
                     </div>
                     <div className="text-center text-[70px] text-[#042f2e]">
                         {produits ? produits.length : 0}
                     </div>
                 </div>
             </div>
-            <div className="pt-2 w-full flex flex-wrap">
+            <div className="h-full pt-2 w-full flex flex-wrap">
                 {produits?.length ? (
                     produits.map((produit, index) => (
                         <div className="w-1/2" key={index}>
@@ -89,7 +89,9 @@ const ProductionPlan = () => {
                         </div>
                     ))
                 ) : (
-                    <div>Aucun produit au plan</div>
+                    <div className="flex h-full w-full justify-center items-center">
+                        Aucun produit au plan
+                    </div>
                 )}
             </div>
 

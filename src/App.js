@@ -84,7 +84,7 @@ function App() {
     setContenu,
     contenu,
   };
-  const ROLES = { SuperAdmin: 1, admin: 2, Famers: 3 };
+  const ROLES = { SuperAdmin: 2, admin: 3, Famers: 4 };
 
   return (
     <DataMeteoContext.Provider value={{ dataMeteoContextValue }}>
