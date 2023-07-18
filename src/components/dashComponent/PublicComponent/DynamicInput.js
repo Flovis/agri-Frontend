@@ -12,6 +12,7 @@ const DynamicInput = ({
   name,
   editor,
   seteditor,
+  placeholder,
 }) => {
   let inputComponent;
 
@@ -37,6 +38,7 @@ const DynamicInput = ({
           name={name ? name : "title"}
           // required
           maxLength={tailTexte}
+          placeholder={placeholder}
         />
       );
       break;

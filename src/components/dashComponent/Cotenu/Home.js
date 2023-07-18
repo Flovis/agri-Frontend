@@ -46,37 +46,37 @@ const Home = () => {
         {/* content adding */}
         {<Step />}
         <div className="flex-none mt-10  lg:mt-0">
-          <ul className="grid grid-cols-2 gap-2 md:grid-cols-3   items-center justify-center [&>*]:bg-custom-white [&>*]:w-full [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
+          <ul className="grid grid-cols-2 gap-2 md:grid-cols-3 md:[&>*]:my-20  items-center justify-center [&>*]:bg-custom-white [&>*]:w-full md:[&>*]:h-36 [&>*]:h-20 [&>*]:flex sm:[&>*]:px-10 [&>*]:rounded-lg">
             <li
               onClick={() => handleclick("audio")}
-              className="flex items-center flex-col  justify-center m-auto    "
+              className="flex items-center flex-col md:flex-row md:gap-4 justify-center m-auto  cursor-pointer   "
             >
               <img
                 src="./assets/fichier.png"
                 alt="png"
-                className="w-12  flex-none"
+                className="w-12 md:w-20  flex-none"
               />
               <p className="font-extrabold text-gray">Audio</p>
             </li>
             <li
               onClick={() => handleclick("video")}
-              className="flex items-center flex-col  justify-center m-auto   "
+              className="flex items-center flex-col  cursor-pointer  justify-center m-auto md:flex-row md:gap-4"
             >
               <img
                 src="./assets/fichier.png"
                 alt="png"
-                className="w-12  flex-none"
+                className="w-12 md:w-20  flex-none"
               />
               <p className="font-extrabold text-gray">Video</p>
             </li>
             <li
               onClick={() => handleclick("textuel")}
-              className="flex items-center flex-col  justify-center m-auto   "
+              className="flex items-center  cursor-pointer flex-col  justify-center m-auto md:flex-row md:gap-4  "
             >
               <img
                 src="./assets/fichier.png"
                 alt="png"
-                className="w-12  flex-none"
+                className="w-12 md:w-20  flex-none"
               />
               <p className="font-extrabold text-gray">Textuel</p>
             </li>

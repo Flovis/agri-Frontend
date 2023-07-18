@@ -1,11 +1,11 @@
 import React from "react";
 
-const DynamicTitle = ({ text, level = 1, size }) => {
+const DynamicTitle = ({ text, level = 1, size, md }) => {
   const HeadingComponent = `h${level}`;
 
   return (
     <HeadingComponent
-      className={`font-bold text-text-gray text-${size}`}
+      className={`font-bold text-text-gray text-${size} md:text-${md}`}
       name="title"
     >
       {text}

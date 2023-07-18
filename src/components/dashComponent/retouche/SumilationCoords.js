@@ -1,13 +1,16 @@
 import Chart from "chart.js/auto";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import communesHautKatanga from "../../../data/Coordonnees";
+import { OurContext } from "../../../context/SelectContext";
 
 const SumilationCoords = () => {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
+  const { setGroupe } = useContext(OurContext);
 
   useEffect(() => {
     const groupedCommunes = groupCommunes(communesHautKatanga);
+    setGroupe(groupedCommunes);
 
     const labels = Object.keys(groupedCommunes);
     const data = Object.values(groupedCommunes).map((group) => group.length);
@@ -47,7 +50,6 @@ const SumilationCoords = () => {
 
     for (const commune of communes) {
       const groupe = `Groupe ${Math.ceil(commune.latitude)}`;
-      console.log("groupe: ", groupe);
 
       if (groupedCommunes[groupe]) {
         groupedCommunes[groupe].push(commune);

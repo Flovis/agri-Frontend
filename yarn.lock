@@ -4028,6 +4028,11 @@ css-loader@^6.5.1:
     postcss-value-parser "^4.2.0"
     semver "^7.3.8"
 
+css-mediaquery@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/css-mediaquery/-/css-mediaquery-0.1.2.tgz"
+  integrity sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==
+
 css-minimizer-webpack-plugin@^3.2.0:
   version "3.4.1"
   resolved "https://registry.npmjs.org/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.4.1.tgz"
@@ -4381,7 +4386,7 @@ deepmerge@^2.1.1:
   resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
 
-deepmerge@^4.2.2:
+deepmerge@^4.0.0, deepmerge@^4.2.2:
   version "4.3.1"
   resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-4.3.1.tgz"
   integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
@@ -5944,6 +5949,11 @@ human-signals@^2.1.0:
   resolved "https://registry.npmjs.org/human-signals/-/human-signals-2.1.0.tgz"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+hyphenate-style-name@^1.0.0:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz"
+  integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
+
 iconv-lite@^0.6.3:
   version "0.6.3"
   resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz"
@@ -7111,6 +7121,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/load-script/-/load-script-1.0.0.tgz"
+  integrity sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==
+
 loader-runner@^4.2.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-4.3.0.tgz"
@@ -7269,6 +7284,13 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
+matchmediaquery@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/matchmediaquery/-/matchmediaquery-0.3.1.tgz"
+  integrity sha512-Hlk20WQHRIm9EE9luN1kjRjYXAQToHOIAHPJn9buxBwuhfTHoKUcX+lXBbxc85DVQfXYbEQ4HcwQdd128E3qHQ==
+  dependencies:
+    css-mediaquery "^0.1.2"
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.14.tgz"
@@ -7290,6 +7312,11 @@ memfs@^3.1.2, memfs@^3.4.3:
   integrity sha512-4kbWXbVZ+LU4XFDS2CuA7frnwz2HxCMB/0yOXc86q7aCQrfWKkL11t6al1e2CsVC7uhnBNTQ1TfUsAxVauO9IQ==
   dependencies:
     fs-monkey "^1.0.3"
+
+memoize-one@^5.1.1:
+  version "5.2.1"
+  resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
+  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
 
 memoize-one@^6.0.0:
   version "6.0.0"
@@ -8576,7 +8603,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8741,6 +8768,11 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
+react-fast-compare@^3.0.1:
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.2.tgz"
+  integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
+
 react-geolocated@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/react-geolocated/-/react-geolocated-4.1.0.tgz"
@@ -8816,6 +8848,17 @@ react-phone-input-2@^2.15.1:
     lodash.startswith "^4.2.1"
     prop-types "^15.7.2"
 
+react-player@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.npmjs.org/react-player/-/react-player-2.12.0.tgz"
+  integrity sha512-rymLRz/2GJJD+Wc01S7S+i9pGMFYnNmQibR2gVE3KmHJCBNN8BhPAlOPTGZtn1uKpJ6p4RPLlzPQ1OLreXd8gw==
+  dependencies:
+    deepmerge "^4.0.0"
+    load-script "^1.0.0"
+    memoize-one "^5.1.1"
+    prop-types "^15.7.2"
+    react-fast-compare "^3.0.1"
+
 react-property@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/react-property/-/react-property-2.0.0.tgz"
@@ -8841,6 +8884,16 @@ react-resize-detector@^8.0.4:
   integrity sha512-S7szxlaIuiy5UqLhLL1KY3aoyGHbZzsTpYal9eYMwCyKqoqoVLCmIgAgNyIM1FhnP2KyBygASJxdhejrzjMb+w==
   dependencies:
     lodash "^4.17.21"
+
+react-responsive@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.npmjs.org/react-responsive/-/react-responsive-9.0.2.tgz"
+  integrity sha512-+4CCab7z8G8glgJoRjAwocsgsv6VA2w7JPxFWHRc7kvz8mec1/K5LutNC2MG28Mn8mu6+bu04XZxHv5gyfT7xQ==
+  dependencies:
+    hyphenate-style-name "^1.0.0"
+    matchmediaquery "^0.3.0"
+    prop-types "^15.6.1"
+    shallow-equal "^1.2.1"
 
 react-router-dom@^6.12.0:
   version "6.12.0"
@@ -9457,6 +9510,11 @@ setprototypeof@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
+
+shallow-equal@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/shallow-equal/-/shallow-equal-1.2.1.tgz"
+  integrity sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==
 
 shallowequal@^1.1.0:
   version "1.1.0"

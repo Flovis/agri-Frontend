@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Level1 from "./Level1";
 import Level2 from "./Level2";
 import { useNavigate } from "react-router";
@@ -44,14 +44,12 @@ export default function GetForm() {
           headers: { "Content-Type": "multipart/form-data" },
         });
         notyf.success("Un nouveau contenu a été ajouté");
-        console.log(updatedFormObject);
         navigate("/contenu");
       } catch (error) {
         console.log(error);
         notyf.error("Erreur lors d'ajout du contenu");
       }
     }
-    // console.log("formData", formData.get("file"));
   };
   return (
     <div>

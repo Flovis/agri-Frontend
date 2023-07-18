@@ -23,7 +23,6 @@ import fetchData from "./api/fetchData";
 import Step from "./components/dashComponent/Cotenu/step/Step";
 
 function App() {
-  const [conditionAlert, setConditionAlert] = useState({});
   const [formData, setFormData] = useState([]);
   const [localisation, setLocalisation] = useState(null);
   const [forecast, setForecast] = useState([]);
@@ -75,9 +74,6 @@ function App() {
   const dataMeteoContextValue = {
     forecast,
     weather,
-
-    conditionAlert,
-    setConditionAlert,
     setFormData,
     formData,
     localisation,

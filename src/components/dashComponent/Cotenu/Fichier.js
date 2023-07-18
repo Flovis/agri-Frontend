@@ -1,86 +1,122 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import AddCatModal from "./modal/AddCatModal";
+import { useCallback, useEffect, useState } from "react";
 import { Notyf } from "notyf";
 import { useLocation } from "react-router-dom";
 import TopHeader from "../header/TopHeader";
 import BackNavStep from "../header/BackNav";
 import { backendAxios } from "../../../api/axios";
-import SongCard from "./cards/audio/SongCard";
-import CardVideo from "./cards/vdeo/CardVideo";
 import Text from "./cards/text/Text";
 import CardMusic from "./cards/audio/CardMusic";
 import InputSearch from "../PublicComponent/InputSearch";
+import DynamicSelect from "../PublicComponent/DynamicSelect ";
+import CardVideo from "./cards/vdeo/CardVideo";
+import DynamicDataSet from "../PublicComponent/DynamicDataSet";
 
 const Fichier = () => {
-  const [listItems, setListItems] = useState([1, 2, 3]);
-  const location = new useLocation();
+  const location = useLocation();
   const type = new URLSearchParams(location.search).get("type");
-
   const URL = `/getContents/${type}`;
   const [datas, setDatas] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [selectedCycle, setSelectedCycle] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  // const [selectedProduct, setSelectedProduct] = useState("");
 
-  const notyf = new Notyf({
-    duration: 1000,
-    position: {
-      x: "right",
-      y: "top",
-    },
-  });
+ 
+  const filterData = useCallback(() => {
+    let filteredData = datas;
 
-  const toggle = useCallback((show, setshow) => {
-    setshow(!show);
-  }, []);
+    if (selectedCycle !== "Tout les cycles" && selectedCycle !== "") {
+      filteredData = filteredData.filter(
+        (item) => item.Cycle.name === selectedCycle
+      );
+    }
+
+    if (selectedLanguage !== "Toutes les langues" && selectedLanguage !== "") {
+      filteredData = filteredData.filter(
+        (item) => item.Language.name === selectedLanguage
+      );
+    }
+
+    setSearch(filteredData);
+  }, [selectedCycle, selectedLanguage, datas]);
 
   useEffect(() => {
-    const fectData = async () => {
+    const fetchData = async () => {
       try {
         const response = await backendAxios.get(URL, {
           headers: { "Content-Type": "application/json" },
         });
-        console.log(response.data);
         setDatas(response.data.allContent);
       } catch (error) {
         console.log(error);
       }
     };
-    fectData();
-  }, []);
 
-  console.log("Datas", datas);
+    fetchData();
+  }, [URL]);
+
+  useEffect(() => {
+    filterData();
+  }, [filterData]);
 
   return (
     <>
-      <div>
+      <div className="fixed w-screen z-50 ">
         <TopHeader />
         <BackNavStep classes="hidden" linkTo="/contenu" title={type} />
       </div>
-      <div className="py-2">
-        <div className="max-w-screen-xl    mx-auto px-4 flex-wrap gap-x-12 md:mt-14 md:px-8 lg:flex-nowrap">
-          <div className="flex-none mt-6   lg:mt-0">
-            <InputSearch />
+      <div className="py-2 pt-32">
+        <div className="max-w-screen-xl mx-auto px-4 flex-wrap gap-x-12 md:mt-14 md:px-8 lg:flex-nowrap">
+          <div className="flex-none mt-6 lg:mt-0">
+            <InputSearch placeholder="recherche par titre..." />
+            <form className="flex -mb-8 flex-col items-center justify-center md:flex-row md:gap-2 w-full ">
+              <div className=" flex w-full md:gap-2  ">
+                <DynamicSelect
+                  options={[
+                    "Tout les cycles",
+                    "semence",
+                    "croissance",
+                    "recolte",
+                    "conditionnement",
+                  ]}
+                  name="cycle"
+                  onChange={(value) => setSelectedCycle(value.target.value)}
+                />
+                <DynamicSelect
+                  options={[
+                    "Toutes les langues",
+                    "Français",
+                    "Anglais",
+                    "Lingala",
+                    "Swahhili",
+                  ]}
+                  name="langue"
+                  onChange={(value) => setSelectedLanguage(value.target.value)}
+                />
+              </div>
+            </form>
             <ul
               className={`grid ${
                 type === "audio"
                   ? "grid-cols-1 md:grid-cols-3 mt-16"
                   : type === "video"
-                  ? "grid-cols-2  md:grid-cols-3 mt-20"
+                  ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-20"
                   : "grid-cols-3 mt-20"
               } gap-3`}
             >
-              {listItems.map((item, index) =>
+              {search?.map((item, index) =>
                 type === "audio" ? (
-                  // <SongCard index={index} />
-                  <CardMusic key={index} />
+                  <CardMusic key={index} file={item} />
                 ) : type === "video" ? (
-                  <CardVideo key={index} />
+                  <CardVideo key={index} file={item} />
                 ) : (
-                  <Text key={index} />
+                  <Text key={index} file={item} />
                 )
               )}
             </ul>
           </div>
         </div>
-      </div>{" "}
+      </div>
     </>
   );
 };

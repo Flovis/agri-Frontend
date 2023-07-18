@@ -6,13 +6,6 @@ import { useNavigate } from "react-router-dom";
 export default function ModalContenu({ isOpen, setIsOpen }) {
   const navigate = new useNavigate();
 
-  const notyf = new Notyf({
-    duration: 1000,
-    position: {
-      x: "right",
-      y: "top",
-    },
-  });
   // codition pour declancher
 
   const handleSubmit = (e) => {
@@ -33,6 +26,7 @@ export default function ModalContenu({ isOpen, setIsOpen }) {
             </h3>
             <hr />
           </div>
+
           <div className="mt-2 mb-4 text-sm text-gray-800 dark:text-gray-300"></div>
           <div className="flex justify-end">
             <DynamicButton label="Valider" type="submit" />

@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header className="duration-500">
       <div className="bg-[#488575]">
-        <div className=" h-12 bg-[#488575] max-w-screen-xl mx-auto flex items-center justify-between px-5">
+        <div className=" h-12 bg-[#488575]  mx-auto flex items-center justify-between px-5">
           <div className="flex gap-4  text-custom-white">
             <HiPhone />
             <BiEnvelope />
@@ -26,7 +26,7 @@ const Header = () => {
         </div>
       </div>
       {/* ddddddddddddddd */}
-      <div className="flex h-16 max-w-screen-xl mx-auto  items-center justify-between p-4 bg-gray-800 text-white">
+      <div className="flex h-16  mx-auto  items-center justify-between p-4 bg-gray-800 text-white">
         <div className="flex items-center">
           <h1 className="text-xl font-extrabold text-[#488575]">AGRI TECH</h1>
         </div>

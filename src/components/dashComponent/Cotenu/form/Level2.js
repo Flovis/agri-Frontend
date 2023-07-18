@@ -88,7 +88,7 @@ const Level2 = ({ onPrevious, onSubmit, formObject }) => {
             <div>
               <DynamicSelect
                 label="Sélectionner la langue"
-                options={["Francais", "Anglais", "Lingala", "swahili"]}
+                options={["Français", "Anglais", "Lingala", "swahili"]}
                 nameData="language"
               />
             </div>

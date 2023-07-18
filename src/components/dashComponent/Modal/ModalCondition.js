@@ -1,22 +1,35 @@
 import React, { useState } from "react";
 import DynamicButton from "../PublicComponent/DynamicButton ";
 import { Notyf } from "notyf";
-import DynamicCheckbox from "../PublicComponent/DynamicCheckbox";
 
-export default function ModalCondition({ isOpen, setIsOpen, setData }) {
-  const notyf = new Notyf({
-    duration: 1000,
-    position: {
-      x: "right",
-      y: "top",
-    },
+import Liste from "../Cotenu/configPage/card/ConditionShow";
+
+export default function ModalCondition({ condition, setIsOpen, setData }) {
+  const [selectedData, setSelectedData] = useState({
+    selectedDay: "",
+    selectedCondition: "",
+    selectedHeure: "",
   });
+
+  const isFormValid = () => {
+    return (
+      selectedData.selectedDay !== "" &&
+      selectedData.selectedCondition !== "" &&
+      selectedData.selectedHeure !== ""
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const newData = Object.fromEntries(formData.entries());
-    setData((prevData) => ({ ...prevData, ...newData }));
+
+    const notyf = new Notyf();
+    if (isFormValid()) {
+      setData(selectedData);
+      handleClose();
+      notyf.success("condition selectionnée  avec succès !");
+    } else {
+      notyf.error("Veuillez remplir tous les champs !");
+    }
   };
 
   const handleClose = () => {
@@ -25,9 +38,9 @@ export default function ModalCondition({ isOpen, setIsOpen, setData }) {
 
   return (
     <>
-      <div className="z-50 fixed inset-0 w-full h-full flex items-center justify-center bg-[#000] bg-opacity-60">
+      <div className="z-50 fixed inset-0 w-full  h-full flex items-center justify-center bg-[#000] bg-opacity-60">
         <form
-          className="p-4 border border-gray-300 bg-custom-white rounded-lg w-[90%] z-50 relative"
+          className="p-4 border border-gray-300 bg-custom-white rounded-lg w-[90%] md:w-[50%] md:h-[80%] z-50 relative"
           onSubmit={handleSubmit}
         >
           <div className="flex items-center justify-between">
@@ -37,50 +50,21 @@ export default function ModalCondition({ isOpen, setIsOpen, setData }) {
             <hr />
             <button onClick={handleClose}>X</button>
           </div>
-          <div className="flex justify-between">
-            <div className="mt-2 mb-4 text-sm text-gray-800 dark:text-gray-300">
-              <DynamicCheckbox
-                label="Précipitations"
-                type="radio"
-                value="precipitation"
-                name="condition"
-              />
-              <DynamicCheckbox
-                label="VentsForts"
-                type="radio"
-                value="ventFort"
-                name="condition"
-              />
-              <DynamicCheckbox
-                label="Ensoleillé"
-                type="radio"
-                value="ensoleille"
-                name="condition"
-              />
-              <DynamicCheckbox
-                label="Nuageux"
-                type="radio"
-                value="nuageux"
-                name="condition"
-              />
-              <DynamicCheckbox
-                label="Pluvieux"
-                type="radio"
-                value="pluvieux"
-                name="condition"
-              />
-            </div>
-            <div>
-              <input
-                type="date"
-                name="date"
-                id="date"
-                className="border mt-4 w-36 border-gray-300 text-gray text-md appearance-none rounded-lg focus:outline-none focus:ring-gray focus:border-gray block w-full p-3.5"
+          <div className="flex items-center justify-center ">
+            <div className="overflow-y-auto h-96  ">
+              <Liste
+                condition={condition}
+                setSelectedData={setSelectedData}
+                selectedData={selectedData}
               />
             </div>
           </div>
           <div className="flex justify-end">
-            <DynamicButton label="Valider" type="submit" />
+            <DynamicButton
+              label="Valider"
+              type="submit"
+              disabled={!isFormValid()}
+            />
           </div>
         </form>
       </div>

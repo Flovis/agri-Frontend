@@ -7,6 +7,7 @@ const DynamicCheckbox = ({
   handleCheckboxChange,
   label,
   type,
+  ref,
 }) => {
   //   const [isChecked, setIsChecked] = useState(false);
 
@@ -24,6 +25,7 @@ const DynamicCheckbox = ({
         className="mr-2"
         checked={isChecked}
         onChange={handleCheckboxChange}
+        ref={ref}
       />
       <label htmlFor={name} className="text-[11px]">
         {label}{" "}

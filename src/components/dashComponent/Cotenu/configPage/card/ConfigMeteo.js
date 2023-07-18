@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TopHeader from "../../../header/TopHeader";
 import BackNavStep from "../../../header/BackNav";
 import DynamicTextarea from "../../../PublicComponent/DynamicTextarea ";
@@ -9,124 +9,175 @@ import ModalContenu from "../../../Modal/ModalContenu";
 import DynamicSelect from "../../../PublicComponent/DynamicSelect ";
 import CardMeteo from "../../../retouche/CardMeteo";
 import { TbAirConditioning } from "react-icons/tb";
-import DynamicCheckbox from "../../../PublicComponent/DynamicCheckbox";
 import ModalCondition from "../../../Modal/ModalCondition";
+import DataMeteoContext from "../../../../../context/MeteoContext";
+import { Notyf } from "notyf";
 
 export default function ConfigMeteo() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [Open, setOpen] = useState(false);
-    const [dataModal, setData] = useState({});
-    console.log("dataModal: ", dataModal);
-    const [condition, setCondition] = useState({});
-    console.log("condition: ", condition);
-    const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [Open, setOpen] = useState(false);
+  const [data, setData] = useState({});
+  const [condition, setCondition] = useState({});
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        navigate("/contenu/listemeteo");
-    };
+  const navigate = useNavigate();
 
-    const toggle = (show, setshow) => {
-        setshow(!show);
-    };
+  const {
+    dataMeteoContextValue: { forecast },
+  } = useContext(DataMeteoContext);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.set("condition", dataModal.condition);
-        formData.set("jour", dataModal.date.split("-")[2] * 1);
-        const newData = {};
-        for (let pair of formData.entries()) {
-            newData[pair[0]] = pair[1];
+  useEffect(() => {
+    let sorts = {};
+
+    for (let item of forecast) {
+      const condition = {
+        condition: item.condition,
+        heure: item.hour,
+      };
+      if (item.day in sorts) {
+        let can_add = true;
+        for (let key in sorts[item.day]) {
+          if (sorts[item.day][key].condition === item.condition) {
+            can_add = false;
+          }
         }
-        setCondition(newData);
-    };
 
-    return (
-        <>
-            <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md">
-                <TopHeader />
-                <BackNavStep
-                    classes="hidden"
-                    title="configuration Méteo"
-                    linkTo="/alert"
-                />
+        if (can_add) {
+          sorts[item.day].push(condition);
+        }
+      } else {
+        sorts[item.day] = [condition];
+      }
+    }
+    setCondition(sorts);
+  }, [forecast]);
+
+  const toggle = (show, setshow) => {
+    setshow(!show);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const notyf = new Notyf({
+      duration: 1000,
+      position: {
+        x: "right",
+        y: "top",
+      },
+    });
+    const formData = new FormData(e.target);
+    formData.set("typeAlert", "meteologique");
+    const formDataObject = Object.fromEntries(formData.entries());
+
+    // Check if any field is empty in the form data
+    const isEmpty = Object.values(formDataObject).some((value) => !value);
+
+    if (
+      formDataObject &&
+      formDataObject.audience !== "Choisi à qui envoyer" &&
+      formDataObject.cycle !== "selectionne le cycle" &&
+      !isEmpty
+    ) {
+      setData({
+        ...data,
+        ...formDataObject,
+      });
+    } else {
+      notyf.error("Veuillez remplir tous les champs !");
+    }
+  };
+
+  return (
+    <>
+      <div className="h-18 fixed  top-0 bg-custom-white w-full shadow-md">
+        <TopHeader />
+        <BackNavStep
+          classes="hidden"
+          title="configuration Méteo"
+          linkTo="/alert"
+        />
+      </div>
+      {/* add content */}
+      {Open && <ModalContenu isOpen={Open} setIsOpen={setOpen} />}
+      {isOpen && (
+        <ModalCondition
+          condition={condition}
+          setIsOpen={setIsOpen}
+          setData={setData}
+        />
+      )}
+
+      <main className="w-full pt-44 md:pt-0 h-screen flex items-center justify-center px-4 items-center  ">
+        <div className="max-w-sm w-full text-text-gray mt-52">
+          <CardMeteo />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="flex justify-end my-4 gap-2">
+              <DynamicButton
+                type="button"
+                label={<TbAirConditioning />}
+                onClick={() => toggle(isOpen, setIsOpen)}
+              />
+              <DynamicButton
+                label={<MdOutlineProductionQuantityLimits />}
+                type="button"
+                onClick={() => toggle(Open, setOpen)}
+              />
             </div>
-            {/* add content */}
-            {Open && <ModalContenu isOpen={Open} setIsOpen={setOpen} />}
-            {isOpen && (
-                <ModalCondition
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                    setData={setData}
-                />
-            )}
+            <div>
+              <DynamicSelect
+                label="Audiance"
+                options={[
+                  "Choisi à qui envoyer ",
+                  "group",
+                  "Option 2",
+                  "Option 3",
+                ]}
+                nameData="audience"
+              />
+            </div>
+            <div className="flex gap-2">
+              <DynamicSelect
+                label="Cycle"
+                options={[
+                  "selectionne le cycle",
+                  "semence",
+                  "croissance",
+                  "recolte",
+                  "conditionnement",
+                ]}
+                nameData="cycle"
+              />
+            </div>
 
-            <main className="mb-10 mt-28 w-full h-full flex flex-col items-center justify-center px-4 items-center">
-                <div className="max-w-sm w-full text-text-gray">
-                    <div className="-mb-3 mt-6"></div>
-                    <CardMeteo />
-                    <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-                        <div className="flex justify-end my-4 gap-2">
-                            <DynamicButton
-                                type="button"
-                                label={<TbAirConditioning />}
-                                onClick={() => toggle(isOpen, setIsOpen)}
-                            />
-                            <DynamicButton
-                                label={<MdOutlineProductionQuantityLimits />}
-                                type="button"
-                                onClick={() => toggle(Open, setOpen)}
-                            />
-                        </div>
-                        <div>
-                            <DynamicSelect
-                                label="Audiance"
-                                options={["group", "Option 2", "Option 3"]}
-                                nameData="audience"
-                            />
-                        </div>
-                        <div className="flex gap-2">
-                            <DynamicCheckbox
-                                name="semence"
-                                type="checkbox"
-                                label="semence"
-                            />
-                            <DynamicCheckbox
-                                name="croissance"
-                                type="checkbox"
-                                label="croissance"
-                                value="croissance"
-                            />
-                            <DynamicCheckbox
-                                name="recolte"
-                                type="checkbox"
-                                label="recolte"
-                            />
-                            <DynamicCheckbox
-                                name="conditionnement"
-                                type="checkbox"
-                                label="conditionnement"
-                            />
-                        </div>
-                        <div>
-                            <DynamicTextarea
-                                label="Message"
-                                rows={3}
-                                name="message"
-                            />
-                        </div>
+            <div className="flex gap-2 w-full">
+              <DynamicSelect
+                label="Quand envoyer"
+                options={Object.keys(condition)}
+                nameData="selectedDay"
+              />
+            </div>
+            <div className="flex gap-2">
+              <DynamicSelect
+                label="Canal"
+                options={[
+                  "selectionne le canal d'envoi",
+                  "whatsapp",
+                  "sms",
+                  "notification",
+                ]}
+                nameData="canal"
+              />
+            </div>
+            <div>
+              <DynamicTextarea label="Message" rows={3} name="message" />
+            </div>
 
-                        <div>
-                            <DynamicButton
-                                label="Enregistrer"
-                                getsizeClasses="w-full "
-                                // type="submit"
-                            />
-                        </div>
-                    </form>
-                </div>
-            </main>
-        </>
-    );
+            <div className="">
+              <DynamicButton label="Enregistrer" getsizeClasses="w-full" />
+            </div>
+          </form>
+        </div>
+      </main>
+    </>
+  );
 }

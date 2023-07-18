@@ -26,14 +26,14 @@ export default function TodayMeteo() {
   };
   return (
     <>
-      <div className="max-w-xl h-screen">
+      <div className="w-screen h-full mt-32 md:w-full ">
         <div className="mt-2">
-          <div className="text-xl font-bold  mx-6 flex justify-between items-center">
-            <DynamicTitle text="Prévision Méteologique" />
+          <div className=" font-bold  mx-6 flex justify-between items-center ">
+            <DynamicTitle text="Prévision Méteologique" size="sm" md="md" />
             <DynamicButton
               label="Configuration"
               onClick={handleOpen}
-              getsizeClasses="text-[12px] w-24 -mr-6 -py-2 flex justify-center"
+              getsizeClasses="text-[11px] md:text-md w-24  -py-2 flex justify-center"
             />
           </div>
           <div className="mt-4">
@@ -51,6 +51,7 @@ export default function TodayMeteo() {
             </div>
           </div>
           {isOpen && <AjoutCat isOpen={isOpen} setIsOpen={setIsOpen} />}
+
           <div className="flex items-center justify-center w-screen">
             <div className="bg-custom-white w-[90%] shadow-lg rounded-lg p-6 h-[max-content]">
               <div className="grid grid-cols-3 gap-6">
@@ -91,17 +92,17 @@ export default function TodayMeteo() {
         <div className="mx-6 text-md font-bold my-6 text-text-gray">
           Prévision de 7 jours
         </div>
-        <div
-          className="overflow-x-auto flex gap-4 mx-6 mr-4"
-          style={{ width: "100%" }}
-        >
-          {jours?.map((day) => (
-            <DaysCard
-              day={day}
-              minMaxTemperatures={minMaxTemperatures[day]}
-              key={day}
-            />
-          ))}
+        <div className=" flex items-center md:h-60   justify-center px-2  h-36">
+          <div className="overflow-x-auto flex md:flex-none md:grid md:grid-cols-4 gap-6">
+            {jours?.map((day) => (
+              <DaysCard
+                day={day}
+                minMaxTemperatures={minMaxTemperatures[day]}
+                key={day}
+                // Ajoutez toutes les autres propriétés supplémentaires dont vous avez besoin pour le composant DaysCard
+              />
+            ))}
+          </div>
         </div>
       </div>
     </>
