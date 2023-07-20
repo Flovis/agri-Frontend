@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 
 import { backendAxios } from "../../api/axios";
 import { SocketContext } from "../../context/SocketContext";
+import ROLES from "./role";
 
 const LOGIN_URL = "/login";
 
@@ -81,12 +82,15 @@ const Login = () => {
                 );
 
                 // console.log(JSON.stringify(response?.data));
+                // console.log(response?.data?.data?.role);    console.log("auth", auth);
+
                 const id = response?.data?.data?.id;
                 const token = response?.data?.data?.token;
                 const role = response?.data?.data?.role;
                 const first_name = response?.data?.data?.first_name;
                 const phone = response?.data?.data?.phone;
                 const last_name = response?.data?.data?.last_name;
+                const id_organisation = response?.data?.data?.id_organisation;
 
                 //Stockage des donnees de l'utilisateur dans le contexte
                 setAuth({
@@ -94,19 +98,20 @@ const Login = () => {
                     first_name,
                     last_name,
                     email,
-                    password,
+                    // password,
                     token,
                     role,
                     phone,
+                    id_organisation,
                 });
 
                 setEmail("");
                 setPassword("");
 
                 //Redirection
-                if (role === 4) {
+                if (role === ROLES.Famer) {
                     navigate("/agriculteur/contenu", { replace: true });
-                } else if (role === 2 || role === 3) {
+                } else if (role === ROLES.SuperAdmin || role === ROLES.Admin) {
                     navigate("/dashboard", { replace: true });
                 }
             } catch (error) {
@@ -215,8 +220,7 @@ const Login = () => {
                             value={btnValue}
                             typ="submit"
                             className="block mx-auto shadow bg-deep-green hover:bg-over-green text-custom-white font-bold py-3 px-10 rounded-lg w-full h-[55px] md:text-[17px]"
-                            disabled = {isSubmitting}
-                            
+                            disabled={isSubmitting}
                         />
                         <div className="mt-5 text-center text-text-gray">
                             Vous n'avez pas de compte?{" "}

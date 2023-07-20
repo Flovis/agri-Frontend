@@ -21,6 +21,7 @@ import ResetPassword from "./pages/login/ResetPassword";
 import Singin from "./pages/login/Singin";
 import fetchData from "./api/fetchData";
 import Step from "./components/dashComponent/Cotenu/step/Step";
+import ROLES from "./pages/login/role";
 
 function App() {
   const [formData, setFormData] = useState([]);
@@ -80,7 +81,6 @@ function App() {
     setContenu,
     contenu,
   };
-  const ROLES = { SuperAdmin: 2, admin: 3, Famers: 4 };
 
   return (
     <DataMeteoContext.Provider value={{ dataMeteoContextValue }}>
@@ -93,7 +93,7 @@ function App() {
           <Route path="/renitialiser" element={<ResetPassword />} />
 
           {/* Private routes*/}
-          <Route element={<RequireAuth allowedRoles={[ROLES.Famers]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Famer]} />}>
             {/* Famers */}
 
             <Route
@@ -118,7 +118,7 @@ function App() {
           {/* Admin AND superAdmin */}
           <Route
             element={
-              <RequireAuth allowedRoles={[ROLES.SuperAdmin, ROLES.admin]} />
+              <RequireAuth allowedRoles={[ROLES.SuperAdmin, ROLES.Admin]} />
             }
           >
             <Route path="/" element={<Home />} />
