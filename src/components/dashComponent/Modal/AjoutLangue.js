@@ -41,7 +41,7 @@ export default function AjoutCat({ isOpen, setIsOpen }) {
   return (
     <>
       <div
-        className="fixed inset-0 w-full h-full flex items-center justify-center bg-[#000] bg-opacity-60 "
+        className="fixed inset-0 w-full  h-full flex items-center justify-center bg-[#000] bg-opacity-60 "
         // onClick={handleOpen}
       >
         <form

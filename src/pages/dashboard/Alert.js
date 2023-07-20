@@ -14,8 +14,8 @@ export default function Alert() {
         <Header />
       </div>
 
-      <div className="flex">
-        <div className="">
+      <div className="flex flex-row-reverse">
+        <div className="flex-1">
           <TodayMeteo />
         </div>
         <div>

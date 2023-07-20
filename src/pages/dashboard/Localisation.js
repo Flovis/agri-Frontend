@@ -29,9 +29,13 @@ export default function Localisation() {
         <Header />
       </div>
       <div className=" flex flex-row-reverse w-full">
-        <div className="max-w-xl inset-x-auto flex-1 pt-[120px]">
-          <Geoloc />
-          <SumilationCoords />
+        <div className="max-w-xl border  inset-x-auto md:max-w-screen-xl md: md:mx-auto md: flex-1 pt-[120px]">
+          <div className="">
+            <Geoloc />
+          </div>
+          <div className=" w-44">
+            <SumilationCoords />
+          </div>
         </div>
         <div className="mb-20"></div>
         {!isMedium ? (

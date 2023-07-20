@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Notyf } from "notyf";
 import { useLocation } from "react-router-dom";
 import TopHeader from "../header/TopHeader";
@@ -9,19 +9,19 @@ import CardMusic from "./cards/audio/CardMusic";
 import InputSearch from "../PublicComponent/InputSearch";
 import DynamicSelect from "../PublicComponent/DynamicSelect ";
 import CardVideo from "./cards/vdeo/CardVideo";
-import DynamicDataSet from "../PublicComponent/DynamicDataSet";
+import { OurContext } from "../../../context/SelectContext";
+// import DynamicDataSet from "../PublicComponent/DynamicDataSet";
 
 const Fichier = () => {
   const location = useLocation();
   const type = new URLSearchParams(location.search).get("type");
   const URL = `/getContents/${type}`;
-  const [datas, setDatas] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedCycle, setSelectedCycle] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   // const [selectedProduct, setSelectedProduct] = useState("");
+  const { datas, setDatas } = useContext(OurContext);
 
- 
   const filterData = useCallback(() => {
     let filteredData = datas;
 

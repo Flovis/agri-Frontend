@@ -36,9 +36,9 @@ export default function Liste({ condition, setSelectedData, selectedData }) {
                 name="jourSelectionne"
                 className="sr-only peer"
               />
-              <div className="w-full p-5 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
-                <div className="pl-7">
-                  <h3 className="leading-none text-gray-800 font-medium">
+              <div className="w-full  p-5 cursor-pointer rounded-lg border bg-custom-white shadow-sm ring-borde-gray peer-checked:ring-1 duration-200">
+                <div className="pl-7 w-screen">
+                  <h3 className="leading-none text-text-gray font-medium ">
                     {jour}
                   </h3>
                   {selectedData.selectedDay === jour && (

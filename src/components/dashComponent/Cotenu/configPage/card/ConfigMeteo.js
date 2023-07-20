@@ -107,8 +107,8 @@ export default function ConfigMeteo() {
         />
       )}
 
-      <main className="w-full pt-44 md:pt-0 h-screen flex items-center justify-center px-4 items-center  ">
-        <div className="max-w-sm w-full text-text-gray mt-52">
+      <main className=" pt-44 md:pt-0 h-screen   flex items-center justify-center px-4 items-center  ">
+        <div className="md:max-w-screen-xl  text-text-gray mt-52 w-full">
           <CardMeteo />
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="flex justify-end my-4 gap-2">

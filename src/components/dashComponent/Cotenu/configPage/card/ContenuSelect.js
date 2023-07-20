@@ -9,8 +9,14 @@ import DynamicTitle from "../../../PublicComponent/DynamicTitle";
 import TopHeader from "../../../header/TopHeader";
 import BackNavStep from "../../../header/BackNav";
 import DynamicDataSet from "../../../PublicComponent/DynamicDataSet";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import ModalContenu from "../../../Modal/ModalContenu";
 
 const ContenuSelect = ({ onNext }) => {
+  const [Open, setOpen] = useState(false);
+  const toggle = (show, setshow) => {
+    setshow(!show);
+  };
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
@@ -56,12 +62,13 @@ const ContenuSelect = ({ onNext }) => {
           linkTo={`/alert`}
         />
       </div>
+      {Open && <ModalContenu isOpen={Open} setIsOpen={setOpen} />}
       <form
         onSubmit={handleNext}
-        className="flex flex-col justify-center items-center gap-4 mt-32"
+        className=" max-w-screen-xl flex justify-center   mt-32 mx-auto"
       >
-        <div className="w-[90%] flex flex-col gap-px">
-          <div className="w-[90%]">
+        <div className="w-full px-4 md:px-56 flex flex-col gap-px mt-4">
+          <div className="w-[90%] mb-4">
             <DynamicTitle text="Configuration" size="xl" />
           </div>
 
@@ -82,7 +89,19 @@ const ContenuSelect = ({ onNext }) => {
           <div>
             <DynamicDataSet label="Sélectionner le produit" />
           </div>
-
+          <div>
+            <DynamicSelect
+              label="Quelle est la catégorie préférée"
+              options={["choisi la preference", "audio", "video", "texte"]}
+            />
+          </div>
+          <div className="mt-4">
+            <DynamicButton
+              label={<MdOutlineProductionQuantityLimits />}
+              type="button"
+              onClick={() => toggle(Open, setOpen)}
+            />
+          </div>
           <div className="mt-4">
             <DynamicButton
               label="Suivant"

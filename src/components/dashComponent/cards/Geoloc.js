@@ -52,6 +52,13 @@ export default function Geoloc() {
       setMapInitialized(true);
     }
   }, [coords, mapInitialized]);
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.addEventListener("wheel", (e) => {
+        e.stopPropagation();
+      });
+    }
+  }, []);
 
   if (!isGeolocationAvailable) {
     return (

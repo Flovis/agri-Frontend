@@ -6,7 +6,7 @@ const CardVideo = ({ ...props }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
-    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+    setIsPlaying(() => !isPlaying);
   };
 
   return (
@@ -15,11 +15,21 @@ const CardVideo = ({ ...props }) => {
         {props.file.link && props.file.link.length > 0 ? (
           <div className="mb-4 relative">
             {isPlaying ? (
-              <ReactPlayer url={props.file.link} playing={isPlaying} controls />
+              <ReactPlayer
+                url={props.file.link}
+                playing={isPlaying}
+                controls
+                className="w-full h-40 bg-cover bg-center bg-no-repeat cursor-pointer"
+              />
             ) : (
               <div
                 className="w-full h-40 bg-cover bg-center bg-no-repeat cursor-pointer"
                 onClick={handlePlay}
+                style={{
+                  backgroundImage: `url('https://img.youtube.com/vi/${
+                    props.file.link.split("v=")[1]
+                  }/maxresdefault.jpg')`,
+                }}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <button
@@ -50,8 +60,3 @@ const CardVideo = ({ ...props }) => {
 };
 
 export default CardVideo;
-//  style={{
-//                   backgroundImage: `url('https://img.youtube.com/vi/${
-//                     props.file.link.split("v=")[1]
-//                   }/maxresdefault.jpg')`,
-//                 }}
