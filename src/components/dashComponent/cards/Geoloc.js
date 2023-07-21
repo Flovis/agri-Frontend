@@ -45,7 +45,6 @@ export default function Geoloc() {
       });
 
       groupedUsers?.map((item) => {
-        console.log("item: ", item);
         L.marker([item.latitude, item.longitude], {
           icon: customMarkerIcon,
         })
