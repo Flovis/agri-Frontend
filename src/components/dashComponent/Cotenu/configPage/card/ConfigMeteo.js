@@ -13,6 +13,7 @@ import ModalCondition from "../../../Modal/ModalCondition";
 import DataMeteoContext from "../../../../../context/MeteoContext";
 import { Notyf } from "notyf";
 
+
 export default function ConfigMeteo() {
   const [isOpen, setIsOpen] = useState(false);
   const [Open, setOpen] = useState(false);

@@ -1,5 +1,5 @@
 import L from "leaflet";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import agripng from "../../../placeholder.png";
 import { MoonLoader } from "react-spinners";
