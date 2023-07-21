@@ -82,6 +82,7 @@ export default function ConfigMeteo() {
         ...data,
         ...formDataObject,
       });
+      console.log("Données du formulaire en JSON : ", JSON.stringify(data));
     } else {
       notyf.error("Veuillez remplir tous les champs !");
     }
