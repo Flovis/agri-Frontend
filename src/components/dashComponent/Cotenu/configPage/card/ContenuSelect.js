@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
@@ -10,17 +10,20 @@ import TopHeader from "../../../header/TopHeader";
 import BackNavStep from "../../../header/BackNav";
 import DynamicDataSet from "../../../PublicComponent/DynamicDataSet";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-import ModalContenu from "../../../Modal/ModalContenu";
+// import ModalContenu from "../../../Modal/ModalContenu";
+// import Fichier from "../../Fichier";
+// import { useCart } from "react-use-cart";
+// import { OurContext } from "../../../../../context/SelectContext";
+// import { TbRuler } from "react-icons/tb";
 
-const ContenuSelect = ({ onNext }) => {
-  const [Open, setOpen] = useState(false);
-  const toggle = (show, setshow) => {
-    setshow(!show);
-  };
+const ContenuSelect = ({ onNext, SelectRef, handleSelectChange }) => {
+  // const { myItem } = useContext(OurContext);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const defaultType = searchParams.get("type");
   // const navigate = useNavigate();
+
+  // console.log("items: ", myItem);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -62,7 +65,6 @@ const ContenuSelect = ({ onNext }) => {
           linkTo={`/alert`}
         />
       </div>
-      {Open && <ModalContenu isOpen={Open} setIsOpen={setOpen} />}
       <form
         onSubmit={handleNext}
         className=" max-w-screen-xl flex justify-center   mt-32 mx-auto"
@@ -92,23 +94,36 @@ const ContenuSelect = ({ onNext }) => {
           <div>
             <DynamicSelect
               label="Quelle est la catégorie préférée"
+              onChange={handleSelectChange}
               options={["choisi la preference", "audio", "video", "texte"]}
+              ref={SelectRef}
+            />
+          </div>
+          <div>
+            <DynamicSelect
+              label="Canal"
+              options={[
+                "selectionne le canal d'envoi",
+                "whatsapp",
+                "sms",
+                "notification",
+              ]}
+              nameData="canal"
             />
           </div>
           <div className="mt-4">
             <DynamicButton
               label={<MdOutlineProductionQuantityLimits />}
-              type="button"
-              onClick={() => toggle(Open, setOpen)}
+              type="submit"
             />
           </div>
           <div className="mt-4">
-            <DynamicButton
+            {/* <DynamicButton
               label="Suivant"
               getsizeClasses="w-full mb-10"
               type="submit"
-              // onClick={}
-            />
+             
+            /> */}
           </div>
         </div>
       </form>

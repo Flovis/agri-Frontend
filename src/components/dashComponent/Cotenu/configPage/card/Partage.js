@@ -14,59 +14,59 @@ import SelectComponent from "../../../PublicComponent/SelectComponent";
 import CardRetard from "../../../notification/CardRetard";
 
 const Partage = ({ onPrevious, onSubmit, formData }) => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const defaultType = searchParams.get("type");
-    const navigate = new useNavigate();
-    const [form, setform] = useState("");
-    //   console.log("formDataPage", formData);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const defaultType = searchParams.get("type");
+  const navigate = new useNavigate();
+  const [form, setform] = useState("");
+  //   console.log("formDataPage", formData);
 
-    const notyf = new Notyf({
-        duration: 1000,
-        position: {
-            x: "right",
-            y: "top",
-        },
-    });
+  const notyf = new Notyf({
+    duration: 1000,
+    position: {
+      x: "right",
+      y: "top",
+    },
+  });
 
-    const handlePrevious = () => {
-        onPrevious(form);
-    };
+  const handlePrevious = () => {
+    onPrevious(form);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formdata = new FormData(e.target);
-        const data = Object.fromEntries(formdata);
-        setform(data);
-        onSubmit(data);
-        navigate(`/contenu/${defaultType}`);
-    };
+  // const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     const formdata = new FormData(e.target);
+  //     const data = Object.fromEntries(formdata);
+  //     setform(data);
+  //     onSubmit(data);
+  //     navigate(`/contenu/${defaultType}`);
+  // };
 
-    return (
-        <>
-            <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md ">
-                <TopHeader />
-                <BackNavStep
-                    title="configuration"
-                    classes="hidden"
-                    handlePrevious={handlePrevious}
-                />
-            </div>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center items-center gap-4 mt-32 "
-            >
-                <div className="w-[90%] flex flex-col gap-4">
-                    <div className="flex justify-between">
-                        <DynamicTitle text=" Draft " size="xl" />
+  return (
+    <>
+      <div className="h-18 fixed top-0 bg-custom-white w-full shadow-md ">
+        <TopHeader />
+        <BackNavStep
+          title="configuration"
+          classes="hidden"
+          handlePrevious={handlePrevious}
+        />
+      </div>
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="flex flex-col justify-center items-center gap-4 mt-32 "
+      >
+        <div className="w-[90%] flex flex-col gap-4">
+          <div className="flex justify-between">
+            <DynamicTitle text=" Draft " size="xl" />
 
-                        <FaShareAltSquare
-                            className="text-2xl text-deep-green"
-                            type="submit"
-                        />
-                    </div>
-                    <CardRetard />
-                    {/* {formData?.map((el) => {
+            <FaShareAltSquare
+              className="text-2xl text-deep-green"
+              type="submit"
+            />
+          </div>
+          <CardRetard />
+          {/* {formData?.map((el) => {
             <li>
               <p> {el.cycle}</p>
               <p>{el.category}</p>
@@ -76,18 +76,18 @@ const Partage = ({ onPrevious, onSubmit, formData }) => {
               <p> {el.group}</p>
             </li>;
           })} */}
-                    <div className="mt-4 flex items-center">
-                        <DynamicButton
-                            label="Enregistrer"
-                            getsizeClasses="w-full"
-                            type="submit"
-                            // onClick={handleSubmit}
-                        />
-                    </div>
-                </div>
-            </form>
-        </>
-    );
+          <div className="mt-4 flex items-center">
+            <DynamicButton
+              label="Enregistrer"
+              getsizeClasses="w-full"
+              type="submit"
+              // onClick={handleSubmit}
+            />
+          </div>
+        </div>
+      </form>
+    </>
+  );
 };
 
 export default Partage;

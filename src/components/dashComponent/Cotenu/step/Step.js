@@ -10,6 +10,7 @@ import ConfigMeteo from "../configPage/card/ConfigMeteo";
 import ListeAlert from "../configPage/card/ListeAlert";
 import Fichier from "../Fichier";
 import Notification from "../../header/Notification";
+import ConfigPlan from "../configPage/card/ConfigPlan";
 
 const Step = () => {
   const { stepNumber } = useParams();
@@ -27,7 +28,7 @@ const Step = () => {
       case "getform":
         return <GetForm />;
       case "configpage":
-        return <ConfigPage />;
+        return <ConfigPlan />;
       case "configmeteo":
         return <ConfigMeteo />;
       case "listemeteo":

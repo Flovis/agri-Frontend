@@ -10,17 +10,32 @@ import InputSearch from "../PublicComponent/InputSearch";
 import DynamicSelect from "../PublicComponent/DynamicSelect ";
 import CardVideo from "./cards/vdeo/CardVideo";
 import { OurContext } from "../../../context/SelectContext";
+// import { useCart } from "react-use-cart";
 // import DynamicDataSet from "../PublicComponent/DynamicDataSet";
 
-const Fichier = () => {
+const Fichier = ({ open, Type, onPrevious }) => {
   const location = useLocation();
-  const type = new URLSearchParams(location.search).get("type");
+
+  let type = ""; // Donnez une valeur par défaut à "type"
+
+  if (open !== 2) {
+    type = new URLSearchParams(location.search).get("type");
+  } else if (open === 2) {
+    type = Type;
+  }
+
   const URL = `/getContents/${type}`;
   const [search, setSearch] = useState([]);
   const [selectedCycle, setSelectedCycle] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  // const [selectedProduct, setSelectedProduct] = useState("");
   const { datas, setDatas } = useContext(OurContext);
+  const [isSelectionMode, setIsSelectionMode] = useState(true);
+
+  // console.log("addItem: ", addItem);
+
+  // const toggleSelectionMode = () => {
+  //   setIsSelectionMode((prevIsSelectionMode) => !prevIsSelectionMode);
+  // };
 
   const filterData = useCallback(() => {
     let filteredData = datas;
@@ -108,7 +123,15 @@ const Fichier = () => {
                 type === "audio" ? (
                   <CardMusic key={index} file={item} />
                 ) : type === "video" ? (
-                  <CardVideo key={index} file={item} />
+                  <CardVideo
+                    key={index}
+                    onPrevious={onPrevious}
+                    file={item}
+                    isSelectionMode={isSelectionMode}
+                    // toggleSelectionMode={toggleSelectionMode} // Passer la fonction ici
+
+                    open={open}
+                  />
                 ) : (
                   <Text key={index} file={item} />
                 )

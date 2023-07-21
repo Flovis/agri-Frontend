@@ -12,11 +12,13 @@ import { TbAirConditioning } from "react-icons/tb";
 import ModalCondition from "../../../Modal/ModalCondition";
 import DataMeteoContext from "../../../../../context/MeteoContext";
 import { Notyf } from "notyf";
+import DynamicDataSet from "../../../PublicComponent/DynamicDataSet";
 
 export default function ConfigMeteo() {
   const [isOpen, setIsOpen] = useState(false);
   const [Open, setOpen] = useState(false);
   const [data, setData] = useState({});
+  console.log("datacond: ", data);
   const [condition, setCondition] = useState({});
 
   const navigate = useNavigate();
@@ -148,12 +150,14 @@ export default function ConfigMeteo() {
                 nameData="cycle"
               />
             </div>
-
+            <div>
+              <DynamicDataSet />
+            </div>
             <div className="flex gap-2 w-full">
               <DynamicSelect
                 label="Quand envoyer"
                 options={Object.keys(condition)}
-                nameData="selectedDay"
+                nameData="jour"
               />
             </div>
             <div className="flex gap-2">

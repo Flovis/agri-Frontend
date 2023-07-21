@@ -3,10 +3,13 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import agripng from "../../../placeholder.png";
 import { MoonLoader } from "react-spinners";
-
-import communesHautKatanga from "../../../data/Coordonnees";
+import { OurContext } from "../../../context/SelectContext";
 
 export default function Geoloc() {
+  const {
+    groupe: { datafull, groupedUsers },
+  } = useContext(OurContext);
+
   const canvasRef = useRef(null);
 
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -41,10 +44,13 @@ export default function Geoloc() {
         iconSize: [32, 32],
       });
 
-      communesHautKatanga?.map((item) => {
-        L.marker([item.latitude, item.longitude], { icon: customMarkerIcon })
+      groupedUsers?.map((item) => {
+        console.log("item: ", item);
+        L.marker([item.latitude, item.longitude], {
+          icon: customMarkerIcon,
+        })
           .addTo(map)
-          .bindPopup(`${item.commune}`)
+          .bindPopup(`goupe ${item.name}:${datafull?.map((el) => el.username)}`)
           .openPopup();
         // map.flyTo([item.latitude, item.longitude], 10);
       });

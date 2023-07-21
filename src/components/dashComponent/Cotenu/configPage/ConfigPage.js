@@ -5,12 +5,12 @@ import Partage from "./card/Partage";
 
 export default function ConfigPage() {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState([]);
   console.log("formData: ", formData);
 
   const handleNext = (data) => {
     setStep((prev) => prev + 1);
-    setFormData(data);
+    setFormData(JSON.stringify(data));
   };
 
   const handlePrevious = (data) => {
