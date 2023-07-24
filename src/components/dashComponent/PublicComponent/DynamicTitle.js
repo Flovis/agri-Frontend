@@ -5,7 +5,7 @@ const DynamicTitle = ({ text, level = 1, size, md }) => {
 
   return (
     <HeadingComponent
-      className={`font-bold text-text-gray text-${size} md:text-${md}`}
+      className={`font-bold text-text-gray text-${size} md:text-${md} md:text-lg`}
       name="title"
     >
       {text}

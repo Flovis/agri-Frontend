@@ -28,7 +28,7 @@ const getIcon = (code) => {
       ? [code?.weather[0]?.icon]
       : code && code.weather
       ? code?.weather?.map((weatherElement) => weatherElement.icon)
-      : "";
+      : code;
 
   const getWeatherIcons = (weatherIcons) => {
     return weatherIcons

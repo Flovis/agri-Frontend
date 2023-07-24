@@ -45,7 +45,7 @@ export default function AjoutCat({ isOpen, setIsOpen }) {
         // onClick={handleOpen}
       >
         <form
-          className=" p-4 border border-borde-gray bg-custom-white rounded-lg w-[90%] z-50 relative"
+          className=" p-4 border border-borde-gray bg-custom-white rounded-lg w-[90%] z-50 relative md:max-w-screen-lg"
           onSubmit={handleSubmit}
         >
           <div className="flex items-center">

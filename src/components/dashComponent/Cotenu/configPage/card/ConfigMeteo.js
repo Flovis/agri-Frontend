@@ -108,7 +108,7 @@ export default function ConfigMeteo() {
         />
       )}
 
-      <main className=" pt-44 md:pt-0 h-screen   flex items-center justify-center px-4 items-center  ">
+      <main className=" pt-44 md:pt-0 h-screen md:max-w-screen-md mx-auto  flex items-center justify-center px-4 items-center  ">
         <div className="md:max-w-screen-xl  text-text-gray mt-52 w-full">
           <CardMeteo />
           <form onSubmit={handleSubmit} className="space-y-5">

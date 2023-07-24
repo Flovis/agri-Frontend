@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState } from "react";
 import ReactPlayer from "react-player";
 import { MoonLoader } from "react-spinners";
 import { useCart } from "react-use-cart";
-// import { OurContext } from "../../../../../context/SelectContext";
 import useAuth from "../../../../../hooks/useAuth";
 
 const MyItemContext = createContext();
@@ -11,9 +10,7 @@ export const useMyItemContext = () => useContext(MyItemContext);
 const CardVideo = ({ isSelectionMode, open, onPrevious, ...props }) => {
   const { getItem } = useCart();
   const [isPlaying, setIsPlaying] = useState(false);
-  // const { myItem, setMyItem } = useContext(OurContext);
   const { auth } = useAuth();
-  console.log("auth: ", auth.id_user);
 
   const handlePlay = () => {
     if (isSelectionMode) {
@@ -35,7 +32,7 @@ const CardVideo = ({ isSelectionMode, open, onPrevious, ...props }) => {
     }
   };
 
-  const title = props.file.title || "No title provided";
+  const title = props.file.titre || "Titre Inconu";
   const description = props.file.description || "No description provided";
 
   return (
@@ -73,7 +70,7 @@ const CardVideo = ({ isSelectionMode, open, onPrevious, ...props }) => {
       )}
       <div className="flex flex-col sm:flex-row justify-between mt-4">
         <div className="mb-2 sm:mb-0">
-          <h3>{title}</h3>
+          <h3 className="font-extrabold">{title}</h3>
           <p>{description}</p>
         </div>
         <div>
@@ -81,9 +78,7 @@ const CardVideo = ({ isSelectionMode, open, onPrevious, ...props }) => {
             className="btn btn-primary"
             onClick={handlePlay}
             disabled={isSelectionMode}
-          >
-            {isPlaying ? "Pause" : "Play"}
-          </button>
+          ></button>
         </div>
       </div>
     </div>
