@@ -29,11 +29,11 @@ export default function Localisation() {
         <Header />
       </div>
       <div className=" flex flex-row-reverse w-full">
-        <div className="max-w-xl   inset-x-auto md:max-w-screen-xl md: md:mx-auto md: flex-1 pt-[120px]">
-          <div className="">
+        <div className="max-w-xl r  inset-x-auto md:max-w-screen-xl md: md:mx-auto md: flex-1 pt-[120px]">
+          <div className=" relative -z-50">
             <Geoloc />
           </div>
-          <div className=" w-44">
+          <div className="md:h-44 ">
             <SumilationCoords />
           </div>
         </div>

@@ -67,12 +67,12 @@ const ContenuSelect = ({ onNext, SelectRef, handleSelectChange }) => {
       </div>
       <form
         onSubmit={handleNext}
-        className=" max-w-screen-xl flex justify-center   mt-32 mx-auto"
+        className=" max-w-screen-xl md:mt-48 flex justify-center   mt-32 mx-auto"
       >
         <div className="w-full px-4 md:px-56 flex flex-col gap-px mt-4">
-          <div className="w-[90%] mb-4">
+          {/* <div className="w-[90%] mb-4">
             <DynamicTitle text="Configuration" size="xl" />
-          </div>
+          </div> */}
 
           <div className="flex gap-2 mb-2">
             <DynamicSelect

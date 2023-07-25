@@ -17,6 +17,7 @@ const UseTimer = () => {
   const [minutes, setMinutes] = useState(() => new Date().getMinutes());
 
   const weatherIcon = getIcon(weather);
+  // let icon = getIcon(forecast && forecast?.map((ico) => ico.icon));
 
   const updateTime = useCallback(() => {
     setHours(new Date().getHours());
