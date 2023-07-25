@@ -14,7 +14,7 @@ const DynamicSelect = ({
         ref={ref}
         onChange={onChange}
         defaultValue={defaultValue}
-        className={` border mt-2  border-borde-gray text-text-gray text-md appearance-none rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-3.5 `}
+        className={` border mt-2 bg-custom-white  border-borde-gray text-text-gray text-md appearance-none rounded-lg focus:outline-none focus:ring-borde-gray focus:border-borde-gray block w-full p-3.5 `}
       >
         {options?.map((el) => {
           return <option key={el}>{el}</option>;

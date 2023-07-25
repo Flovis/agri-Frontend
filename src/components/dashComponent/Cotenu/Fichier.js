@@ -68,7 +68,7 @@ const Fichier = ({ open, Type, onPrevious }) => {
     };
 
     fetchData();
-  }, [URL]);
+  }, []);
 
   useEffect(() => {
     filterData();
