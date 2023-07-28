@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function NavBottom({ data }) {
     return (
-        <div className="fixed bottom-0 left-0 z-50 w-full h-14 bg-custom-white border-t border-borde-gray">
+        <div className="fixed bottom-0 left-0 z-50 w-full h-14 bg-custom-white border-t border-borde- md:hidden">
             <div
                 className={`grid h-full max-w-lg  grid-cols-4 mx-auto font-medium`}
             >
