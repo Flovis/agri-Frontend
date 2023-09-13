@@ -2,6 +2,11 @@ import React from 'react'
 import NavBottom from './NavBottom';
 import BackNav from './BackNav';
 import CardNotification from './CardNotification';
+import { RiNotification2Line } from "react-icons/ri";
+import { BsCalendarWeek } from "react-icons/bs";
+import { RxHome } from "react-icons/rx";
+import { CgProfile } from "react-icons/cg";
+import Footer from '../../components/dashComponent/footer/Footer';
 
 const Notifications = () => {
     const notifications = [
@@ -28,7 +33,30 @@ const Notifications = () => {
             )) 
             }
                 
-            <NavBottom/>
+                <NavBottom
+                    data={[
+                        {
+                            to: "/agriculteur/contenu",
+                            icon: <RxHome className="text-2xl" />,
+                            nom: "Accuiel",
+                        },
+                        {
+                            to: "/agriculteur/notifications",
+                            icon: <RiNotification2Line className="text-2xl" />,
+                            nom: "Notifications",
+                        },
+                        {
+                            to: "/agriculteur/plan-de-production",
+                            icon: <BsCalendarWeek className="text-2xl" />,
+                            nom: "Production",
+                        },
+                        {
+                            to: "/agriculteur/profile",
+                            icon: <CgProfile className="text-2xl" />,
+                            nom: "Profile",
+                        },
+                    ]}
+                />
         </div>
     );
 };

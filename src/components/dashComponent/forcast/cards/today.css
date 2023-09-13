@@ -1,0 +1,166 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animation {
+  animation: fadeIn 1s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.slideIn {
+  animation: slideIn 1s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+.bounce {
+  animation: bounce 2s;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.scaleIn {
+  animation: scaleIn 1s;
+}
+@keyframes delayedFadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.delayedFadeIn {
+  animation: delayedFadeIn 1s;
+}
+/* ------------------------------ */
+@keyframes iconAnimationDay1 {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay2 {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay3 {
+  0% {
+    transform: rotate(-180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay4 {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay5 {
+  0% {
+    transform: scaleY(0.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay6 {
+  0% {
+    transform: rotate(-360deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconAnimationDay7 {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animation-day1 {
+  animation: iconAnimationDay1 1s ease-in-out;
+}
+
+.animation-day2 {
+  animation: iconAnimationDay2 1s ease-in-out;
+}
+
+.animation-day3 {
+  animation: iconAnimationDay3 1s ease-in-out;
+}
+
+.animation-day4 {
+  animation: iconAnimationDay4 1s ease-in-out;
+}
+
+.animation-day5 {
+  animation: iconAnimationDay5 1s ease-in-out;
+}
+
+.animation-day6 {
+  animation: iconAnimationDay6 1s ease-in-out;
+}
+
+.animation-day7 {
+  animation: iconAnimationDay7 1s ease-in-out;
+}

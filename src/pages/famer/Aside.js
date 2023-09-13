@@ -14,7 +14,7 @@ const Aside = ({ onclickHiddenMenu, state }) => {
         onclickHiddenMenu();
     };
     return (
-        <div className="">
+        <div className="bloc md:hidden">
             <aside
                 className={
                     state
